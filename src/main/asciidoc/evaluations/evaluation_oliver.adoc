@@ -1,0 +1,43 @@
+﻿= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2017/18
+// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
+// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
+// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
+
+**Von: Oliver Jensch**
+
+**Gruppe: 18**
+
+== Was habe ich gelernt?
+// Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
+Ich habe Erfahrung gesammelt, was man bei der Produktion von Software im Team beachten sollte. Natürlich habe ich gelernt mit Java, Frameworks und HTML besser umzugehen. Das Praktikum hat mir gezeigt, wie man mit größeren Projekten umgehen sollte.
+Negativ werde ich wohl aber die vielen Dokumentation und Diagramme im Gedächtnis behalten, die einem Gefühlt eher wenig gepracht haben beim Erstellen der eigentlichen Anwendung. Ehrlich gesagt, weiß ich aber nicht wie man diese Techniken sonst erlernen soll.
+Ich kann mir vorstellen, dass Dokus und Diagramme äußerst hilfreich sein können, wenn man mehr Erfahrung besitzt.
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+Was ich wohl am meisten gelernt habe, ist, dass man es äußerst wichtig ist, sich im Team gut abzusprechen. Dabei spreche ich vor allem von der Aufgabenverteilung. Dabei ist es wichtig, dass die Arbeit des Einzelnen sich so wenig wie möglich
+mit denen des Teams überschneidet. Wenn dies mal nicht zu vermeiden ist, muss man diese Schnittstelle umso mehr besprechen. Gut lief, dass ich mich auf mein Team verlassen konnte. Mein Team hat bereitwillig Aufgaben übernommen,
+so dass es nur kleine Differenzen gab bei der Aufgabenmenge. Das Klima im Team war zum größten Teil angenehm.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+Angenehm war, dass die Frameworks einem die Arbeit oft vereinfacht haben, wobei die Arbeit mit diesen nach einer gewissen Einarbeitungszeit, gut von der Hand ging. Da ich noch nicht mit anderen Frameworks gearbeitet habe,
+ mit denen ich die Frameworks vergleichen könnte, habe ich keine direkten Verbesserungsvorschläge.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+Was mich am meisten gestört hat an dem Praktikum, war, dass man bei vielen Aufgaben wenig das Gefühl hatte, dass sie von Nutzen sind. Dadurch das dieses Praktikum das erste Mal für viele ist im Team zu arbeiten, wo man ein großes Projekt
+zusammen angeht, bringt es wenig Diagramme zu konstruieren, wenn man noch nie die Frameworks, die man nutzen wird, jemals praktisch verwendet hat. Man hat einfach wenig Vorstellung, was alles auf einen zukommt und so entwickelte ich die
+Software nicht wirklich am Analysediagramm, sondern eher am Videoshop, um zu schauen, wie es denn nun genau funktioniert. 
+Ein weiteres Beispiel sind die vielen Dokumentationen. Ich kann den Punkt verstehen, warum man diese schreibt, doch fühlt es sich komisch an, wenn man als Informatiker in die eine Dokumentation fast das gleiche, wie in der anderen schreibt,
+meistens einfach nur umformuliert.
+Noch ein letztes Beispiel ist zum Beispiel die CRC-Karten-Methode. Egal, wo man davon hört, wird einem erzählt, dass die sowieso von keiner Firma mehr in irgendeiner Weise verwendet wird. Was einen dann nicht wirklich dazu motiviert,
+seine Zeit damit zu verbringen.
+
+== Feedback für den Tutor
+// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+Insgesamt bin ich mit unseren Tutorin zufrieden. Man hat ein bisschen gemerkt, dass sie die Tutorinrolle das erste Mal übernommen hat, was aber eher gut war, weil sie ihre Aufgaben ernst genommen hat und es sich gleichzeitig weniger
+so angefühlt hat, als würde sie einfach nur stumpf ihre Aufgabe erfüllen. Den einzigste kleine Mangel der mir aufgefallen ist, ist das sie manchmal ein wenig langsam war damit, unsere Sachen(Dokus, Anwendung) nach Fehlern zu durchschauen.
+
+== Sonstiges und Anmerkungen
+// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?

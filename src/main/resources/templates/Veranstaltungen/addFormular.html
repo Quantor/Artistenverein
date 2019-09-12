@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+	src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link th:href="@{/webjars/Semantic-UI/semantic.min.css}"
+	rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+
+	<div id="sitecontent">
+		<header>
+			<h1>Veranstaltungen</h1>
+		</header>
+
+		<div style="margin: 10px">
+		<div th:include="Veranstaltungen/fehlermeldungen :: fehlermeldungen"></div>
+			<form method="post" role="form" class="ui form" id="form"
+				th:action="@{/add}" th:object="${neueVeranstaltung}">
+
+				<h3 class="ui dividing header">neue Veranstaltung</h3>
+				<div class="ui negative message" th:if="${#fields.hasErrors('*')}">
+					<p>Einige Angaben sind nicht korrekt.</p>
+				</div>
+			
+				 <div class="field" th:each="gruppe : ${artistengruppen}">
+                    <input id="gruppe" name="gruppe" type="radio" value="0"
+                    th:value="${gruppe.gruppenname}" th:field="*{gruppe}" 
+							th:errorclass="fieldError" required="required"/>
+                    <label th:text="${gruppe.gruppenname}" for="gruppen">Vereinshalle</label>
+                </div>
+				
+				<div class="field">
+					<label for="name">Name</label>
+					<input id="name" name="name"
+						th:field="*{name}" th:errorclass="fieldError" type="text"
+						required="required" /><br />
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+						<p>Der Titel darf nicht leer sein.</p>
+					</div>
+				</div>
+
+
+				<div class="field">
+					<label th:text="#{neueVeranstaltung.preis}" for="preis">Preis</label>
+					<input id="preis" name="preis" th:field="*{preis}"
+						th:errorclass="fieldError" type="number" required="required" /><br />
+					<p th:if="${#fields.hasErrors('preis')}" th:errors="*{preis}">Der
+						Preis darf nicht leer sein.</p>
+				</div>
+				
+				<div class="field">
+					<label th:text="#{neueVeranstaltung.dauer}" for="dauer">Dauer</label>
+					<input id="dauer" name="dauer" th:field="*{dauer}"
+						th:errorclass="fieldError" type="number" required="required" /><br />
+					<p th:if="${#fields.hasErrors('dauer')}" th:errors="*{dauer}">Die
+						Dauer darf nicht leer sein.</p>
+				</div>
+				
+				<div th:if="${workshop}>=1" class="field">
+					<label th:text="#{neueVeranstaltung.tage}" for="tage">Tage</label>
+					<input id="tage" name="tage" th:field="*{tage}"
+						th:errorclass="fieldError" type="number" required="required" /><br />
+					<p th:if="${#fields.hasErrors('tage')}" th:errors="*{tage}">Die
+						Tage dürfen nicht leer sein</p>
+				</div>
+
+				<div class="field">
+					<label th:text="#{neueVeranstaltung.beschreibung}"
+						for="beschreibung">Beschreibung</label> 
+					<input id="beschreibung" name="beschreibung" th:field="*{beschreibung}"
+						th:errorclass="fieldError" type="text" required="required" /><br />
+					<p th:if="${#fields.hasErrors('beschreibung')}"
+						th:errors="*{beschreibung}">Die Beschreibung darf nicht leer sein.</p>
+				</div>
+				
+				<div class="field">
+					<div  style="float:left">
+						<label th:text="#{neueVeranstaltung.startDatum}"
+							for="startDatum">startDatum</label> 
+						<input id="startDatum" name="startDatum" th:field="*{startDatum}"
+							th:errorclass="fieldError" type="date" required="required" /><br />
+						<p th:if="${#fields.hasErrors('startDatum')}"
+						th:errors="*{startDatum}">Das Start-Datum darf nicht leer sein.</p>
+					</div>
+					<div  style="float:left">
+						<label th:text="#{neueVeranstaltung.startZeit}"
+							for="startZeit">startZeit</label> 
+						<input id="startZeit" name="startZeit" th:field="*{startZeit}"
+							th:errorclass="fieldError" type="time" required="required" /><br />
+						<p th:if="${#fields.hasErrors('startZeit')}"
+							th:errors="*{startZeit}">Die Start-Zeit darf nicht leer sein.</p>
+					</div>
+				</div>
+				
+				<div class="field">
+					<div  style="float:left">
+						<label th:text="#{neueVeranstaltung.endDatum}"
+							for="endDatum">startDatum</label>
+						 <input id="endDatum" name="endDatum" th:field="*{endDatum}"
+							th:errorclass="fieldError" type="date" required="required" /><br />
+						<p th:if="${#fields.hasErrors('endDatum')}"
+							th:errors="*{endDatum}">Das End- Datum darf nicht leer sein.</p>
+					</div>
+					<div  style="float:left">
+						<label th:text="#{neueVeranstaltung.endZeit}"
+							for="endZeit">endZeit</label> 
+						<input id="endZeit" name="endZeit" th:field="*{endZeit}"
+							th:errorclass="fieldError" type="time" required="required" /><br />
+						<p th:if="${#fields.hasErrors('endZeit')}"
+							th:errors="*{endZeit}">Die End- Zeit darf nicht leer sein.</p>
+					</div>
+				</div>
+
+				<button type="submit" class="ui button"
+					th:text="#{neueVeranstaltung.submit}">Erstellen.</button>
+			</form>
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+	src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link th:href="@{/webjars/Semantic-UI/semantic.min.css}"
+	rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+<title th:text="${title}">Veranstaltungen</title>
+
+
+
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<header>
+			<h1 th:text="${title}">Veranstaltungen</h1>
+		</header>
+
+		<form class="ui form" th:if="${artist}" role="form"
+			th:action="@{/neuWorkshop}" method="post">
+			<button type="submit" th:action="@{/neuWorkshop}"
+				sec:authorize="hasRole('ROLE_ARTIST')" class="ui button"
+				th:text="#{veranstaltung.workshop}"></button>
+		</form>
+		<form class="ui form" th:if="${artist}" role="form"
+			th:action="@{/neuShow}" method="post">
+			<button type="submit" th:action="@{/neuShow}"
+				sec:authorize="hasRole('ROLE_ARTIST')" class="ui button"
+				th:text="#{veranstaltung.show}"></button>
+		</form>
+
+		<h3 class="ui dividing header" th:if="!${artist}">Empfehlungen</h3>
+		<div class="ui link cards" th:remove="all-but-first">
+			<div class="ui card" th:each="empfehlung : ${empfehlungen}">
+				<div class="content">
+					<a class="header" th:href="@{'/detail/' + ${empfehlung.id}}"
+						th:text="${empfehlung.name}"></a>
+					<div class="description" th:text="${{empfehlung.name}}">Titel</div>
+				</div>
+			</div>
+		</div>
+
+
+		<h3 class="ui dividing header">weitere Veranstaltungen</h3>
+		<div class="ui link cards" th:remove="all-but-first">
+			<div class="ui card" th:each="veranstaltung : ${katalog}">
+				<div class="content">
+					<a class="header" th:href="@{'/detail/' + ${veranstaltung.id}}"
+						th:text="${veranstaltung.name}"></a>
+					<div class="description" th:text="${{veranstaltung.beschreibung}}">Titel</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

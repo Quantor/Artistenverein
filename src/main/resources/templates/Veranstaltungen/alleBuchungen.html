@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="alleBuchungen">Alle Buchungen</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+		<div id="sitecontent"> 
+    
+    <form class="ui reply form" th:action="@{/alleBuchungen}" method="post">
+			<div class="field">
+				<div class="ui large header" th:text="'Zusatzkosten für außerhalb anpassen'"></div>
+				 <div th:include="Veranstaltungen/fehlermeldungen :: fehlermeldungen"></div>
+				</div>
+					<div th:each="zk : ${zusatzkosten}">
+					<div th:text="Zusatzkosten">Zusatzkosten</div>
+					<div th:text="${zk.zusatzKostenWert}">Kosten</div>
+				</div> 
+				<div class="field">
+					<label th:text="Zusatzkosten">Zusatzkosten</label>
+					<input type="text" required="required" name="zusatzkosten" id="zusatzkosten" />
+				</div>
+
+      <button th::text="Bestaetigen" type="submit" class="ui button" value = "true" name="bestaetigen">Bestaetigen</button>
+
+		</form>
+    
+		    <header>
+		        <h1 th:text="Termine">Termine</h1>
+		    </header>
+		
+		    <table class="ui celled table">
+		        <thead>
+		        <tr>
+		            <th th:text="Datum">Datum</th>
+		            <th th:text="Veranstaltung">Veranstaltung</th>
+		            <th th:text="Ort">Ort</th>
+		            <th th:text="Kunde">Kunde</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <tr th:each="buchung : ${buchungRepository} ">
+		            <td th:text="${buchung.datum}"></td>
+		            <td th:text="${buchung.veranstaltung.name}"></td>
+		            <td th:text="${buchung.ort}"></td>
+		            <td th:text="${buchung.kunde.username}"></td>
+		        </tr>
+		        </tbody>
+		    </table>
+		</div>
+</body>
+</html>

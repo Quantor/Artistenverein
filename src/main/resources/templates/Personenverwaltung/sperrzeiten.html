@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="Personalverwaltung">Personalverwaltung</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+	
+		<div th:include="fragment/fragmentNavigationPersonenverwaltung :: nav_perso"></div>
+		
+		<h3 th:text="Sperrzeiten"></h3>
+		
+		<form class="ui form" method="post" th:action="@{/personenverwaltung/sperrzeiten/anlegen}">
+	    	<table class="ui celled table">
+	       		<tr>
+	                <td><input type="date" name="datum" required="required">Datum</input></td>
+	                <td><input type="time" name="zeit" required="required">Zeit</input></td>
+	                <td><input type="time" name="dauer" required="required">Dauer</input></td>
+	                <td> <select name="haeufigkeit" required="required">
+	                	<option th:text="#{sperrzeiten.einmalig}" value="einmalig">Einmalig</option>
+	                	<option th:text="#{sperrzeiten.jaehrlich}" value="jaehrlich">Jährlich</option>
+	                    <option th:text="#{sperrzeiten.monatlich}" value="monatlich">Monaltich</option>
+	                    <option th:text="#{sperrzeiten.woechentlich}" value="woechentlich">Wöchentlich</option>
+	                    <option th:text="#{sperrzeiten.taeglich}" value="taeglich">Täglich</option>
+	                </select></td>
+	                <td><input type="text" name="name" required="required">Name</input></td>
+	                <td><input type="text" name="kommentar" required="required">Kommentar</input></td>
+	                <td>
+	                    <button type="submit" class="ui button" th:text="#{sperrzeiten.neuesperrzeit}" name="pid">
+	                        Neue Sperrzeit hinzufügen
+	                    </button>
+	                </td>
+				</tr>
+	    	</table>
+	    </form>
+
+	    <table class="ui celled table">
+	        <thead>
+	        <tr>
+	            <th th:text="#{sperrzeiten.datum}">Datum</th>
+	            <th th:text="#{sperrzeiten.uhrzeit}">Uhrzeit</th>
+	            <th th:text="#{sperrzeiten.dauer}">Laenge</th>
+	            <th th:text="#{sperrzeiten.haeufigkeit}">Haeufigkeit</th>
+	            <th th:text="#{sperrzeiten.loeschen}">Löschen</th>
+	        </tr>
+	        </thead>
+	
+	        <tbody th:remove="all-but-first">
+	
+	        <tr th:each="zeit : ${sperrzeiten}">
+	            <form class="ui form" method="post" th:action="@{/personenverwaltung/sperrzeiten/loeschen}">
+	
+	                <td th:text="${zeit.getStart().toLocalDate()}">1.1.2017</td>
+	                <td th:text="${zeit.getStart().toLocalTime()}">14:00</td>
+	                <td th:text="${zeit.getDauer()}">5h</td>
+	                <td th:text="${zeit.getHaeufigkeit()}">Taeglich</td>
+	                <td>
+	                    <input type="hidden" name="item" value="0" th:value="${zeit.getId()}"/>
+	                    <button type="submit" class="ui button" th:text="#{sperrzeiten.loeschen}" name="pid">
+	                        Nachbestellen
+	                    </button>
+	                </td>
+	            </form>
+	        </tr>
+	
+	        </tbody>
+	    </table>
+		
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{inventar.titel}">Bestand</title>
+</head>
+<body>
+<div th:include="fragment/template :: template"></div>
+<div id="sitecontent">
+
+    <header>
+        <h1 th:text="#{inventar.titel}">Bestand</h1>
+    </header>
+		<h3 th:text="#{inventar.mindestMenge}">Mindestmenge</h3>
+		<form class="ui form" method="post" th:action="@{/inventarverwaltung/mindestMenge}">
+			<div class="fields">
+				<div class="seven wide field">
+					<input class="ui input" name="mindestMenge" type="number" th:value="${mindestMenge}" min="1" required="required" />
+				</div>
+				<button type="submit" class="ui button" th:text="#{inventar.speichern}">MindestMenge</button>
+			</div>
+		</form>
+		
+		<h3 th:text="#{inventar.rabatt}">Rabatt</h3>
+		<form class="ui form" method="post" th:action="@{/inventarverwaltung/rabatt}">
+			<div class="fields">
+				<div class="seven wide field">
+					<input class="ui input" name="rabatt" type="number" th:value="${rabatt}" min="0"  max="99" required="required" />
+				</div>
+				<button type="submit" class="ui button" th:text="#{inventar.speichern}">MindestMenge</button>
+			</div>
+		</form>
+		
+		<a class="button ui" href="artikelErstellen.html" th:href="@{/artikelErstellen}" th:text="#{nav.itemCreate}"></a>
+		<br />
+		<br />
+		
+		<form class="ui form" method="post" th:action="@{/nachbestellung}">
+
+        <table class="ui celled table">
+            <thead>
+	            <tr>
+	                <th th:text="#{warenkorb.produkt}">Produkt</th>
+	                <th th:text="#{warenkorb.anzahl}">Anzahl</th>
+	                <th th:text="#{inventar.nachbestellen}">Nachbestellen</th>
+	                <th th:text="#{inventar.bearbeiten}">Bearbeiten</th>
+	                <th th:text="#{inventar.loeschen}">Loeschen</th>
+	            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+	            <tr th:each=" item : ${stock}">
+	                <td th:text="${item.product.name}">Fackel</td>
+	                <td th:text="${item.quantity}">9000</td>
+	
+	                <td>
+	                    <input type="hidden" name="item" value="0" th:value="${item.product.id}"/>
+	                    <div class="form-group">
+	                        <label for="number"></label>
+	                        <input id="number" type="number" name="number" min="0" step="1" max="9223372036854775" value="0" /><br/>
+	                    </div>
+	                    <button type="submit" class="ui button" th:text="#{inventar.nachbestellen}" name="pid" th:value="${item.product.id}" th:formaction="@{/nachbestellungEinzeln}">Nachbestellen</button>
+	                </td>
+	
+					<td><a href="inventarverwaltung.html" class="ui button"
+						th:href="@{/artikel/{id}/bearbeiten(id=${item.product.id})}">Bearbeiten</a></td>
+	
+					<td><a href="inventarverwaltung.html" class="ui button"
+						th:href="@{/artikel/{id}/loeschen(id=${item.product.id})}" th:text="#{inventar.loeschen}">Loeschen</a></td>
+	
+				</tr>
+            </tbody>
+        </table>
+        <button type="submit" class="ui button" th:text="#{inventar.alleNachbestellen}" th:formaction="@{/nachbestellungAlle}">Alle Nachbestellen</button>
+    </form>
+    <br />
+</div>
+</body>
+</html>

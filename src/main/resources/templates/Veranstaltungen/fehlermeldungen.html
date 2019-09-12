@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+	src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link th:href="@{/webjars/Semantic-UI/semantic.min.css}"
+	rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+</head>
+<body>
+	<div th:fragment="fehlermeldungen">
+		<div th:each="fehler : ${fehlerliste}">
+			<div class="ui negative message" th:if="${fehler==0}">Sperrzeiten
+				von Artisten oder des Vorstands sind in ihrem angegebenen Zeitraum
+				aktiv. Bitte w&auml;hlen sie einen neuen Termin.</div>
+
+			<div class="ui red basic large label" th:if="${fehler==1}">Leider
+				ist die Vereinshalle zum angegebenen Zeitraum nicht verf&uuml;gbar.
+				W&auml;len sie bitte einen anderen Ort oder einen anderen Zeitpunt
+				aus.</div>
+
+			<div class="ui red basic large label" th:if="${fehler==2}">Ihr
+				angegebener Zeitraum liegt nicht im vorgegebenen Zeitraum der
+				Veranstaltung. Bitte w&auml;hlen Sie einen neuen Zeitpunkt aus.</div>
+
+			<div class="ui red basic large label" th:if="${fehler==3}">Ihr
+				angegebenes Datum liegt in der Vergangenheit. Bitte w&auml;hlen Sie
+				ein neues.</div>
+
+			<div class="ui red basic large label" th:if="${fehler==4}">Leider
+				ist einer der Artisten in diesem Zeitraum nicht verfügbar. Bitte
+				w&auml;hlen sie einen neuen Zeitpunkt aus.</div>
+				
+			<div class="ui red basic large label" th:if="${fehler==5}">Die Dauer der
+			Veranstaltung kann nicht negativ sein.</div>
+			
+			<div class="ui red basic large label" th:if="${fehler==6}">Das Start-Datum darf
+			nicht vor oder gleich dem End-Datum liegen.</div>
+			
+			<div class="ui red basic large label" th:if="${fehler==7}">Die Bewertung sollte
+			zwischen 0 und 5 liegen.</div>
+			
+			<div class="ui red basic large label" th:if="${fehler==8}">Die Eingabe der Zusatzkosten
+			ist ung&uuml;ltig (Buchstaben oder negative Zahl)</div>
+		</div>
+	</div>
+</body>
+</html>

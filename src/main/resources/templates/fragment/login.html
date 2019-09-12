@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<nav th:fragment="login">
+		<div class="item" sec:authorize="!isAuthenticated()">
+			<div class="column">
+				<form class="ui form" role="form" th:action="@{/login}"
+					method="post">
+					<div class="field">
+						<label>Username</label>
+						<div class="ui left icon input">
+							<input type="text" name="username" placeholder="Username"></input>
+							<i class="user icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label>Password</label>
+						<div class="ui left icon input">
+							<input type="password" name="password" placeholder="Passwort"></input>
+							<i class="lock icon"></i>
+						</div>
+					</div>
+
+					<button type="submit" class="ui blue submit button">Login</button>
+					<a th:href="@{/registration}">registrieren?</a>
+				</form>
+
+			</div>
+		</div>
+
+		<div class="item"
+				sec:authorize="hasAnyRole('ROLE_ARTIST','ROLE_CUSTOMER')">
+				<form th:action="@{/user/userpage}">
+					<button class="ui labeled basic fluid compact blue icon large button">
+						<i class="settings icon"></i>
+						<div th:text="Account"></div>
+					</button>
+				</form>
+			</div>
+		
+
+		<div class="item" sec:authorize="isAuthenticated()">
+
+
+			<form th:action="@{/logout}" method="post">
+				<button type="submit" class="ui blue submit button">Logout</button>
+			</form>
+
+		</div>
+		
+		
+
+
+
+
+
+
+
+
+	</nav>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 23.11.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+30.11.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Hälfte der Muss-Kiterien der Implementationphase sollte erfüllt sein --> (Nachholbedarf)
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|5
+|Testplan
+|in Arbeit
+|Ergänzungen (IDs und Akteure) müssen noch hinzugefügt werden
+
+|8
+|Entwurfs-Klassendiagramm
+|in Arbeit
+|Überarbeitung
+
+|6
+|Entwicklerdokumentatoin
+|in Arbeit
+|- Hinzufügen des Entwurf- Klassendiagramms +
+	- Erweiterung der bestehenden Kriterien
+
+|4
+|Anwendungsprototyp
+|erledigt
+|Prototypen zu einem Prototyp zusammenfassen
+
+|===
+
+== Aktueller Stand
+Wir befinden uns in der Implementationsphase. 
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|Unittests müssen hinzugefügt werden, Testfälle müssen an einigen Stellen noch 
+überarbeitet werden
+|alle
+|in Arbeit
+
+|8
+|Entwurfs-Klassendiagramm
+|Aktualisierung
+|alle
+|in Arbeit
+
+|6
+|Entwicklerdokumentation
+|Packagediagramm an Entwurfsklassendiagramm anpassen
+|alle
+|in Arbeit
+
+
+|9
+|Implementation
+|Muss-Kriterien müssen erfüllt werden (siehe Git Issus- Muss-Kiterien)
+|alle
+|in Arbeit
+
+|10
+|Unittests
+|Code soll mit Unitstests getestet werden (80% Codeabdeckung)
+|alle
+|in Arbeit
+
+|11
+|Javadoc
+|Es soll eine Java- Dokumentation für die Anwendung erstellt werden
+|alle
+|in Arbeit
+
+|==

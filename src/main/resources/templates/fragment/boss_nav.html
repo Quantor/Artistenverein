@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+ 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<nav th:fragment="boss_nav">
+	<!-- Verwalungsbereich für Boss -->
+			<div class="item" sec:authorize="hasAnyRole('ROLE_BOSS')">
+
+				<div class="ui big header">
+					<i class="options icon"></i>
+					Vorstand
+				</div>
+
+
+				<div class="ui vertical buttons">
+					<div class="ui horizontal divider">Verwaltung</div>
+					<form th:action="@{/personenverwaltung/artistenverwaltung}">
+						<button class="ui labeled basic compact blue icon large button">
+							<i class="home icon"></i>
+							<div th:text="Personalverwaltung"></div>
+						</button>
+					</form>
+
+					<form th:action="@{/inventarverwaltung}">
+						<button class="ui labeled basic compact blue icon large button">
+							<i class="home icon"></i>
+							<div th:text="Inventarverwaltung"></div>
+						</button>
+					</form>
+
+					<form th:action="@{/hallenverwaltung}">
+						<button class="ui labeled basic compact blue icon large button">
+							<i class="home icon"></i>
+							<div th:text="Hallenverwaltung"></div>
+						</button>
+					</form>
+
+					<div class="ui horizontal divider">Übersicht</div>
+					<form th:action="@{/bestellungen}">
+						<button class="ui labeled basic  compact blue icon large button">
+							<i class="home icon"></i>
+							<div th:text="Bestellungen"></div>
+						</button>
+					</form>
+
+					<form th:action="@{/alleBuchungen}">
+						<button class="ui labeled basic compact blue icon large button">
+							<i class="home icon"></i>
+							<div th:text="Buchungen"></div>
+						</button>
+					</form>
+
+					
+				</div>
+			</div>
+	
+	</nav>
+	</body>
+
+</html>

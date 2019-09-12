@@ -1,0 +1,1583 @@
+= Test-Plan
+
+Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+
+== Einführung
+Wozu dient das Dokument?
+In diesem Dokument wird beschrieben, wie die Website "Artistenverein Funkenschlag", zu testen ist. Es ist an die/den Tester gerichtet und soll erklären,
+ was wie getestet werden muss um die Korrektheit der Anwendung sicherzustellen.
+
+== Aufbau der Testbezeichner
+Nach welchem Schema sind die Tests benannt?
+
+- Der erste Teil ist ein Buchstabe, er bezeichnet die Art des Tests
+- Der zweite Teil ist eine Zahl, sie ist die Testnummer
+- Optional gibt es einen dritten Teil, der die Variante beschreibt. Das ist wiederum ein Buchstabe.
+
+U - Unit Test, I - Integrationstest
+
+Beispiel: U-2-B ist die 2. Variante des 2. Unittests
+
+== Test Gegenstände
+Die Aufgabe des Testes ist es du Funktionalität der Anwendung in Übereinkunft der im Pflichtenheft festgelegten Spezifikationen sicherzustellen. 
+Getestet werden die einzelnen Klassen und deren Funktionen, sowie deren Zusammenspiel im ganzen System.
+
+== Zu testende Funktionalitäten
+Die implementieren Klassen müssen korrekt funktionieren. Das Zusammenspiel zwischen einzelnen Klassen bzw. Komponenten muss korrekt vonstatten gehen.
+ Ebenso müssen externe Komponenten und Frameworks korrekt angebunden sein. Die Module sind auf Einhaltung ihrer Spezifikation zu testen. Das System muss 
+ angemessen auf auftretende Fehler und unerwartete Eingaben reagieren.
+
+== Nicht zu testende Funktionalitäten
+Die verwendeten Bibliotheken von Drittanbietern (z.B. Spring- und Salespoint-Framework) müssen nicht getestet werden da diese von den jeweiligen Anbietern 
+selbst getestet werden. Getestet wird nur das Zusammenspiel mit diesen Bibliotheken. Triviale Methoden wie z.B. _set-_ und _get-_ Methoden brauchen nicht
+ getestet zu werden.
+
+== Herangehensweise
+*Unit-Test:*
+Das Programm wird in Java umgesetzt und die dazugehörigen Test werden in JUnit angefertigt.
+Die Klassen werden mit JUnit- Testfällen geprüft:
+Vor Beginn der Implementierung werden bereits Blackbox-Testfälle erstellt, die dann begleitend zur Implementierung genutzt werden.
+_Definition *Blackbox-Test*: 
+Wenn Testfälle sich alleine aus der Spezifikation des zu testenden Objekt (Produkt, Komponente) ableiten._
+Nach Abschluss der Implementierung einer Komponente wird diese dann durch Whitebox- Tests geprüft.
+_Definition *Whitebox-Test*:
+Die Testfälle werden aus der inneren Struktur des Objekts ab z.B. aus dessen Quellcode oder dessen Software-Architektur abgeleitet._
+
+*Integration-Test*
+Funktionieren die einzelnen Klassen entsprechend ihrer White- und Blackboxtest, werden diese im Zusammenspiel getestet. 
+Für jede Abhängigkeit zwischen zwei Klassen eines Systems wird ein Testszenario definiert, welches in der Lage ist nachzuweisen, 
+dass nach der Zusammenführung sowohl beide Klassen für sich wie auch der Datenaustausch über die gemeinsame(n) Schnittstelle(n) 
+spezifikationsgemäß funktionieren. Mehrere korrekt funktionierende Klassen können dann zu Komponenten zusammengeführt werden und mit 
+anderen Komponenten im Zusammenspiel getestet werden. Dies wird als *Integrationstest nach Bottom-Up Prinzip* bezeichnet.
+
+*Systemtest*
+Funktioniert das Zusammenspiel der einzelnen Komponenten, beginnt die nächste Teststufe. Das gesamte System wird gegen die gesamte 
+Anforderung des Pflichtenheftes getestet. In einer Testumgebung, die die Produktumgebung simuliert, soll das Verhalten von Vorstand, 
+Kunden und Artisten möglichst detailgetreu nachgestellt werden. 
+
+*Abnahmetest*
+Ein Abnahmetest ist das Testen der gelieferten Software durch den Kunden. Der erfolgreiche Abschluss dieser Teststufe ist meist Voraussetzung 
+für die Übernahme der Software durch den Kunden.
+Besonders für System- und Abnahmetests wird das Blackbox-Verfahren angewendet.
+
+== Umgebungsvoraussetzungen
+Wird spezielle Hardware benötigt? +
+Es sollte ein Rechner mit mindestens 256 MB Hauptspeicher zu Verfügung stehen.
+Ansonsten wird keine "spezielle" Hardware benötigt.
+
+Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt? +
+Eventuell werden in einer DataInitializer-Klasse ein paar Objekte erstellt, um die Funktion des Systems zu zeigen.
+
+Wird zusätzliche Software für das Testen benötigt? +
+Es wird eine Java JDK mit dem Salespoint-Framework und dem Spring-Framework benötigt.
+Für das Testen wird JUnit verwendet.
+
+Wie kommuniziert die Software während des Testens? Internet? Netzwerk? +
+Um die Website zu testen wird ein Browser benötigt.
+
+== Testfälle und Verantwortlichkeit
+Jede textbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe |Akteur
+
+|I-1-A
+|Login (erfolgreich)
+|Ein Benutzer befindet sich unangemeldet auf der Website.
+|Der Benutzer klickt auf den Button "Anmelden", und gibt anschließend seine Benutzerinformationen ein und klickt "Anmelden".
+| Wenn die eingegebenen Benutzerinformationen vorhanden und korrekt sind, so wird der Benutzer(ohne User) auf den 
+Willkommen- Bildschirm weitergeleitet und ist angemeldet. Er hat nun die vollen Rechte, die für ihn angedacht sind.								
+|Benutzer = {Vorstand, User, Kunde, Artist}
+
+|I-1-B
+|Login (Fehlerfall)
+|Ein User befindet sich unangemeldet auf der Website.
+|Der User klickt auf den Button "Anmelden", und gibt anschließend seine Benutzerinformationen ein und klickt "Anmelden".
+|Wenn die eingegebenen Benutzerinformationen fehlerhaft oder nicht vorhanden sind, wird der User 
+	darauf hingewiesen, wird nicht angemeldet und erhält einen neuen Versuch sich anzumelden.
+|User
+
+
+|I-2
+|Logout
+|Ein Benutzer befindet sich angemeldet auf der Website.
+|Der Benutzer klickt auf den Button "Abmelden".
+|Der Benutzer wird abgemeldet und wird auf die Startseite weitergeleitet.
+|Benutzer = {Kunde, Artist, Vorstand}
+
+|I-3
+|Registrieren            
+|Ein User der Seite ist nicht eingeloggt auf der Registrierungsseite (/Registrieren)
+|Auf der Seite sieht der Benutzer vier Labels, in denen er seinen Namen, seine Email, seine Telefonnummer 
+und sein Passwort eingibt. Außerdem gibt es einen Button “Registrieren”, auf den der User klickt.     
+|Der Kunde nun wird auf die Homepage weitergeleitet. Dort kommt eine Meldung, dass er erfolgreich registriert wurde.
+|User, Kunde
+
+|I-4
+|Account- Ansicht (Kunde)
+|Kunde ist eingeloggt.
+|Der Kunde kann auf den Menüpunkt "mein Konto" klicken. (/meinKonto)
+|Hier werden ihm nun die Daten aufgelistet, welche er beim letzten Bearbeiten seines Kontos interlassen hat. 
+(Name, Nachname, Nutzername, Email Adresse und seine Telefonnummer).
+
+|Kunde
+|I-5
+|Kundenkontobearbeitung
+|Kunde ist eingeloggt. Er befindet sich im Menüpunkt "mein Konto". (/meinKonto)
+|Hier kann er nun auf den Button "Konto bearbeiten" klicken. Nun kann er die angegebenen Daten modifizieren und auf 
+"absenden" klicken, um diese zu speichern.
+|Wenn die eingegeben Daten korrekt sind (also keine Pflichtfelder ausgelassen worden), kommt er zurück zum Menüpunkt "mein Konto"
+und sieht dort seine neuen Daten. Falls die eingegebenen Daten nicht den geforderten entsprechen wird das entsprechende Feld rot markiert
+und es erscheint die Fehlermeldung "Dieses Feld darf nicht leer sein."
+
+|Kunde
+|I-6-A
+|Produkte im Einkaufswagen kaufen
+|Im Einkaufswagen ist mindestens eine Ware. Der Kunde befindet sich im Einkaufswagen, 
+ wo er seine Waren aufgelistet sieht(/Einkaufswagen).
+|Im Einkaufswagen gibt es unterhalb der aufgelisteten Ware einen “Kaufen” Button, 
+auf den der Kunde drückt.
+|Die Ware verschwindet aus dem Einkaufswagen und es erscheint die Meldung,
+ dass die Ware gekauft wurde. Der gekaufte Artikel landet im Menüpunkt "bestellte Artikel". (/bestellteArtikel)
+
+|User 
+|I-6-B
+|Produkte im Einkaufswagen kaufen
+|Im Einkaufswagen ist mindestens eine Ware. Der Benutzer befindet sich im Einkaufswagen, 
+wo er seine Waren aufgelistet sieht(/Einkaufswagen).
+|Im Einkaufswagen gibt es unterhalb der aufgelisteten Ware einen “Kaufen” Button,
+ auf den der Benutzer drückt.
+|Der Benutzer wird auf den Login-Screen weitergeleitet.(/Login)
+
+|	
+|I-7
+|Nachbestellung von Artikeln des Shops
+|Ein Kunde ist in seinem Einkaufswagen(/Einkaufswagen).
+In dem Einkaufswagen sind so viele Produkte, dass nach einem Einkauf die Zahl der Mindestanzahl
+ des Produktes unterschritten wird.
+|Kunde ist im Einkaufswagen, wo er sieht, was in diesem enthalten ist. 
+Weiterhin gibt es einen Button “kaufen”. Auf diesen Button drückt der Kunde.
+|Es erscheint eine Nachricht, dass die Ware erfolgreich gekauft wurde. 
+Im Hintergrund wird eine bestimmte Anzahl des gekauften Produktes nachbestellt.
+																						
+|Kunde, Vorstand, Artist, User
+|I-8
+|Produkte im Shop anschauen
+|keine
+|Jeder kann auf den Menüpunkt "Shop" klicken. (/Shop)
+|Man gelangt zu einer Übersichtseite in der alle im Shop befindlichen Artikel aufgelistet sind.
+Die Artikel haben Name, Preis und ein Bild.
+
+|Kunde, Vorstand, Artist, User
+|I-9
+|Produkt Details im Shop anschauen 
+|Es befindet sich mindestens ein Produkt im Shop. Artist, Kunde, User oder Administrator sind auf der Seite,
+auf welcher alle Produkte aufgelistet sind.
+|Die Titel der Produkte lassen sich anklicken.(/Shop/Detail)
+|Man kommt zu einer detaillierten Ansicht des angeklickten Artikels.(z.B. Produktbeschreiben, noch vorhandene
+Anzahl).
+
+|Kunde
+|I-10
+|Produkt zum Einkaufswagen hinzufügen
+|Im Shop existieren bereits Produkte
+|Der Benutzer kann in der Artikeldetailseite (/Shop/Detail) einen Button "Zum Einkaufswagen hinzufügen" klicken.
+|Der Nutzer bleibt auf der Artikeldetailseite (Shop/Detail). Der Artikel wurde im Hintergrund dem Einkaufswagen (/Einkaufswagen) hinzugefügt.
+ Wechselt der Nutzer jetzt zur Seite"Einkaufswagen" (/Einkaufswagen)so wird der Artikel zusammen mit möglichen anderen Artikeln in seinem Warenkorb angezeigt.
+
+|Kunde
+|I-11-A
+|Einkaufswagen überprüfen
+|Der Kunde ist angemeldet und befindet sich im Shop. (/Shop)
+|Der Kunde klickt auf "Einkaufswagen".(/Einkaufswagen)
+|Wenn der Kunde vorher noch nichts in den Einkaufswagen gelegt hatte, werden im Einkaufswagen keine 
+Produkte angezeigt sondern es wird darauf hingewiesen, dass noch keine Produkte im Einkaufswagen sind.
+
+|Kunde
+|I-11-B
+|Einkaufswagen überprüfen
+|Der Kunde ist angemeldet und befindet sich im Shop.(/Shop)
+|Der Kunde klickt auf "Einkaufswagen".(/Einkaufwagen)
+| Wenn der Kunde schon Produkte in den Einkaufswagen gelegt wurden, so werden diese jetzt angezeigt. 
+Es gibt die Möglichkeit die Anzahl einzelner Produkte zu verändern oder Produkte ganz aus dem Einkaufswagen zu entfernen.
+
+|Kunde
+|I-12-A
+|Produkte im Einkaufswagen kaufen
+|Im Einkaufswagen ist mindestens eine Ware. Der Kunde befindet sich im Einkaufswagen (/Einkaufswagen),
+ wo er seine Waren aufgelistet sieht.
+|Im Einkaufswagen gibt es unterhalb der aufgelisteten Ware einen “Kaufen” Button, 
+auf den der Benutzer drückt.
+|Wenn der Benutzer eingeloggt ist, verschwindet die Ware aus dem Einkaufswagen und es erscheint die Meldung,
+ dass die Ware gekauft wurde.
+
+|User
+|I-12-B
+|Produkte im Einkaufswagen kaufen
+|Im Einkaufswagen ist mindestens eine Ware. Der User befindet sich im Einkaufswagen (/Einkaufswagen),
+ wo er seine Waren aufgelistet sieht.
+|Im Einkaufswagen gibt es unterhalb der aufgelisteten Ware einen “Kaufen” Button, 
+auf den der User drückt.
+|Der User wird auf den Login-Screen (/Login) weitergeleitet. Nach dem Einloggen hat er die Möglichkeit, die Waren zu kaufen..
+
+
+|Vorstand
+|I-13
+|Sortierung Produktübersicht/ Bestellübersicht 
+|Vorstand ist eingeloggt und befindet sich im Menüpunkt aller bereits gekauften Produkte (/gekaufteProdukte) bzw. der gebuchten Veranstaltungen (/Bestellübersicht)
+|Vorstand kann auf die Button "nach Alphabet sortieren" oder "nach Datum sortieren" klicken.
+|Der Vorstand bleibt in der jeweiligen Übersichtsseite. Diese sind nun nach dem ausgewählten Kriterium
+(Alphabet oder Datum) sortiert.
+
+|Vorstand
+|I-14
+|Bestellübersicht
+|Vorstand ist eingeloggt.
+|Er kann auf den Menüpunkt "Bestellübersicht" klicken.(/Bestellübersicht)
+|Hier öffnet sich eine Liste mit allen gebuchten Veranstaltungen. Es sind jeweils die Titel und die Daten 
+dazu zu sehen. Falls noch keine vorhanden sind steht dort der Schriftzug "Noch keine Bestellungen vorhanden.".
+
+|Vorstand
+|I-15
+|Artistenübersicht 
+|Der Vorstand ist eingeloggt.
+|Er kann auf den Menüpunkt "Artistenübersicht" klicken.(/Personalverwaltung/Artistenübersicht)
+|Hier werden alle Artisten mit Namen aufgelistet.
+
+|Vorstand 
+|I-16
+|Artistengruppenübersicht
+|Vorstand ist eingeloggt
+|Der  Vorstand kann eine Übersicht über alle bereits erstellten Artistengruppen (/Personalverwaltung/Artistengruppen) öffnen.
+|Es öffnet sich eine Liste, in der alle Artistengruppen angezeigt werden. 
+
+
+|Vorstand
+|I-17
+|Details Artistenansicht 
+|Der Vorstand ist eingeloggt und ist im Menüpunkt "Artistenüberischt".(/Personalverwaltung/Artistenübersicht)
+|Er kann nun auf die Artistennamen klicken. 
+|So lande er in der Detailansicht (/Personalverwaltung/Artistenübersicht/Detail) des angeklickten Artistenkontos. Hier stehen alle bei der letzten Bearbeitung angegebenen Daten,
+Name, Adresse und Email.
+
+|Vorstand
+|I-18
+|allgemeine Sperrzeiten erstellen
+|Der Vorstand ist eingeloggt.
+|Er kann auf den Button "allgemeine Sperrzeiten erstellen" klicken (/Sperrzeiten). Hier kann er nun einen täglichen Zeitraum angeben in welchem alle Veranstaltungen stattfinden 
+(bzw. nicht stattfinden) sollen.
+|Es kommt der Schriftzug "allgemeine Sperrzeiten wurden erfolgreich eingerichtet." Kunden können nun in diesem Zeitraum keine Veranstaltungen mehr buchen.
+Buchungen die vorher bereits in diesem Zeitraum getätigt wurden sind jedoch weiterhin gültig.
+
+|Vorstand
+|I-19
+|Rabatt festlegen 
+|Der Vorstand ist eingeloggt und befindet sich in der Shopüberischt.(/Shop)
+|Er kann nun auf den Button "Rabatt festlegen." klicken. (Shop/Rabatt) Hier kann er eine Prozentzahl eingeben, welche den Rabatt für die Kunden welche einen Workshop in diesem Zeitraum
+gebucht haben, repräsentiert. Dann klickt er auf "OK."
+|Es kommt der Schriftzug "Rabatt wurden erfolgreich festgelegt.".Der Rabatt wird nun Kunden zugerechnet, die im Zeitraum vor dem Workshop, welchen sie über diese Seite gebucht haben,
+einen Shopartikel kaufen.
+
+|Vorstand
+|I-20
+|Nachbestellung von Produkten im Shop 
+|Der Vorstand ist eingeloggt und befindet sich in der Detailansicht des Artikels.(Shop/Detail)
+|Er kann nun den Button "automatische Nachbestellung einrichten." anklicken.(Shop/Detail/Nachbestellung) Jetzt kann er eine Anzahl angeben, welche immer mindestens vorhanden sein soll
+und eine Anzahl, welche dann nachbestellt werden soll. Dann klickt er auf "OK."
+|Es kommt der Schriftzug "automatische Nachbestellung erfolgreich eingerichtet für <Produktname>." Der Vorstand wird zurück auf die Shopseite (/Shop)
+verwiesen. Wenn die Anzahl des Artikels nun unter die gerade angegebene fällt, wird dieser automatische nachbestellt.
+
+
+|Vorstand
+|I-21
+|Übersicht über Einkäufe 
+|Vorstand ist eingeloggt
+|Der  Vorstand kann eine Übersicht über alle bereits gekauften Produkte öffnen (/gekaufteProdukte)
+|Es öffnet sich eine Liste, in der alle bereits gekauften Produkte angezeigt werden. 
+ Zusätzlich wird zu jedem Produkt der eingenommene Preis angezeigt. 
+Falls noch keine Produkte gekauft wurden erscheint der Text: „Es wurden noch keine Produkte gekauft“.
+
+
+|Vorstand
+|I-22
+|Erstellung Artistenkonto 
+|Der Vorstand ist eingeloggt und befindet sich im Menüpunkt "Artistenübersicht". (/Personalverwaltung/Artistenübersicht)
+|Hier kann er auf den Button "Neues Artistenkonto erstellen" klicken. (/Personalverwaltung/Artistenübersicht/neuesKonto) Es öffnet sich ein Formular, in welchem er Namen, Adresse, Email und 
+Passwort des Artisten einfügen muss. 
+|Wenn alle Felder ausgefüllt sind kommt die Meldung "Konto erfolgreich erstellt." Ansonsten wird der Vorstand zurück auf das Formular verwiesen
+und das im nicht ausgefüllten Feld steht der Schriftzug: "Dieses Feld darf nicht freigelassen werden.".
+
+|Vorstand
+|I-23
+|Bearbeitung Artistenkonto
+|Vorstand ist eingeloggt und befindet sich in der Detailansicht des zu bearbeitenden Artistenkontos.(/Personalverwaltung/Artistenübersicht/Detail)
+|Hier kann er auf den Button "Konto bearbeiten" klicken.(/Personalverwaltung/Artistenübersicht/Detail/bearbeiten) Nun kann er die angegebenen Daten bearbeiten und auf den Button "fertig." klicken.
+|Wenn keine Felder leer gelassen wurden, bekommt er die Nachricht "Konto wurde erfolgreich bearbeitet." und wird zurück zur Artistenüberischt weitergeleitet.
+Wenn dies jedoch nicht der Fall ist, wird im entsprechenden Feld rot der Schriftzug "Dieses Feld darf nicht leer sein." angezeigt.
+
+
+|Vorstand
+|I-24
+|Details Bestellübersicht (
+|Der Vorstand ist eingeloggt und befindet sich in der Bestellübersicht.(/Bestellübersicht)
+|Hier kann er nun die Veranstaltungen anklicken, zu denen er mehr erfahren möchte.
+|Zu der ausgewählten Veranstaltung öffnet sich eine Detailansicht (/Bestellübersicht/Detail), in welcher zusätzlich verzeichnet ist, an welchem Ort diese
+stattfindet, welcher Kunde sie gebucht hat und welche Artisten /Artistengruppe diese Veranstaltung halten soll.
+
+|Vorstand
+|I-25
+|Kundenliste anschauen 
+|Vorstand ist eingeloggt
+|Der  Vorstand drückt im Navigationsbereich auf den Knopf Personalverwaltung(/Personalverwaltung). 
+Dort weiter auf den Knopf Kundenübersicht (/Personalverwaltung/Kundenübersicht)
+|Es öffnet sich eine Liste, mit allen registrierten Kunden und deren relevanten Details wie Username, Vor und Nachname und Email.
+Sollten keine Kunden vorhanden sein, wird eine Nachricht "Keine Kunden registriert" angezeigt
+
+|Vorstand
+|I-26
+|Übersicht über Vereinsraum 
+|Der Vorstand ist eingeloggt.
+|Er kann auf den Menüpunkt "Übersicht Vereinsraum" klicken.(/Vereinsraum)
+|Es öffnet sich eine Kalenderübersicht, wo eingetragen ist, an welchen Tagen der Vereinsraum bereits gebucht ist.
+
+|Vorstand
+|I-27
+|Artikel hinzufügen 
+|Der Vorstand ist eingeloggt und befindet sich im Shop.(/Shop)
+|Hier kann er auf den Button "Artikel hinzufügen" klicken.(Shop/hinzufügen) Es öffnet sich ein Formular, in welchem er Namen, Beschreibung, Preis und Bild einfügen muss.
+Dann kann er auf den Button "hinzufügen" klicken.
+|Wenn alle Felder im Formular richtig ausgefüllt wurden, dann kommt er zurück zur  Shopansicht (/Shop) und es erscheint der Schriftzug "Artikel wurde erfolgreich eingefügt."
+im oberen Bereich der Seite. Ist dies nicht der Fall, so bleibt er beim Formular und wird durch einen roten Schriftzug auf den Fehler hingewiesen. (z.B. "Dieses Feld 
+darf nicht leer sein.").
+
+|Vorstand
+|I-28
+|Artikel bearbeiten 
+|Der Vorstand ist eingeloggt und in der Detailansicht des zu bearbeitenden Artikels. (/Shop/Detail)
+|Hier kann er den Button "bearbeiten" klicken. (Shop/Detail/bearbeiten) Jetzt kann er die Daten des Artikels bearbeiten.
+|Wenn das Formular richtig ausgefüllt ist, so wird er zu der Shopansicht (/Shop) weitergeleitet und am oberen Rand der Website erscheint der Schriftzug "Artikel erfolgreich 
+bearbeitet.".  Ist dies nicht der Fall, so bleibt er beim Formular und wird durch einen roten Schriftzug auf den Fehler hingewiesen. (z.B. "Dieses Feld 
+darf nicht leer sein.").
+
+|Vorstand
+|I-29
+|Anlegen von Artistengruppen 
+|Der Vorstand ist eingeloggt  und befindet sich auf der Übersichtsseite der Artistengruppen. (/Personalverwaltung/Artistengruppen)
+|Hier kann er auf den Button "neue Gruppe anlegen" klicken. (/Personalverwaltung/Artistengruppen/neu) Es öffnet sich ein Formular, in welchem er die Namen der Artisten aufgelistet sind.
+Er kann nun die Artisten, welche er in der Gruppe haben möchte anklicken.
+ Dann kann er auf "OK." klicken.
+|Wenn mindestens zwei Namen in dem Formular stehen, wird er auf die Übersichtsseite der Artistengruppen (/Personalverwaltung/Artistengruppen) verwiesen und es erscheint der 
+Schriftzug "Artistengruppe wurde erfolgreich erstellt.".
+
+|Kunde
+|I-30
+|Kommentar zur Veranstaltung erstellen 
+|Kunde ist registriert und eingeloggt.
+|Kunde kann zu jeder Veranstaltung auf einen Button „Kommentar hinzufügen“. (/Veranstaltungen/Detail/Kommentar) Nun kann der Benutzer sein  Kommentar in das vorgesehene
+Feld tippen und auf "absenden" klicken.
+|Der Kommentar erscheint nun unter der dazugehörigen Veranstaltung unter dem Punkt "Kommentare" und ist für jeden sichtbar.
+
+|Vorstand
+|I-31
+|Inventar überprüfen 
+|Vorstand ist eingeloggt.
+|Der Vorstand klickt auf den Reiter "Inventar".(/Inventar)
+|Es werden alle vorhandenen Produkte mit Stückzahl im Lager angezeigt. Der Vorstand hat die Möglichkeit einzelne oder mehrere Produkte in verschiedenen Stückzahlen nachzubestellen.
+
+ |Kunde
+|I-32
+|Bewertung zur Veranstaltung erstellen
+|Kunde ist registriert und eingeloggt
+|Kunde kann zu jeder Veranstaltung auf einen Button „bewerten“ klicken.(/Veranstaltungen/Detail/Bewertung) Er kann nun eine Bewertung in Form von Schulnoten abgeben und
+klickt dann auf "absenden".
+|Aus allen Bewertungen derselben Veranstaltung wird der Mittelwert
+ gebildet und dieser wird unter dieser Veranstaltung unter der Überschrift „Bewertung“ angezeigt. (/Veranstaltungen/Detail)
+
+|Benutzer ={Vorstand, Artist, User, Kunde}
+|I-33
+|Nutzung der Suchfunktion im Shop 
+|keine
+|Der Benutzer befindet sich im Shop (/Shop). Er kann im Feld „Suche:“ einen Begriff eingeben, 
+nachdem er den Shop durchsuchen will und dann auf den Button „Suchen!“ klicken. (/Shop/Suche)
+|Bei erfolgreicher Suche werden die gefunden Produkte , welche den Suchbegriff enthalten aufgelistet.
+Bei fehlgeschlagener Suche wird der Text:„Es gab keine Übereinstimmungen.“ angezeigt.
+
+|Benutzer = {Vorstand, Kunde, User, Artist}
+|I-34
+|Veranstaltungskatalog betrachten 
+|keine
+|Der Benutzer drückt im Navigationsbereich auf den Knopf Veranstaltungen.(/Veranstaltungen)
+|Ganz oben auf der Seite unter dem Punkt "zu empfehlende Veranstaltungen" werden die drei Veranstaltungen mit den besten Bewertungen aufgelistet.
+Darunter befindet sich eine Liste mit allen buchbaren Veranstaltungen. Zu jeder Veranstaltung wird der Titel, der Preis und der Zeitraum angezeigt.
+ Sollten keine Veranstaltungen zu dieser Zeit buchbar sein, wird folgende Nachricht angezeigt: "Zur Zeit sind keine Veranstaltungen buchbar. Bitte besuchen Sie uns
+ später noch einmal."
+
+|Benutzer = {Kunde, Vorstand, User, Artist}
+|I-35
+|Details im Veranstaltungskatalog betrachten
+|Benutzer befindet sich im Veranstaltungskatalog. (/Veranstaltungen)
+|Er kann nun einzelne Veranstaltungen anklicken.
+|Er kommt zu einer Detailansicht (/Veranstaltungen/Detail) der angeklickten Veranstaltung. Hier sieht er nun mehr Details zu der Veranstaltung wie Beschreibung, mitwirkende Artisten, 
+aber auch Bewertungen und Kommentare.
+
+|Artist
+|I-36
+|Eintragen von Sperrzeiten
+|Der Artist is registriert.
+|Der Aritst navigiert per Knopfdruck auf seine persönliche Aristenseite.(/meinKonto). 
+Dort befindet sich unter dem Punkt Sperrzeiten (/meinKonto/Sperrzeiten) eine kalendarische Ansicht. Er wählt einen Tag aus und legt ein Start- und Endzeit aus.
+|In diesem Zeitraum wird der Artist als gesperrt markiert.
+
+|Kunde
+|I-37-A
+|Preisbestimmung mit Rabatt / eingeloggt / Kunde nimmt an Workshop teil
+|Ein Kunde ist eingeloggt, er hat einen Workshop gebucht.
+|Ein Preis wird abgefragt (im Warenkorb (/Einkaufswagen) oder auf der Produktseite (/Shop))
+|Der Normalpreis wird erst bestimmt und dann mit dem festgelegten Rabatt verrechnet. Dieser neue Preis wird dem Kunden angezeigt.
+
+|Kunde
+|I-37-B
+|Preisbestimmung mit Rabatt / eingeloggt / Kunde nimmt nicht an Workshop teil
+|Ein Kunde ist eingeloggt, er hat keinen Workshop gebucht
+|Ein Preis wird abgefragt (im Warenkorb (/Einkaufswagen) oder auf der Produktseite (/Shop))
+|Der Normalpreis wird  bestimmt und unverändert angezeigt.
+
+|Artist
+|I-37
+|Show wird erstellt
+|Ein Artist ist angemeldet und ist Teil mindestens einer Artistengruppe.
+|Der Artist ist auf der Seite der Shows (/Veranstaltungen/Shows) und klickt auf den Button "Show hinzufügen." (Veranstaltungen/Shows/hinzufügen) 
+Hier muss er eine seiner Gruppen und alle Details (Name, Preis, Beschreibung, Bilder) eintragen .
+und klickt anschließend auf den Button "Show erstellen".
+|Sind alle Eingaben korrekt, so wird die Show erstellt und gespeichert. Der Artist wird anschließend auf die Übersichtsseite
+ mit allen Shows (/Veranstaltungen/Shows) weitergeleitet wo er seine Show sieht. Dies ist nun buchbar.
+
+|Artist
+|I-38
+|Workshop wird erstellt
+|Artist ist angemeldet.
+|Der Artist ist auf der Seite der Workshops (/Veranstaltungen/Workshops)und klickt auf den Button "neuen Workshop erstellen" (Veranstaltungen/Workshops/neu) und trägt anschließend alle 
+Details (Name, Preis, Beschreibung, Dauer, Zeitraum) ein. Er kann außerdem Artikel aus dem Shop diesem Workshop zuordnen.Dann klickt er auf den Button "erstellen!."
+|Sind alle Eingaben korrekt, wird der Workshop erstellt und gespeichert. Der Artist wird anschließend auf die Übersichtsseite mit 
+allen Workshops weitergeleitet, wo er seinen Workshop sieht. Dieser ist nun buchbar.
+
+|Artist 
+|I-39
+|Veranstaltung bearbeiten
+|Artist ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Veranstaltungen (/Veranstaltungen)
+|Er kann auf seine Workshops/ Shows klicken
+und bekommt dort eine Detailansicht.(/Veranstaltungen/Detail) Dort kann er auf den Button 
+"Workshop/Show bearbeiten" klicken.(/Veranstaltungen/Detail/bearbeiten) Nun kann er einzelne Details ändern. Dann klickt er auf den Button "Änderungen speichern".
+|Sind die Eingaben korrekt, werden die Änderungen gespeichert. Der Artist wird auf die Übersichtsseite weitergeleitet (/Veranstaltungen) und kann
+die Änderungen sehen. Die Show/ der Workshop ist nun mit den Änderungen buchbar. Falls der Artist den Zeitraum verändert hat, sind alle 
+bisher gebuchten Veranstaltungen in diesem Zeitraum weiterhin gültig, es können nur keine neuen in diesem Zeitraum gebucht werden.
+
+|Artist
+|I-40
+|Löschen von Veranstaltungen 
+|Artist ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Termine (/Termine).
+|Er kann auf seine Workshops/ Shows klicken 
+und bekommt dort eine Detailansicht. (Termine/Detail) Dort kann er auf den Button "Show/Workshop löschen" klicken.(Termine/Detail/löschen) 
+zunächst kommt eine Warnung mit der Aufschrift:"Wollen Sie diese Show/ diesen Workshop wirklich löschen?". hier kann er auf "Ja"  oder "Nein" klicken.
+|Für "Ja" wird die Show gelöscht. Sie ist nicht mehr buchbar und steht nicht mehr im Angebotskatalog. Alle bereits gebuchten Shows/ Workshops werden 
+trotzdem abgehalten. Für "Nein." wird der Vorgang abgebrochen und der Workshop/ die Show wird nicht gelöscht, ist weiterhin buchbar und in der Katalog Liste.
+
+|Kunde
+|I-41-A
+|Buchung Workshop/Show (erfolgreich)
+|Kunde ist eingeloggt. Er befindet sich auf der Seite der angebotenen Veranstaltungen (/Veranstaltungen) in der Detailansicht seiner gewünschten 
+Veranstaltung.(/Veranstaltungen/Detail)
+|Hier kann er nun den Button "diese Veranstaltung buchen" klicken.(Veranstaltungen/Detail/buchen) Er wird weitergeleitet und muss eingeben in welchem Zeitraum er die Veranstaltung
+buchen möchte und an welchem Ort. Hier kann er wählen, ob er die Halle des Vereins benutzen möchte oder einen selbst gewählten Ort hinzufügen möchte.
+|Die eingegebenen Daten werden überprüft. Wenn der gewünschte Zeitraum sich mit keinem unterscheidet und wenn die Halle gewählt wurde, diese frei ist wird
+der Termin gebucht. Der Kunde bekommt eine Rechnung und der Artist eine Benachrichtigung. Der Termin wird im Terminkalender des Artisten im ausgewählten 
+Zeitraum gespeichert. Der Kunde wird auf die Startseite (/home) weitergeleitet und die Meldung "Buchung erfolgreich." erscheint im oberen Bereichs des Bildschirms.
+
+
+|Kunde
+|I-41-B
+|Buchung Workshop/Show (nicht erfolgreich)
+|Kunde ist eingeloggt. Er befindet sich auf der Seite der angebotenen Veranstaltungen (/Veranstaltungen) in der Detailansicht seiner gewünschten 
+Veranstaltung.(/Veranstaltungen/Detail)
+|Hier kann er nun den Button "diese Veranstaltung buchen" klicken.(Veranstaltungen/Detail/buchen) Er wird weitergeleitet und muss eingeben in welchem Zeitraum er die Veranstaltung
+buchen möchte und an welchem Ort. Hier kann er wählen, ob er die Halle des Vereins benutzen möchte oder einen selbst gewählten Ort hinzufügen möchte.
+|Hier kann er nun den Button "diese Veranstaltung buchen" klicken. Er wird weitergeleitet und muss eingeben in welchem Zeitraum er die Veranstaltung
+buchen möchte und an welchem Ort. Hier kann er wählen, ob er die Halle des Vereins benutzen möchte oder einen selbst gewählten Ort hinzufügen möchte.
+Sind die eingegebenen Daten jedoch nicht buchbar wird der Kunde zurück zur Seite geleitet, in welcher er die Daten eingeben konnte.(/Veranstaltungen/Detail/buchen)
+Es erscheint eine der folgenden
+Meldungen: "Der Raum ist zu diesem Zeitpunkt leider besetzt." oder "Die Artistengruppe/ Der Artist ist in diesem Zeitraum nicht buchbar" .
+
+|
+|I-42
+|Ausbuchung von Veranstaltungen
+|Kunde ist eingeloggt und will Veranstaltung buchen. Dieses ist der letzte freie Termin von mindestens einem der mitwirkenden Artisten.
+|Kunde bucht Veranstaltung wie oben. (erfolgreich)
+|Nach Überprüfung der Artisten Konten wird festgestellt, dass dies für mindestens einen Artisten der letzte freie Termin für diese Veranstaltung ist, 
+bzw kann in dem angegebenen Zeitraum der Veranstaltung kein Termin mehr gebucht werden, da zwischen den einzelnen Terminen nicht mehr genügend Zeit zur
+Verfügung steht.
+Es erscheint der Schriftzug "ausgebucht" direkt unter dem Veranstaltungstitel.(/Veranstaltungen) Die Veranstaltung ist nicht mehr buchbar.
+
+|Artist
+|I-43
+|Ansicht der eigenen Termine 
+|Artist ist eingeloggt
+|Artist kann auf den Menüpunkt "eigene Termine" klicken. (/Termine)
+|Er sieht eine Kalenderansicht, wo alle Zeiträume seiner gebuchten Veranstaltungen vermerkt sind. Es ist lediglich eine Zuordnung der Veranstaltungsnamen 
+zu einem bestimmten Zeitraum.
+
+|Artist
+|I-44-A
+|Detailansicht der Termine
+|Artist ist eingeloggt und befindet sich in der Terminansicht.(/Termine)
+|Artist kann nun die Termine anklicken. 
+|Er kommt auf eine Detailansicht (/Termine/Detail)der angeklickten Veranstaltung. Hier erfährt er weitere Details, wie den Ort, an dem der Termin stattfinden soll, welcher Kunde
+die Veranstaltung gebucht hat.
+
+|Kunde
+|I-44-B
+|Detailansicht der Termine 
+|Kunde ist eingeloggt und befindet sich in der Terminansicht.(/Termine)
+|Kunde kann nun seine Termine anklicken.
+|Er kommt auf eine Detailansicht (/Termine/Detail) der angeklickten Veranstaltung. Hier erfährt er weitere Details, wie den Ort, an dem der Termin stattfinden soll, welcher Artist bzw.
+welche Artistengruppe die Veranstaltung gebucht hat.
+
+|Kunde
+|I-45
+|Ansicht der eigenen Termine
+|Kunde ist eingeloggt
+|Kunde kann auf den Menüpunkt "eigene Termine" klicken.(/Termine)
+|Er sieht eine Kalenderansicht, wo alle Zeiträume seiner gebuchten Veranstaltungen vermerkt sind. Es ist lediglich eine Zuordnung der Veranstaltungsnamen 
+zu einem bestimmten Zeitraum.
+
+
+|Artist
+|I-46-A
+|Terminabsage  
+|Artist ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Termine (/Termine). 
+|Artist geht nun in die Detailansicht (Termine/Detail) des Termins, den er absagen möchte und klickt auf "Termin absagen.". (/Termine/Detail/absagen )
+Es erscheint eine Meldung mit der Frage: "Möchten Sie diesen Termin wirklich absagen?" und er hat die Wahl zwischen "Ja" und "Nein"
+|Wenn er auf "Ja." klickt, wird der Termin aus seinem Terminkalender entfernt (für Shows auch aus den Kalendern aller an der Show beteiligten Artisten). Es kommt die 
+Meldung: "Termin wurde erfolgreich abgesagt." Der Kunde wird 
+benachrichtigt und der Termin wird auch aus seinem Kalender gestrichen. Der Kunde bekommt sein Geld zurück und falls die Halle für diesen Termin gebucht war, wird der Termin 
+ebenfalls aus dem Kalender der Halle gelöscht.
+
+|Artist
+|I-46-B
+|Terminabsage  
+|Artist ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Termine (/Termine). 
+|Artist geht nun in die Detailansicht (Termine/Detail) des Termins, den er absagen möchte und klickt auf "Termin absagen.". (/Termine/Detail/absagen )
+Es erscheint eine Meldung mit der Frage: "Möchten Sie diesen Termin wirklich absagen?" und er hat die Wahl zwischen "Ja" und "Nein"
+|Wenn er auf "Nein." klickt bleibt der Artist in der Detailansicht (/Termine/Detail) der gebuchten Veranstaltung.
+
+|Kunde
+|I-47-A
+|Terminabsage  
+|Kunde ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Termine (/Termine). 
+|Kunde geht nun in die Detailansicht (/Termine/Detail)des Termins, den er absagen möchte und klickt auf "Termin absagen.".(/Termine/Detail/absagen)
+ Es erscheint eine Meldung mit der Frage: "Möchten Sie diesen Termin wirklich absagen?" und er hat die Wahl zwischen "Ja" und "Nein"
+|Wenn er auf "Ja." klickt, wird der Termin aus seinem Terminkalender entfernt.. Es kommt die 
+Meldung: "Termin wurde erfolgreich abgesagt." Die zugehörigen Artisten werden 
+benachrichtigt und der Termin wird auch aus ihrem Kalender ebenfalls gestrichen. Falls die Halle für diesen Termin gebucht war, wird der Termin 
+ebenfalls aus dem Kalender der Halle gelöscht.  Der Kunde bekommt das dafür bezahlte Geld nicht zurück.
+
+|Kunde
+|I-47-B
+|Terminabsage 
+|Kunde ist eingeloggt. Er befindet sich in der Ansicht seiner eigenen Termine (/Termine). 
+|Kunde geht nun in die Detailansicht (/Termine/Detail)des Termins, den er absagen möchte und klickt auf "Termin absagen.".(/Termine/Detail/absagen)
+ Es erscheint eine Meldung mit der Frage: "Möchten Sie diesen Termin wirklich absagen?" und er hat die Wahl zwischen "Ja" und "Nein"
+|Wenn er auf "Nein." klickt bleibt der Kunde in der Detailansicht (/Termine/Detail) der gebuchten Veranstaltung.
+
+|===
+
+== Unit-Tests:
+
+[options="header"]
+|===
+|ID |Klasse und Funktion| Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe 
+
+|U-1
+|
+|Automatische Nachbestellung von Artikeln
+|Im Inventar existieren Produkteinträge, eine Mindestvorratsmenge ist festgelegt.
+|Durch einen Einkauf eines Kunden fällt der Vorrat eines Artikels unter den Mindestwert der zuvor festgelegt wurde. 
+|Ein Hintergrundprozess wird aktiviert der die vorrätige Menge jedes Artikels überprüft und bei Bedarf den Artikel so lange nachkauft,
+ bis der Vorrat wieder hoch genug ist.
+
+
+|U-2-C
+|
+|Preisbestimmung mit Rabatt / nicht eingeloggt
+|keine
+|Ein Preis wird abgefragt (im Warenkorb (/Einkaufswagen) oder auf der Produktseite (/Shop))
+|Der Normalpreis wird  bestimmt und unverändert angezeigt.
+
+|U-3
+|
+|Löschen von Veranstaltungen (durch System)
+|Der Zeitraum einer Veranstaltung läuft aus.
+|
+|Mit Ablauf des Zeitraums der Veranstaltung (einen Tag später), wird diese aus dem Katalog gelöscht und ist nicht mehr buchbar und sichtbar.
+
+|U-4
+|EntityVeranstaltung: CompareMittelwertTest()
+|Mittelwert der Bewertungen der Veranstaltungen wird korrekt berechnet
+|Veranstaltung wurden erstellt
+|Bewertungen werden erstellt
+|Mittelwert der Veranstaltung wird korrekt geändert
+
+|U-5
+|EntityVeranstaltung: addBewertungTest()
+|Bewertung wird mit korrektem aktuellen Datum zur Veranstaltung hinzugefügt 
+|Veranstaltung wurde erstellt
+|Bewertung wird erstellt
+|Aktuelles Datum und Datum der Bewertung stimmen überein, Bewertung wurde Veranstaltung korrekt zugeordnet
+
+|U-6
+|Fehler: pruefeSperrzeitTest()
+|Sperrzeiten der Artisten sollen Überprüft werden (ob sie sich mit dem eingegebenen Termin überschneiden)
+|Sperrzeiten der Artisten sind erstellt
+|zu überprüfendes Datum
+|korrekte Aussage darüber, ob das eingegebene Datum in der Sperrzeit des Artisten liegt
+
+|U-7
+|Fehler: pruefeVerbuchtTest()
+|Verfügbarkeit der Artisten soll überprüft werden 
+|Artisten sind erstellt, einige Veranstaltungen sind diesen Artisten zugeordnet
+|Eingabe eines Datums (z.b. durch erstellen einer neuen Buchung einer Veranstaltung des vorher erstellten Artisten)
+|richtige Ausgabe, ob der Artist zum eingegebenen Datum noch verfügbar ist
+
+|U-8
+|Fehler : pruefeVergangenheitTest()
+|Es soll geprüft werden, ob das Datum in der Vergangenheit liegt 
+| Veranstaltung ist erstellt, die gebucht werden soll
+| Datum an der Veranstaltung gebucht werden soll wird eingegeben
+|Es soll korrekt erkannt werden, ob dieses Datum in der Vergangenheit liegt
+
+|U-9
+|Fehler: pruefeHalleTest()
+|Verfügbarkeit der Halle soll überprüft werden 
+|Es sind bereits einige Veranstaltungen für die Halle gebucht worden
+|Eingabe eines Datums für eine Buchung in der Halle
+|soll korrekt wiedergeben, ob die Halle zu diesem Datum verbucht ist 
+
+|U-10
+|Fehler: pruefeDauerTest()
+|Bei Erstellung einer Veranstaltung darf keine negative Dauer eingegeben werden 
+|
+|Veranstaltung wird erstellt
+|soll korrekt zurückgeben, ob die Dauer korrekt eingegeben wurde (oder negativ war)
+
+|U-11
+|Fehler: pruefeDatumTest()
+|Es soll überprüft werden, dass das Startdatum vor dem Enddatum liegt 
+|
+|Veranstaltung wird erstellt
+|soll korrekt wiedergeben,, ob das Start- und End-Datum korrekt eingegeben wurde (oder ob das End-Datum vor dem Startdatum liegt)
+
+|U-12
+|Fehler: pruefeZusatzkostenTest()
+|es soll geprüft werden, ob die Zusatzkosten korrekt angegeben werden 
+|
+|Zusatzkosten werden erstellt
+|soll korrekt wiedergeben, ob Zusatzkosten richtig eingegeben wurden (oder ob ein String oder eine negative Zahl stattdessen eingegeben wurden)
+
+|U-13
+|Fehler: pruefeBewertungTest()
+|es soll geprüft werden ob die eingegebene Bewertung im Bereich von 0- 5 liegt
+|Veranstaltung wurde erstellt
+|zu dieser Veranstaltung wird eine Bewertung abgegeben
+|soll korrekt wiedergeben, ob die abgegebene Bewertung im Bereich von 0-5 liegt
+
+|U-14
+|Fehler: pruefeZeitraumTest()
+|es soll geprüft werden ob eine Buchung noch im Zeitraum der Veranstaltung liegt 
+|Veranstaltung wurde erstellt
+|Buchung wird erstellt
+|Es soll korrekt wiedergegeben werden, ob Buchungsdaten noch im Zeitraum der Veranstaltung liegen
+
+|U-15
+|VeranstaltungsManager: erstelleNeueVeranstaltungTest()
+|Es soll getestet werden ob eine Veranstaltung richtig erstellt wird 
+|
+|Veranstaltung wird erstellt
+|es soll getestet werden, ob die Werte korrekt gespeichert werden
+
+|U-16
+|VeranstaltungsManager: addArtikelTest()
+|Es soll getestet werden, ob Artikel der Veranstaltung korrekt zugeordnet werden 
+|Es wurde eine Veranstaltung erstellt
+|Dieser Veranstaltung werden nun Artikel zugeordnet
+|Überprüfung der korrekten Abspeicherung der Artikel zur Veranstaltung
+
+|U-17
+|VeranstaltungsManager: getBesteVeranstaltungenTest()
+|Es soll getestet werden ob die Funktion getBesteVeranstaltungn() die richtigen Veranstaltungen zurück gibt 
+|Es werden Veranstaltungen mit verschiedenen Bewertungen erstellt
+|Die Funktion getBesteVeranstaltungen() wird aufgerufen
+|Überprüfung ob die Funktion  die richtigen 3 Veranstaltungen (mit den höchsten Bewertungen(absteigend sortiert)) zurückgibt
+
+|U-18
+|ControllerHighlightsTests: index()
+|Es wird getestet, ob der Controller den richtigen String als Rückgabewert liefert.
+|Model wird erstellt.
+|Die Funktion index() des Controllers wird aufgerufen.
+|Der String "index".
+
+|U-19
+|ArtistengruppenTest: GuppeNullPointerAndEmptyString()
+|Es wird getestet, ob eine IllegalArgumentExeption geworfen wird, wenn der Gruppenname null oder leer ist.
+|
+|Neue Artistengruppe mit Guppenname der leer oder null ist.
+|IllegalArgumentException
+
+|U-20
+|ArtistengruppenTest: MitgliedHinzufuegen()
+|Es wird getestet, ob ein hinzugefügter Artist einer Gruppe, in dieser auch enthalten ist.
+|Gruppe und Artist sind erstellt.
+|Die Funktion addMitglied() einer Artistengruppe wird aufgerufen.
+|Es wird überprüft, ob der Artist der Gruppe hinzugefügt wurde.
+
+|U-21
+|ArtistengruppenTest: MitgliedEntfernen()
+|Es wird getestet, ob ein Artist, der von einer Gruppe entfernt wurde, nicht mehr in dieser enthalten ist.
+|Gruppe und Artist sind erstellt. Artist ist in Gruppe.
+|Die Funktion entferneMitglied() wird aufgerufen.
+|Überprüfung, ob der Artist nicht mehr in der Gruppe enthalten ist.
+
+|U-22
+|ControllerArtistenTest: termineTest()
+|Es wird geprüft, ob der richtige String zurückgegeben wird.
+|Mehere Gruppen und Artisten wurden erstellt.
+|Die Funktion termine() des Controllers wird aufgerufen.
+|Der String "Veranstaltungen/veranstaltungskatalog".
+
+|U-23
+|ControllerPersonenverwaltungTest: authorization()
+|Es wird geprüft, ob die Funktionen des Controllers Exceptions mit Fehlern werfen.
+|
+|Es werden die Funktionen getPersonenverwaltung(), getKundenverwaltung(), get Gruppenverwaltung() und getGruppeErstellen() aufgerufen.
+|Es wird überprüft, ob die Exceptions durch die Funktionen den String "An Authentication object was not found in the SecurityContext" werfen.
+
+|U-24
+|ControllerPersonenverwaltungTest: postArtist()
+|Es wird getestet, ob die Funktion postArtist() des Controllers den richtigen String zurückgibt.
+|Eine Artist wird mit einer Form erstellt. Mit der Form wird ein BindingResult erstellt.
+|Die Funktion postArtist() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/artistenverwaltung".
+
+|U-25
+|ControllerPersonenverwaltungTest: postGruppeErstellen()
+|Es wird getestet, ob die Funktion postGuppeErstellen() den richtigen String zurückgibt.
+|Ein BindingResult wird mit einer FormGruppenValidation erstellt.
+|Die Funktion postGuppenErstellen() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/gruppenverwaltung".
+
+|U-26
+|ControllerPersonenverwaltungTest: allgemeineSperrzeitenanlegenWithParameters()
+|Es wird getestet, ob die Funktion allgemeineSperrzeitenanlegen() den richtigen String zurückgibt.
+|Es sind mehrere Strings und LocalTimes als Parameter erstellt.
+|Die Funktion allgemeineSperrzeitenanlegen() des Controllers wird aufgerufen.
+|Der String "redirect:/personenverwaltung/sperrzeiten".
+
+|U-27
+|ControllerPersonenverwaltungTest: getPersonenverwaltung()
+|Es wird getestet, ob die Funktion getPersonenverwaltung() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getPersonenverwaltung() wird aufgerufen.
+|Der String "Personenverwaltung/artistenverwaltung".
+
+|U-28
+|ControllerPersonenverwaltungTest: getGruppeErstellen()
+|Es wird getestet, ob die Funktion getGrupeeErstellen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getGruppeErstellen() wird aufgerufen.
+|Der String "Personenverwaltung/gruppe/erstellen".
+
+|U-29
+|ControllerPersonenverwaltungTest: getKundenverwaltung()
+|Es wird getestet, ob die Funktion getKundenverwaltung() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getKundenverwaltung() wird aufgerufen.
+|Der String "Personenverwaltung/kundenverwaltung".
+
+|U-30
+|ControllerPersonenverwaltungTest: getGruppenverwaltung()
+|Es wird getestet, ob die Funktion getGruppenverwaltung() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getGruppenverwaltung() wird aufgerufen.
+|Der String "/Personenverwaltung/gruppenverwaltung".
+
+|U-31
+|ControllerPersonenverwaltungTest: getArtist()
+|Es wird getestet, ob die Funktion getArtisten() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtisten() wird aufgerufen.
+|Der String "Artisten/artisten".
+
+|U-32
+|ControllerPersonenverwaltungTest: getGruppen()
+|Es wird getestet, ob die Funktion getGruppen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getGruppen() wird aufgerufen.
+|Der String "Artisten/gruppen".
+
+|U-33
+|ControllerPersonenverwaltungTest: allgemeineSperrzeitenLoeschen()
+|Es wird getestet, ob die Funktion allgemeinenSperrzeitenLoeschen() den richtigen String zurückgibt.
+|
+|Die Funktion allgemeinenSperrzeitenLoeschen() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/sperrzeiten".
+
+|U-34
+|ControllerPersonenverwaltungTest: allgemeineSperrzeitanlegen()
+|Es wird getestet, ob die Funktion allgemeineSperrzeitanlegen() den richtigen String zurückgibt.
+|
+|Die Funktion allgemeineSperrzeitanlegen() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/sperrzeiten".
+
+|U-35
+|ControllerPersonenverwaltungTest: getArtistErstellen()
+|Es wird getestet, ob die Funktion getArtistErstellen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtistErstellen() wird aufgerufen.
+|Der String "/Personenverwaltung/register/regArtist".
+
+|U-36
+|ControllerPersonenverwaltungTest: postArtistErstellen()
+|Es wird getestet, ob die Funktion postArtistErstellen() den richtigen String zurückgibt.
+|Ein BindingResult und eine FormUserValidation sind erstellt.
+|Die Funktion postArtistErstellen() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/artistenverwaltung".
+
+|U-37
+|ControllerPersonenverwaltungTest: postUserLoeschen()
+|Es wird getestet, ob die Funktion postUserLoeschen() den richtigen String zurückgibt.
+|FormUserValidation ist erstellt. Ein Artist ist mit der Form erstellt.
+|Die Funktion postUserLoeschen() wird aufgerufen.
+|Der String "redirect:/personenverwaltung/artistenverwaltung".
+
+|U-38
+|ControllerPersonenverwaltungTest: getGruppeMitglieder()
+|Es wird getestet, ob die Funktion getGruppeMitglieder() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getGruppeMitglieder() wird aufgerufen.
+|Der String "/Personenverwaltung/gruppe/gruppe".
+
+|U-39
+|ControllerPersonenverwaltungTest: postGruppeMitgliedEntfernen()
+|Es wird getestet, ob die Funktion postGruppeMitgliedEntfernen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion postGruppeMitgliedEntfernen() wird aufgerufen.
+|Der String "/Personenverwaltung/gruppe/gruppe".
+
+|U-40
+|ControllerPersonenverwaltungTest: postGruppeMitgliedHinzfuegen()
+|Es wird getestet, ob die Funktion postGruppeMitgliedHinzfuegen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion postGruppeMitgliedHinzfuegen() wird aufgerufen.
+|Der String "/Personenverwaltung/gruppe/gruppe".
+
+|U-41
+|ControllerPersonenverwaltungTest: postArtistBearbeiten()
+|Es wird getestet, ob die Funktion postArtistBearbeiten() den richtigen String zurückgibt.
+|FormUserValidation ist erstellt. Ein Artist und ein BindingResult ist mit der Form erstellt. 
+|Die Funktion postArtistBearbeiten() wird aufgerufen.
+|Der String "Personenverwaltung/ok".
+
+|U-42
+|ControllerPersonenverwaltungTest: postKundeAlsVorstandBearbeiten()
+|Es wird getestet, ob die Funktion postKundeAlsVorstandBearbeiten() den richtigen String zurückgibt.
+|FormUserValidation ist erstellt. Ein Artist und ein BindingResult ist mit der Form erstellt. 
+|Die Funktion postKundeAlsVorstandBearbeiten() wird aufgerufen.
+|Der String "Personenverwaltung/ok".
+
+|U-42
+|ControllerPersonenverwaltungTest: postKundeEntfernen()
+|Es wird getestet, ob die Funktion postKundeEntfernen() den richtigen String zurückgibt.
+|FormUserValidation ist erstellt. Ein Artist ist mit der Form erstellt. 
+|Die Funktion postKundeEntfernen() wird aufgerufen.
+|Der String "Personenverwaltung/ok".
+
+|U-43
+|ControllerSperrzeitenTests: ControllerSperrzeitenErstellTest()
+|Testet, ob der Konstruktors den Controllers den Wert zurückgibt, wenn die Parameter null sind.
+|ControllerSperrzeiten ist erstellt.
+|Der Konstruktor wird aufgerufen.
+|Es wird eine Meldung zurückgegeben, dass die Parameter nicht null sein dürfen.
+
+|U-44
+|ControllerSperrzeitenTests: sperrzeitenTest()
+|Testet, ob die Funktion sperrzeiten() die richtigen Werte dem Model hinzufügt und den richtigen String zurückgibt.
+|ControllerSperrzeiten ist erstellt.
+|Die Funktion sperrzeiten() wird aufgerufen.
+|Der String "/Zeitverwaltung/sperrzeiten".
+
+|U-45
+|ControllerSperrzeitenTests: sperrzeitloeschenTest() 
+|Testet, ob die Funktion sperrzeitloeschenTest()  die richtigen Werte dem Model hinzufügt und den richtigen String zurückgibt.
+|ControllerSperrzeiten ist erstellt.
+|Die Funktion sperrzeitloeschenTest()  wird aufgerufen.
+|Der String "/Zeitverwaltung/sperrzeiten".
+
+|U-46
+|ControllerSperrzeitenTests: sperrzeiterstellenTest()
+|Testet, ob Sperrzeiten die erstellt wurden, richtig funktionieren.
+|Ein Model und mehrere Sperrzeiten zu einem Artisten.
+|Es wird die Funktion getStart(), getDauer(), getName(), getKommentar() und getArtist() von einer Zeit aufgerufen.
+|Es wird wird verglichen, ob diese Werte mit den richtigen Übereinstimmen.
+
+|U-46
+|ControllerSperrzeitenTests: sperrzeiterstellenTest()
+|Testet, ob Sperrzeiten die erstellt wurden, richtig funktionieren.
+|Ein Model und mehrere Sperrzeiten zu einem Artisten.
+|Es wird die Funktion sperrzeiterstellen() des Controllers aufgerufen.
+|Der String "/Zeitverwaltung/sperrzeiten".
+
+|U-47
+|ControllerUserAccountTests: detail()
+|Testet, ob der Controller den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion detail() wird aufgerufen.
+|Der String "/User/userpage".
+
+|U-48
+|ControllerUserAccountTests: getProfilBearbeiten()
+|Testet, ob der Controller den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getProfilBearbeiten() wird aufgerufen.
+|Der String "User/bearbeiten".
+
+|U-49
+|ControllerUserAccountTests: postProfilBearbeiten()
+|Testet, ob der Controller den richtigen String zurückgibt.
+|Ein Artist und ein BindingResult ist mit einer Form erstellt erstellt.
+|Die Funktion getProfilBearbeiten() wird aufgerufen.
+|Der String "index".
+
+|U-50
+|ControllerUserAccountTests: getUserErstellen()
+|Testet, ob der Controller den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getUserErstellen() wird aufgerufen.
+|Der String "User/registration".
+
+|U-51
+|ControllerUserAccountTests: postKundeErstellen()
+|Testet, ob der Controller den richtigen String zurückgibt.
+|Ein Artist und ein BindingResult ist mit einer Form erstellt erstellt.
+|Die Funktion postKundeErstellen() wird aufgerufen.
+|Der String "User/registration".
+
+|U-52
+|ControllerVeranstaltungskatalogTest: erstelleControllerVeranstaltungsKatalogTest()
+|Testet, ob der Konstruktor des Controllers die richtigen Fehlermeldungen wirft, wenn ein Parameter null ist.
+|
+|Der Konstruktor wird aufgerufen mit einem Parameter, der null ist.
+|Gibt eine Fehlermeldung, dass dieser Parameter nicht null sein darf.
+
+|U-53
+|ControllerVeranstaltungskatalogTest: workshopTest()
+|Testet, ob die Funktion workshops() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model und eine Liste von Veranstaltungen ist erstellt.
+|Die Funktion workshops() wird aufgerufen.
+|Das Model sollte richtigen Werte enthalten und die Funktion sollte den String "Veranstaltungen/veranstaltungskatalog" zurückgeben.
+
+|U-54
+|ControllerVeranstaltungskatalogTest: showsTest()
+|Testet, ob die Funktion showsTest() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model und eine Liste von Veranstaltungen ist erstellt.
+|Die Funktion showsTest() wird aufgerufen.
+|Das Model sollte richtigen Werte enthalten und die Funktion sollte den String "Veranstaltungen/veranstaltungskatalog" zurückgeben.
+
+|U-55
+|ControllerVeranstaltungskatalogTest: registerWorkshopTest()
+|Testet, ob die Funktion registerWorkshopTest() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion registerWorkshopTest() wird aufgerufen.
+|Das Model sollte richtigen Werte enthalten und die Funktion sollte den String "Veranstaltungen/veranstaltungskatalog" zurückgeben.
+
+|U-56
+|ControllerVeranstaltungskatalogTest: erstelleNeueVeranstaltungTest()
+|Testet, ob die Funktion erstelleNeueVeranstaltungTest() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model, ein FormNeueVeranstaltung und ein BindingResult sind erstellt.
+|Die Funktion erstelleNeueVeranstaltungTest() wird aufgerufen.
+|Die Funktion sollte den String "Veranstaltungen/addFormular" zurückgeben.
+
+|U-57
+|ControllerVeranstaltungskatalogTest: bearbeitenTest()
+|Testet, ob die Funktion bearbeitenTest() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model, ein FormNeueVeranstaltung und ein BindingResult sind erstellt.
+|Die Funktion bearbeitenTest() wird aufgerufen.
+|Die Funktion sollte den String "Veranstaltungen/addFormular" zurückgeben, wenn der Form keine Werte zugewiesen sind, ansonsten
+"Veranstaltungen/VeranstaltungBearbeiten".
+
+|U-58
+|ControllerVeranstaltungskatalogTest: bewerten()
+|Testet, ob die Funktion bewerten() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion bewerten() wird aufgerufen.
+|Die Funktion sollte den String "Veranstaltungen/bewertungFormular" und dem Model sollten die korrekten Veranstaltungen übergeben werden.
+
+|U-59
+|ControllerVeranstaltungskatalogTest: zeigeAlleBuchungenTest()
+|Testet, ob die Funktion zeigeAlleBuchungenTest() dem Model die richtigen Werte übergibt und ob sie den richtigen String zurückgibt.
+|Ein Model und eine Liste aus Zusatzkosten sind erstellt.
+|Die Funktion zeigeAlleBuchungenTest()() wird aufgerufen.
+|Die Funktion sollte den String "Veranstaltungen/alleBuchungen" und dem Model sollten die korrekten Zusatzkosten übergeben werden.
+
+|U-60
+|ControllerVerwaltungArtistTest: getArtistenverwaltungTermine()
+|Testet, ob die Funktion getArtistenverwaltungTermine() den richtigen String zurückgibt.
+|Ein Model und ein UserAcconut sind erstellt.
+|Die Funktion getArtistenverwaltungTermine() wird aufgerufen.
+|Der String "VerwaltungArtist/termine".
+
+|U-61
+|ControllerVerwaltungArtistTest: getArtistverwaltungMain()
+|Testet, ob die Funktion getArtistverwaltungMain() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtistverwaltungMain() wird aufgerufen.
+|Der String "VerwaltungArtist/main".
+
+
+|U-62
+|ControllerVerwaltungArtistTest: getArtistverwaltungGruppe()
+|Testet, ob die Funktion getArtistverwaltungGruppe() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtistverwaltungGruppe() wird aufgerufen.
+|Der String "VerwaltungArtist/gruppen".
+
+
+|U-63
+|ControllerVerwaltungArtistTest: getArtistverwaltungSperrzeiten()
+|Testet, ob die Funktion getArtistverwaltungSperrzeiten() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtistverwaltungSperrzeiten()wird aufgerufen.
+|Der String "VerwaltungArtist/main".
+
+
+|U-64
+|ControllerVerwaltungArtistTest: getArtistverwaltungVeranstaltungen()
+|Testet, ob die Funktion getArtistverwaltungVeranstaltungen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getArtistverwaltungVeranstaltungen() wird aufgerufen.
+|Der String "VerwaltungArtist/veranstaltungen".
+
+
+|U-61
+|ControllerVerwaltungKundeTest: getKundenVerwaltungTermine()
+|Testet, ob die Funktion getKundenVerwaltungTermine() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getKundenVerwaltungTermine() wird aufgerufen.
+|Der String "VerwaltungKunde/termine".
+
+
+|U-61
+|ControllerVerwaltungArtistTest: getKundenRechnungen()
+|Testet, ob die Funktion getKundenRechnungen() den richtigen String zurückgibt.
+|Ein Model ist erstellt.
+|Die Funktion getKundenRechnungen() wird aufgerufen.
+|Der String "VerwaltungKunde/rechnungen".
+
+|U-62
+|FormGruppenValidationTest: setGruppennameNullTest()
+|Testet, ob eine IllegalArgumentException geworfen wird, wenn der Gruppenname null oder leer ist und ob diese die richtige
+Message liefert.
+|Eine FormGruppenValidation ist erstellt.
+|Die Funktion setGruppenname() wird aufgerufen.
+|Es wird geprüft, ob die Message "Gruppenname darf nicht Null sein!" ist, wenn eine Exception geworfen wurde.
+
+|U-63
+|FormUserValidationTest: setUsernameNullTest()
+|Testet, ob eine IllegalArgumentException geworfen wird, wenn der Username null oder leer ist und ob diese die richtige
+Message liefert.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion setUsername() wird aufgerufen.
+|Es wird geprüft, ob die Message "Username darf nicht Null sein!" ist, wenn eine Exception geworfen wurde.
+
+
+|U-64
+|FormUserValidationTest: setFristNullTest()
+|Testet, ob eine IllegalArgumentException geworfen wird, wenn der Vorname null oder leer ist und ob diese die richtige
+Message liefert.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion setFirstname() wird aufgerufen.
+|Es wird geprüft, ob die Message "Vorname darf nicht Null sein!" ist, wenn eine Exception geworfen wurde.
+
+|U-65
+|FormUserValidationTest: setLastnameNullTest()
+|Testet, ob eine IllegalArgumentException geworfen wird, wenn der Nachname null oder leer ist und ob diese die richtige
+Message liefert.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion setLastname() wird aufgerufen.
+|Es wird geprüft, ob die Message "Nachname darf nicht Null sein!" ist, wenn eine Exception geworfen wurde.
+
+|U-66
+|FormUserValidationTest: setEmailNullTest()
+|Testet, ob eine IllegalArgumentException geworfen wird, wenn die Email null oder leer ist und ob diese die richtige
+Message liefert.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion setEmail() wird aufgerufen.
+|Es wird geprüft, ob die Message "Emailname darf nicht Null sein!" ist, wenn eine Exception geworfen wurde.
+
+|U-67
+|ManagerUserTest: createGruppeTest()
+|Testet, ob eine Gruppe mit der Funktion createGruppe() korrekt erstellt wird.
+|Mit einer FormGruppenValidation wird eine Gruppe erstellt.
+|Die Funktion createGruppe() wird aufgerufen.
+|Es wird geprüft, ob die Gruppe dem Gruppen-Repository hinzugefügt wurde.
+
+|U-68
+|ManagerUserTest: createArtistTest()
+|Testet, ob ein Artist mit der Funktion createArtist() korrekt erstellt wird.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion createArtist() wird aufgerufen.
+|Es wird geprüft, ob der Artist erstellt wurde.
+
+|U-69
+|ManagerUserTest: createUserTest()
+|Testet, ob eine Gruppe mit der Funktion createUser() korrekt erstellt wird.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion createUser() wird aufgerufen.
+|Es wird geprüft, ob der Kunde erstellt wurde.
+
+|U-70
+|ManagerUserTest: createVorstandTest()
+|Testet, ob der Vorstand mit der Funktion createVorstand() korrekt erstellt wird.
+|Eine FormUserValidation ist erstellt.
+|Die Funktion createVorstand() wird aufgerufen.
+|Es wird geprüft, ob die Vorstand erstelllt wurde.
+
+
+|U-71
+|ManagerUserTest: deleteUserTest()
+|Testet, ob der User korrekt gelöscht wird.
+|Eine FormUserValidation ist erstellt. Ein User ist damit erstellt.
+|Die Funktion deleteUser() wird aufgerufen.
+|Es wird geprüft, ob der User nicht mehr vorhanden ist.
+
+|U-72
+|ManagerUserTest: GroupFunction()
+|Testet, ob ein Artist einer Gruppe hinzugefügt und entfernt werden kann.
+|Ein Artist und eine Gruppe sind mit Forms erstellt.
+|Die Funktion addToGroup() und removeFromGroup() werden aufgerufen.
+|Es wird geprüft, ob der Artist erst hinzugefügt und dann wieder entfernt wurde.
+
+|U-73
+|ManagerUserTest: editArtist()
+|Testet, ob man die Daten eines Artisten korrekt bearbeiten kann.
+|Ein Artist ist mit einer Form erstellt. Eine andere Form zum bearbeite ist erstellt.
+|Die Funktion editArtist() wird aufgerufen.
+|Es wird geprüft, ob die Daten des Artisten bearbeitet wurden.
+
+|U-74
+|ManagerUserTest: SearchCommon()
+|Testet, ob die Funktion findArtist() und findKunde() nur Artisten/Kunden zurückgeben.
+|
+|Die Funktionen findArtist() und findKunden() werden aufgerufen.
+|Es wird geprüft, ob die gefundenen User die Rolle eines Artisten/Kunden haben.
+
+|U-75
+|ManagerUserTest: findUser()
+|Testet, ob die Funktion findeUserAccount() den gesuchten User zurückgibt.
+|User mit Form erstellt.
+|Die Funktion findeUserAccount() wird aufgerufen.
+|Es wird geprüft, ob der User zurückgegeben wurde, der gesucht wurde.
+
+|U-76
+|ManagerUserTest: Veranstaltungen()
+|Testet, ob die Funktion findeVeranstaltungenZuUser() die richtigen Veranstaltungen zu dem User zurückgibt.
+|Artist muss Veranstaltungen besitzen.
+|Die Funktion findeVeranstaltungenZuUser() wird aufgerufen.
+|Es wird geprüft, ob die richtigen Veranstaltungen zürückgegeben werden.
+
+|U-77
+|ManagerUserTest: Buchungen()
+|Testet, ob die Funktion findeBuchungenZuUser() die richtigen Buchungen zum User zurückgibt.
+|Kunde muss Veranstaltungen gebucht haben vom Artisten.
+|Die Funktion findeBuchungenZuKunde() wird aufgerufen.
+|Es wird geprüft, ob jede der Buchungen vom dem Kunden gebucht wurden.
+
+|U-78
+|KalenderTests: getBuchungenZuArtistImMonatTest()
+|Testet, ob die Funktion getBuchungenZuArtistImMonat() genau die Buchungen zurück gibt, die in dem gegebenen Monat stattfinden.
+|Kunde muss Buchungen besitzen.
+|Die Funktion getBuchungenZuArtistImMonat() wird aufgerufen.
+|Es wird geprüft, ob die zurückgegeben Liste die richtigen Buchungen enthält.
+
+|U-79
+|KalenderTests: getBuchungenZuKundeImMonatTest()
+|Testet, ob die Funktion getBuchungenZuKundeImMonat() genau die Buchungen zurück gibt, die in dem gegebenen Monat stattfinden.
+|Kunde muss Buchungen besitzen.
+|Die Funktion getBuchungenZuKundeImMonat() wird aufgerufen.
+|Es wird geprüft, ob die zurückgegeben Liste die richtigen Buchungen enthält.
+
+|U-80
+|KalenderTests: findeBuchungMitDatumTest()
+|Testet, ob die Funktion findeBuchungMitDatum() die richtige Buchung zu dem Datum zurückgibt.
+|Kunde muss Buchungen besitzen.
+|Die Funktion findeBuchungMitDatum() wird aufgerufen.
+|Es wird geprüft, ob die richtige Buchung zurückgegeben wurde.
+
+|U-81
+|KalenderTests: getEintraegeFuerMonatTest()
+|Testet, ob die Funktion getEintraegeFuerMonat den richtigen zweidimensionalen Array zurückgibt.
+|
+|Die Funktion getEintraegeFuerMonat() wird aufgerufen.
+|Es wird geprüft, ob die richtigen Einträge für diesen Monat zurückgegeben wurden.
+
+|U-82
+|ControllerKalenderTest: getKalenderKundeTest()
+|Testet, ob die Funktion getKalenderKunde() den richtigen String zurückgibt.
+|
+|Die Funktion getKalenderKunde() wird aufgerufen.
+|Der String "/Kalender/kalender" wird zurückgegeben.
+
+|U-83
+|ControllerBestellungenTests: ControllerBestellungenErstellTest()
+|Testet, ob der Bestellungs Controller richtig erstellt wird.
+|Keine.
+|Verschiedene nullpointer werden übergeben.
+|Es werden exceptions geworfen, dass keine Nullpointer erlaubt sind.
+
+|U-84
+|ControllerBestellungenTests: initialisiereWarenkorbTest()
+|Testet, ob der Warenkorb richtig initialisiert wird.
+|Keine.
+|Ein Test Warenkorb wird erstellt.
+|Verschiedene Eigenschaften des erstellten Warenkorbs werden überprüft.
+
+|U-85
+|ControllerBestellungenTests: artikelHinzufuegenTest()
+|Testet, dass Artikel richtig zum Warenkorb hinzugefügt werden können.
+|Käufliche Artikel und ein Warenkorb müssen vorhanden sein.
+|Verschiedene Artikel werden dem Warenkorb hinzugefügt.
+|Fehlerhafte Eingaben werden vom Controller erkannt.
+
+|U-86
+|ControllerBestellungenTests: warenkorbAnzeigenTest()
+|Überprüft, dass der Bestellungscontroller nach einer Nutzeraktion auf die richtige Seite weiterleitet.
+|Es müssen ein Warenkorb und ein Account vorhanden sein.
+|Nutzeraktionen werden simuliert.
+|Der Rückgabestring wird auf Richtigkeit überprüft.
+
+|U-87
+|ControllerBestellungenTests: warenkorbKaufenTest()
+|Es werden verschiedene Nutzeraktionen auf dem Warenkorb getestet.
+|Ein Nutzeraccount, ein Warenkorb und Testartikel müssen vorhanden sein.
+|Nutzeraktionen werden simuliert.
+|Der Controller wird auf Exceptions überprüft und die Rückgaben des Controllers auf Richtigkeit.
+
+|U-88
+|ControllerBestellungenTests: bestellungenTest()
+|Es werden mögliche Bestellversuche getestet.
+|Nutzeraccounts, Artikel und ein Warenkorb müssen vorhanden sein.
+|Fehlerhafte sowie korrekte Bestellungen werden simuliert.
+|Die Ergebnisse der Bestellungen werden auf Richtigkeit überprüft.
+
+|U-89
+|ControllerBestellungenTests: detailTest()
+|Testet, ob bei einer Bestellung die Detailansicht funktioniert.
+|Nutzeraccounts, Artikel und eine stattfindende Bestellung.
+|Eine Bestellungsdetailansicht wird von verschiedenen Nutzeraccounts aus aufgerufen.
+|Die Ergebnisse des Controllers werden auf Richtigkeit überprüft.
+
+|U-90
+|ControllerBestellungenTests: leerenTest()
+|Es wird überprüft, ob der Warenkorb richtig geleert wird.
+|Ein Warenkorb und Artikel.
+|Der Warenkorb wird in verschiedenen Zuständen versucht zu leeren.
+|Es wird überprüft, dass der Warenkorb richtig reagiert.
+
+|U-91
+|ControllerBestellungenTests: bearbeitenTest()
+|Überprüft die Bearbeitung von Warenkörben.
+|Ein Warenkorb und Artikel.
+|Es werden Artikel zum Warenkorb hinzugefügt oder Artikel entfernt oder fehlerhafte Eingaben gemacht.
+|Es wird überprüft, dass der Warenkorb richtig reagiert.
+
+|U-92
+|ControllerBestellungenTests: rabattAnwendenTest()
+|Testet, ob der Rabatt für Artikel richtig berechnet wird.
+|Artikel, buchbare Veranstaltungen und ein Nutzeraccount.
+|Es werden Artikel unter verschiedenen Bedingungen gekauft.
+|Der Rabatt muss immer richtig berechnet werden.
+
+|U-93
+|RabattCartTests: getTotalPriceTest()
+|Testet, ob unter allen Umständen der richtige Gesamtpreis eines Warenkorbs berechnet wird.
+|Ein Warenkorb und Artikel.
+|Verschiedene Artikelzusammenstellungen werden gekauft.
+|Der richtige Preis muss ausgegeben werden.
+
+|U-94
+|RabattCartTests: getRabattStatusTest()
+|Testet, ob für Warenkörbe richtig eingestellt ist, ob es einen Rabatt gibt.
+|Warenkörbe mit verschiedenen Artikeln.
+|Der Rabattstatus wird abgefragt.
+|Der Rabattstatus wird auf Richtigkeit überprüft.
+
+|U-95
+|RabattCartTests: setRabattStatusTest()
+|Testet, ob das Einstellen des Rabatts für einen Warenkorb richtig funktioniert.
+|Warenkörbe.
+|Der Rabattstatus der Warenkörbe wird geändert.
+|Der resultierende Rabattstatus wird auf Richtigkeit überprüft.
+
+|U-96
+|RabattOrderTests: RabattOrderErstellTest()
+|Testet, ob Rabatte richtig erstellt werden können.
+|Ein Nutzeraccount.
+|Es werden verschiedene gültige und ungültige Rabatte versucht zu erstellen.
+|Es wird überprüft, ob die richtigen Fehlermeldungen geworfen werden oder der Rabatt korrekt erstellt wird.
+
+|U-97
+|RabattOrderTests: getTotalPriceTest()
+|Testet, ob der Gesamtpreis eines Warenkorbs den Rabatt richtig mit einberechnet.
+|Gesetzte Rabatte und Bestellungen.
+|Verschiedene Bestellungen werden geprüft.
+|Die Gesamtpreise werden unter Einbezug der Rabatte überprüft.
+
+|U-98
+|RabattOrderTests: getRabattStatusTest()
+|Es wird getestet, ob der ein Rabatt aktiviert ist oder nicht.
+|Rabatte und Bestellungen.
+|Der Rabattstatus wird abgefragt.
+|Der Rabattstatus der einzelnen Bestellungen wird auf Richtigekeit überprüft.
+
+|U-99
+|ArtistSperrZeitTests: ArtistSperrZeitErstellTest()
+|Es wird die Erstellung von Artisten Sperrzeiten getestet.
+|Artistenaccounts.
+|Artisten Sperrzeiten werden erstellt.
+|Die Erstellten Sperrzeiten werden auf Richtigkeit überprüft.
+
+|U-100
+|ArtistSperrZeitTests: setArtistTest()
+|Es wird das umstellen des Artisten getestet, der zu einer Sperrzeit gehört.
+|Ein Artistenaccount mit einer Sperrzeit.
+|Der Artist einer Sperrzeit wird geändert.
+|Es wird überprüft, ob die Änderung übernommen wurde.
+
+|U-101
+|HaeufigkeitTests: haeufigkeitOfTest()
+|Es wird geprüft, ob die Konvertierung von einem String zu einer Häufigkeit richtig funktioniert.
+|Keine.
+|Strings werden an die Konvertierungsfunktion übergeben.
+|Es wird überprüft, ob die richtigen Häufigkeiten erkannt werden oder ggf. null zurückgegeben wird.
+
+|U-102
+|ZeitRepositoryTests: ueberschneidetSperrzeitNullPointerTest()
+|Es wird geprüft, ob die Funktion richtig mit übergebenen Nullpointern umgehen kann.
+|Ein Artistenaccount.
+|Es werden verschiedene Kombinationen von Nullpointern übergeben.
+|Die Funktion wird auf richtig geworfene Exceptions überprüft.
+
+|U-103
+|ZeitRepositoryTests: ueberschneidetSperrzeitTest()
+|Es wird getestet, ob die Funktion richtig erkennt, ob eine Sperrzeit überschnitten wird.
+|Artistenaccounts mit eingetragenen Sperrzeiten.
+|Verschiedene Kombinationen von Sperrzeiten werden getestet.
+|Die Funktion wird daraufhin getestet, ob sie die richtigen Ergebniss liefert.
+
+|U-104
+|ZeitRepositoryTests: getSperrzeitenNullPointerTest()
+|Die Funktion wird auf richtige Reaktion bei übergebenen NullPointern getestet.
+|Keine.
+|Es wird als Artist ein Nullpointer übergeben.
+|Eine Fehlermeldung wird erwartet und auf Korrektheit geprüft.
+
+|U-105
+|ZeitRepositoryTests: getSperrzeitenTest()
+|Es wird geprüft, ob die eingetragenen Sperrzeiten eines Artisten korrekt zurückgegeben werden.
+|Artistenaccounts mit eventuell eingetragenen Sperrzeiten.
+|Die Sperrzeiten der Artistenaccounts werden abgefragt.
+|Die zurückgegebenen Sperrzeiten werden auf Richtigkeit und Vollständigkeit überprüft.
+
+|U-106
+|ZeitTests: ZeitErstellNullPointerTest()
+|Der Konstruktor der Zeitklasse wird auf korrektes NullpointerHandling überprüft.
+|Keine.
+|Der Konstruktor wird mit verschiedenen Nullpointern aufgerufen.
+|Exceptions werden erwartet und auf Korrektheit überprüft.
+
+|U-107
+|ZeitTests: konstruktorTests()
+|Es wird der Konstruktor der Zeitklasse getestet.
+|Keine.
+|Es werden Zeiten mit verschiedenen Parametern erstellt.
+|Die erstellten Zeiten werden auf Richtigkeit überprüft.
+
+|U-108
+|ZeitTests: endTests()
+|Testet, ob das Ende einer Zeit richtig berechnet wird.
+|Eine erstellte Sperrzeit.
+|Das Ende einer Sperrzeit wird abgefragt.
+|Der zurückgegebene Wert wird auf Korrektheit überprüft.
+
+|U-109
+|ZeitTests: getTests()
+|Die GetterFunktionen der Klasse werden getestet.
+|Keine.
+|GetterFunktionen werden aufgerufen.
+|Die zurückgegebenen Werte werden überprüft.
+
+|U-110
+|ZeitTests: stringTests()
+|Die Name- und Kommentarverwaltungsfunktionen der Klasse werden überprüft.
+|Keine.
+|Der Name und Kommentar einer Sperrzeit werden gesetzt.
+|Es wird auf korrekte Rückgabewerte getestet.
+
+|U-111
+|ZeitTests: selberTagTests()
+|Es wird überprüft, ob richtig festgestellt wird, ob eine Sperrzeit an einem bestimmten Tag liegt.
+|Keine.
+|Es werden verschiedene Fälle ausprobiert.
+|Der Rückgabewert wird geprüft.
+
+|U-112
+|ZeitTests: selbenZeitTests()
+|Es wird geprüft, ob richtig festgestellt wird, ob eine Sperrzeit zu einer bestimmten Zeit ist.
+|Keine.
+|Es werden verschiedene Fälle ausprobiert.
+|Die Rückgabewerte werden geprüft.
+
+|U-113
+|ZeitTests: compareTests()
+|Die Sortierfähigkeit der Zeiten wird getestet.
+|Keine.
+|Es wird abgefragt, welche Zeit vor welcher ist.
+|Es wird überprüft, ob richtig festgestellt wird, welche Zeit vor welcher ist.
+
+|U-114
+|ZeitTests: formatierungsTests()
+|Die verschiedenen Zeitformatierungsfunktionen werden getestet.
+|Keine.
+|Es werden Formatierte Strings abgefragt.
+|Es wird überprüft, ob die Ausgabestrings richtig sind.
+
+|U-115
+|ZeitTests: HaeufigkeitsTests()
+|Es wird geprüft, ob die Konvertierung von einem String zu einer Häufigkeit richtig funktioniert.
+|Keine.
+|Strings werden an die Konvertierungsfunktion übergeben.
+|Es wird überprüft, ob die richtigen Häufigkeiten erkannt werden.
+
+|U-116
+|ZeitverwaltungsTests: ZeitverwaltungsErstellTest()
+|Es wird getestet, ob eine Zeitverwaltung richtig erstellt wird.
+|Keine.
+|Es werden fehlerhafte Zeitverwaltungen erstellt.
+|Geworfene Fehler werden getestet.
+
+|U-117
+|ZeitverwaltungsTests: loescheSperrzeitTest()
+|Es werden Sperrzeiten aus Zeitverwaltungen gelöscht.
+|Eingetragene Sperrzeiten.
+|Es werden Sperrzeiten gelöscht.
+|Das Ergebnis der Löschung wird getestet.
+
+|U-118
+|ZeitverwaltungsTests: SchaltjahrTests()
+|Es wird überprüft, ob richtig errechnet wird, welche Jahre Schaltjahre sind.
+|Keine.
+|Verschiedene Jahre werden getestet.
+|Das Ergebnis wird überprüft.
+
+|U-119
+|ZeitverwaltungsTests: sperrzeitEintragenExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-120
+|ZeitverwaltungsTests: sperrzeitEintragenEinmaligExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte einmalige Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-121
+|ZeitverwaltungsTests: sperrzeitEintragenJaehrlichExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte jährliche Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-122
+|ZeitverwaltungsTests: sperrzeitEintragenMonatlichExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte monatliche Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-123
+|ZeitverwaltungsTests: sperrzeitEintragenWoechentlichExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte wöchentliche Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-124
+|ZeitverwaltungsTests: sperrzeitEintragenTaeglichExceptionsTests()
+|Es wird überprüft, ob richtige Exceptions geworfen werden, wenn fehlerhafte tägliche Sperrzeiten erstellt werden.
+|Keine.
+|Verschiedene Kombinationen von fehlerhaften Argumenten werden übergeben.
+|Es wird überprüft, ob die richtigen Exceptions geworfen werden.
+
+|U-125
+|ZeitverwaltungsTests: sperrzeitEintragenEinmaligTest()
+|Es wird überprüft, ob eine einmalige Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-126
+|ZeitverwaltungsTests: sperrzeitEintragenJaehrlichTest()
+|Es wird überprüft, ob eine jährliche Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-127
+|ZeitverwaltungsTests: sperrzeitEintragenMonatlichTest()
+|Es wird überprüft, ob eine monatliche Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-128
+|ZeitverwaltungsTests: sperrzeitEintragenWoechentlichTest()
+|Es wird überprüft, ob eine wöchentliche Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-129
+|ZeitverwaltungsTests: sperrzeitEintragenTaeglichTest()
+|Es wird überprüft, ob eine tägliche Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-130
+|ZeitverwaltungsTests: sperrzeitEintragenTest()
+|Es wird überprüft, ob eine Sperrzeit richtig eingetragen wird.
+|Keine.
+|Es wird eine Sperrzeit erstellt.
+|Die erstellte Sperrzeit wird überprüft.
+
+|U-131
+|ZeitverwaltungsTests: ueberschneidungsTests()
+|Es wird überprüft, ob richtig erkannt wird, ob Sperrzeiten überschnitten werden.
+|Eingetragene Sperrzeiten.
+|Es werden verschiedene Sperrzeiten auf Überschneidungen getestet.
+|Es wird überprüft, dass die Überschneidung von Sperrzeiten richtig festgestellt wird.
+
+
+|===

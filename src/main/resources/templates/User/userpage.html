@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="Userpage">Userpage</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+
+		<div class="ui items">
+			<div class="ui item">
+				<div class="ui huge header"
+					th:text="'User:'+${user.userAccount.username}">title</div>
+			</div>
+
+			<div class="ui item">
+				<div class="ui medium header"
+					th:text="'Vorname:'+${user.userAccount.firstname}">title</div>
+			</div>
+			<div class="ui item">
+				<div class="ui medium header"
+					th:text="'Nachname:'+${user.userAccount.lastname}">title</div>
+			</div>
+			<div class="ui item">
+				<div class="ui medium header"
+					th:text="'Email:'+${user.userAccount.email}">title</div>
+			</div>
+
+			<div class="ui item">
+				<div class="ui medium header" th:text="'Adresse:'+${user.adress}">title</div>
+			</div>
+
+			<div class="ui item">
+				<div class="ui medium header" th:text="'Telefonnummer:'+${user.telefon}">title</div>
+			</div>
+			<div class="ui item">
+				<form th:action="@{/user/bearbeiten}">
+					<button class="ui labeled fluid large blue icon button">
+						<i class="edit icon"></i>
+						<div th:text="bearbeiten"></div>
+					</button>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+</body>
+</html>

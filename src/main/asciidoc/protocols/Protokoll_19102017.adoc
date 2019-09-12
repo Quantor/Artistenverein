@@ -1,0 +1,84 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 19.10.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+26.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Fragen zur Aufgabenstellung wurden geklärt
+- Auswertung der Muss-Kriterien und der Diagramme
+- Klassendiagramm soll bis Ende der Woche angepasst sein
+- restliche Diagramme sollen bis nächste Woche verbessert und Muss-Kriterien angepasst werden
+- Jeder soll eine Funktion im Videoshop erstellen 
+- Akzeptanztests müssen aufgestellt werden
+- Arbeitszeiten sollen für die letzte Woche noch gepusht werden
+- Ziel ist ein fertiges Pflichtenheft zum nächsten Termin
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|1
+|Diagramme
+|in Arbeit
+|Fehler der ersten Versionen wurden besprochen und werden behoben
+
+|2
+|Pflichtenheft
+|in Arbeit
+|ausgebesserte Diagramme müssen noch eingefügt werden und Akzeptanztests
+
+|===
+
+== Aktueller Stand
+Missverständnisse in der Aufgabenstellung wurden geklärt.
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|1
+|Diagramme
+|Klassendiagramm, Kontextdiagramm,Sequenzdiagramme,Top-Level-Architektur und Anwendungsfalldiagramm
+|alle
+|in Arbeit
+
+|2
+|Pflichtenheft
+|--
+|alle
+|in Arbeit
+
+|3
+|VideoShop-Prototyp
+|Jeder soll eine Funktion im videoShop erstellen
+|alle
+|noch zu erledigen

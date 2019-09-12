@@ -1,0 +1,129 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 14.11.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+04.01.2018, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- eigenes Programm so schnell wie möglich in eine .jar packen und Gruppe 18 zum testen zuschicken, read me mit Benutzernamen und Passwörtern ebenfalls anfertigen und zuschicken
+- Cross Testing für Gruppe 18 soll bis 17.12.2017 (Sonntag) fertig sein
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|5
+|Testplan
+|in Arbeit
+|Unittests müssen hinzugefügt werden
+
+|8
+|Entwurfs-Klassendiagramm
+|in Arbeit
+|Aktualisierung
+
+
+|9
+|Implementation
+|fertig
+|Muss-Kriterien müssen erfüllt werden (siehe Git Issus- Muss-Kiterien)
+
+|10
+|Unittests
+|in Arbeit
+|Code soll mit Unitstests getestet werden (80% Codeabdeckung)
+
+|11
+|Javadoc
+|in Arbeit
+|Es soll eine Java- Dokumentation für die Anwendung erstellt werden
+
+
+
+|===
+
+== Aktueller Stand
+Implementierungsphase ist fast abgeschlossen. 
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|Unittests müssen hinzugefügt werden
+|alle
+|in Arbeit
+
+|8
+|Entwurfs-Klassendiagramm
+|Aktualisierung
+|alle
+|in Arbeit
+
+|10
+|Unittests
+|Code soll mit Unitstests getestet werden (80% Codeabdeckung)
+|alle
+|in Arbeit
+
+|11
+|Javadoc
+|Es soll eine Java- Dokumentation für die Anwendung erstellt werden
+|alle
+|in Arbeit
+
+|12
+|Kundenwunsch
+|Wunsch: die letzten ausgelaufenen Veranstaltungen sollen mit den besten Kommentaren (zu den besten Bewertungen)
+	auf der Startseite zu sehen sein
+|Tizian
+|in Arbeit
+
+|13
+|CrossTesting
+|Software der Gruppe 18 soll getestet werden und ein Template ausgefüllt werden
+|alle
+|in Arbeit
+
+|14
+|Anwenderdokumentation
+|Es soll ein Handbuch für die Benutzer der Software geschreiben werden
+|alle
+|in Arbeit
+
+|15
+|CodeQualität
+|Über SonarQube solle die CodeQualität getestet und dann verbessert werden
+|alle
+|in Arbeit
+
+|==

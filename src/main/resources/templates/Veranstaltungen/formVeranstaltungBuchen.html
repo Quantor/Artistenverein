@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+	src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link th:href="@{/webjars/Semantic-UI/semantic.min.css}"
+	rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<header>
+			<h1 th:text="${veranstaltung.name}">Buchung</h1>
+		</header>
+		
+		<div style="margin: 10px">
+			<div th:include="Veranstaltungen/fehlermeldungen :: fehlermeldungen"></div>
+			<h3 class="ui dividing header">Buchung</h3>
+			<div class="meta">
+		                	<b>Start:</b><span th:text="${{veranstaltung.startDatum}}">StartDatum</span>
+		                	<b>Ende:</b><span th:text="${{veranstaltung.endDatum}}">EndDatum</span><br />
+		                	<div th:if="${veranstaltung.tage}>1">
+		                		<p> Dieser Workshop geht <span th:text="${{veranstaltung.tage}}">Dauer</span>
+		                		Tage. Nach Ihrem gewählten StartDatum sind die weiteren Tage jeweils die daauf folgenden Tage
+		                		zur gleichen Uhrzeit. </p>
+		                	</div>
+		                    <b>Dauer:</b><span th:text="${{veranstaltung.dauer}}">Dauer</span> Minuten <br />
+		                    <b>Preis:</b><span th:text="${veranstaltung.price}">Preis</span>
+		                     <div> <font color="red">Achtung. Beim buchen einer Veranstaluntg nicht in der vereinseigenen Halle
+		                    wird ein Zuschlag für die Anreise-Gebühren berechnet. </font></div>
+		                    <div>
+								<div th:each="zk : ${zusatzkosten}">
+									<div th:text="Zuschlag">Zusatzkosten</div>
+									<div th:text="${zk.zusatzKostenWert}">Kosten</div>
+								</div> 
+		                	</div>
+		    </div>
+
+			<form method="post" role="form" class="ui form" id="form"
+				th:action="@{/buchen/{id}(id=${veranstaltung.id})}" th:object="${BuchungsValidation}">
+
+				
+				<div class="ui negative message" th:if="${#fields.hasErrors('*')}">
+					<p>Einige Angaben sind nicht korrekt.</p>
+				</div>
+				
+				
+				<div class="field">
+					<div  style="float:left">
+						<label th:text="#{BuchungsValidation.datum}"
+							for="datum">Datum</label> 
+						<input id="datum" name="datum" th:field="*{datum}"
+							th:errorclass="fieldError" type="date" required="required" /><br />
+						<p th:if="${#fields.hasErrors('datum')}"
+						th:errors="*{datum}">Das Datum darf nicht leer sein.</p>
+					</div>
+					<div  style="float:left">
+						<label th:text="#{BuchungsValidation.zeit}"
+							for="zeit">Zeit</label> 
+						<input id="zeit" name="zeit" th:field="*{zeit}"
+							th:errorclass="fieldError" type="time" required="required" /><br />
+						<p th:if="${#fields.hasErrors('zeit')}"
+							th:errors="*{zeit}">Die Zeit darf nicht leer sein.</p>
+					</div>
+				</div>
+				<br />
+				
+				<div class="grouped field">
+				<label th:text="#{BuchungsValidation.ortwahl}" for="ortwahl">Ortwahl</label>
+					<div class="field">
+						<div class="ui radio checkbox">
+			                <input type="radio" id="ortwahl" name="ortwahl" value="0"
+		                    th:value="Halle" th:field="*{ortwahl}"
+									th:errorclass="fieldError" required="required"/>
+			                <label>Vereinshalle</label>
+				        </div>
+			        </div>
+			       	<div class="field">
+						<div class="ui radio checkbox">
+		                    <input type="radio" id ="ortwahl" name="ortwahl" value="0" th:value="außerhalb" 
+		                     th:field="*{ortwahl}" th:errorclass="fieldError" required="required"/>
+		                    <label>außerhalb: </label>
+						</div>
+					</div>
+	                <p th:if="${#fields.hasErrors('ortwahl')}" th:errors="*{ortwahl}">Bitte kreuzen
+	            	Sie "Vereinshalle" oder "außerhalb" an</p>
+	            </div>
+              	
+              	<div class="field">
+					<label th:text="#{BuchungsValidation.ort}" for="ort">Ort</label>
+					<input id="ort" name="ort" th:field="*{ort}"
+						th:errorclass="fieldError" type="text" /><br />
+					<p th:if="${#fields.hasErrors('ort')}" th:errors="*{ort}">Der Ort 
+						darf nicht leer sein.</p>
+				</div>
+
+				<button type="submit" class="ui button"
+					th:text="#{BuchungsValidation.submit}">Buchen.</button>
+			</form>
+
+
+		</div>
+	</div>
+</body>
+</html>

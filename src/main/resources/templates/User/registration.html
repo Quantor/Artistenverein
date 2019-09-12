@@ -1,0 +1,125 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="Registration">Registration</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<h3 th:text="#{register.title}">titleRegistrieren</h3>
+
+
+		<form class="ui form" action="#" th:action="@{/registration}"
+			th:object="${userForm}" method="post">
+
+
+
+
+
+
+
+			<div class="fields">
+				<div class="field">
+
+					<label th:text="#{register.username}">username</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{username}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+				<div class="field">
+					<label th:text="#{register.password}">password</label>
+					<input type="password" required="required"
+						th:errorclass="fieldError" th:field="*{password}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+
+
+				<div class="field">
+					<label th:text="#{register.firstname}">firstname</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{firstname}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+
+				<div class="field">
+					<label th:text="#{register.lastname}">lastname</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{lastname}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+
+				<div class="field">
+					<label th:text="#{register.email}">email</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{email}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label th:text="Adresse">adresse</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{adress}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{adress}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label th:text="Telefonnummer">adresse</label>
+					<input type="text" required="required" th:errorclass="fieldError"
+						th:field="*{telefon}" />
+
+					<div class="ui negative message"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{telefon}">
+						<p th:text="#{registration.error.username">Error</p>
+					</div>
+				</div>
+				
+			
+				
+				
+				
+				<button type="submit" class="ui button" th:text="registrieren">registrieren</button>
+
+			</div>
+
+		</form>
+
+	</div>
+</body>
+</html>
+

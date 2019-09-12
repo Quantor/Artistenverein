@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+<title th:text="${artikel.name}">Fackel</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<header>
+			<h1 th:text="${artikel.name}">Fackel</h1>
+		</header>
+
+
+		<div class="ui items">
+			<div class="item">
+				<div class="image">
+					<img th:src="@{/img/{name}.jpg(name=${artikel.bild})}"
+						src="../static/resources/img/fac.jpg" />
+				</div>
+				<div class="content">
+					<a class="header" th:text="${artikel.name}">Fackel</a>
+					<div class="meta">
+						<span th:text="${{artikel.price}}">9.99 €</span>
+					</div>
+					<div class="description">
+						<p><b>Beschreibung</b></p>
+						<p th:text="${artikel.beschreibung}">Ein Artikel.</p>
+						<div th:unless="${artikel.gelisted}" >
+							
+							<p style="color:red;" th:text="#{catalog.nichtGelisted}">Der Artikel wurde leider aus dem Sortiment genommen.</p>
+						</div>
+                    	<div th:if="${artikel.gelisted}">
+                    		<p><b>Vorrat:</b></p>
+                    		<p th:text="${quantity}">10</p><br/>
+                    	</div>
+                    	<div th:if="${orderable}">
+							<form class="ui form" method="post" th:action="@{/warenkorb/hinzufuegen}" >
+								<input type="hidden" name="pid" value="0" th:value="${artikel.id}" />
+								<div class="field">
+									<label for="number">Anzahl:</label> <input id="number"
+										type="number" name="number" min="1" max="5" th:max="${quantity}" step="1" value="1" required="required" /><br />
+								</div>
+								<button type="submit" class="ui labeled icon button">
+									<i class="add to cart icon"></i> Hinzufügen
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<a class="ui button" href="artikel.html" th:href="@{/artikel}"
+			th:text="Zurück">Item Catalog</a>
+	</div>
+
+
+
+
+
+</body>
+</html>

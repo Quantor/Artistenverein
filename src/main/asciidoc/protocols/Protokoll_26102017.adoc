@@ -1,0 +1,101 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 26.10.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+2.11.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Berichtigungen zum Pflichtenheft (Muss-Ktierien, Beschreibungen Sequenzdiagramme, kleine Ungenauigkeiten in Akzeptanztests geklärt,
+GUI-Teil Verbesserungen besprochen)
+- Prototypen wurden vorgeführt (2 müssen noch verbessert werden)
+- Aufgaben für das nächste Treffen wurden besprochen (Grobfassung Anwenungsprototypen(jeder soll zu einem Bereich zwei bis drei Funktionen schreiben),
+Rohfassung des Testplans und der Entwicklerdokumentation sollen vorhanden sein) 
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|1
+|Diagramme
+|erledigt
+|Diagramme wurden verbessert/ vervollständigt
+
+|2
+|Pflichtenheft
+|in Arbeit
+|Akzeptanztests und GUI-Teil müssen noch ausgebessert werden, Muss- Kriterien sollen,
+Glossar soll eingefügt werden
+ausgebessert werden
+
+|3
+|VideoShop-Prototyp
+|in Arbeit
+|Prototypen wurden eingereicht, 2 müssen jedoch noch verbessert/ erweitert werden
+
+|===
+
+== Aktueller Stand
+Missverständnisse in der Aufgabenstellung wurden geklärt.
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|2
+|Pflichtenheft
+|Akzeptanztests und GUI-Teil verbessern, Muss-Kriterien überarbeiten, Glosar einfügen
+|alle
+|in Arbeit
+
+|3
+|VideoShop-Prototyp
+|2 Prototypen müssen nachgereicht werden
+|Anton, Oliver
+|in Arbeit
+
+|4
+|Anwendungsprototyp 
+|Jeder soll sich einen Bereich der Anwendung wählen und einen Prototypen (mit zwei- drei Funktionen)
+schreiben
+|alle
+|noch zu erledigen
+
+|5
+|Testplan
+|Eine Rohfassung soll bis zum nächsten Treffen vorhanden sein
+|alle
+|noch zu erledigen
+
+|6
+|Entwicklerdokumentation
+|Eine Rohfassung soll bis zum nächsten Treffen vorhanden sein
+|alle
+|noch zu erledigen

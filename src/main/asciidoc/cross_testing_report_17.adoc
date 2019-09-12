@@ -1,0 +1,105 @@
+= Cross-Testing Feedback
+
+__Durchführende Gruppe: swt17w18__ +
+__Anwendung von Gruppe: swt17w17__
+
+== Getestetes System
+
+Welche Aufgabe/Problemstellung löst die Anwendung.
+
+Es soll eine Terminverwaltungssoftware für einen Artistenverein erstellt werden, in welcher
+die Artisten einen Überblick über ihre Termine haben und Kunden Shows und Workshops
+buchen können. Außerdem umfasst die Anwendung einen kleinen Online- Shop, in welchem
+Kunden Utensilien für angebotene Workshops besorgen können.
+
+== Fehler-Report
+
+=== *Berechtigungen:* 
+
+Unberechtigte Nutzer können über die URL auf folgende Funktionen des Vorstands zugreifen: +
+
+  - Personalverwaltung +
+  - Hallenverwaltung +
+  - Bestellübersicht +
+  - Buchungsübersicht +
+
+
+=== *Eingaben:*
+
+[cols="1,1,2,3"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe 
+
+| /neuShow  | / | Beim erstellen einer Show mit dem Artistenaccount "genji" ist es möglich eine Show für eine Artistengruppe zu erstellen, in der dieser Artist nicht ist.  | Keine Fehlermeldung. Show wird erstellt mit Gruppe in der der Artist "genji" nicht ist. Benutzer wird weitergeleitet zu /shows.
+
+| /neuShow  | / | Beim erstellen einer Show kann ein negativer Wert für das Attribut "Dauer" gesetzt werden.    | Keine Fehlermeldung. Event wird mit negativer Dauer erstellt. Benutzer wird weitergeleitet auf /shows.
+
+| /neuShow  | / | Beim erstellen einer Show und eingeben der Start- und Enddaten mit Startdatum = Enddatum und Enddatum = Startdatum -2 Stunden.    | Show wird nicht erstellt. Man wird weitergeleitet auf /add mit einem Formular, das alle Daten die man beim Show erstellen angegeben hat die Felder hier füllen.
+
+| /artistverwaltung/termine | / | Wenn man beim Kalendar auf "naechster monat" drückt.  | Benutzer wird weitergeleitet auf /kalender. Whitelabel Error Page sichtbar mit Fehlermeldung: "There was an unexpected error (type=Internal Server Error, status=500).
+
+| /artistverwaltung/main | / | Wenn man auf "Sperrzeiten" klickt.   | Benutzer wird weitergeleitet auf /sperrzeiten. Whitelabel Error Page sichtbar mit Fehlermeldung: "There was an unexpected error (type=Internal Server Error, status=500). Error resolving template "/Zeitverwaltung/sperrzeiten", template might not exist or might not be accessible by any of the configured Template Resolvers".
+
+| /artistverwaltung/termine | / | Wenn man bei einem Termin auf den Button "Absagen" drückt.    | Termin wird zwar storniert, aber Benutzer wird weitergeleitet auf /kalender. Whitelabel Error Page sichtbar mit Fehlermeldung: "There was an unexpected error (type=Internal Server Error, status=500). Error resolving template "/Kalender/kalender", template might not exist or might not be accessible by any of the configured Template Resolvers".                                                                                                                                                                     
+
+| /Artikel | <Artikel ID> | Beim Auswählen der Artikelanzahl bei kauf kann man ein leeres Feld eingeben |(type=Bad Request, status=400).
+Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "" 
+
+| /Artikel | / | Der Artikel "Jonglier Hut" hat kein bild und verlinkt nicht auf eine Seite | /
+
+| /Warenkorb | / | Beim Ändern der Artikelanzahl im Warenkorb kann man ein leeres Feld eingeben |(type=Bad Request, status=400).
+Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+
+| /Bewerten | / | Eine Bewertung akzeptiert sämtliche falschen Eingaben (Leer, Buchstaben, Kommas etc) | (type=Bad Request, status=400).
+Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "23.8"
+
+| /registration -> /personalverwaltung | / | Nachdem man sich registriert und auf der Bestätigungsseite auf "zurueck" klickt, wird man auf eine falsche Seite weitergeleitet | There was an unexpected error (type=Not Found, status=404).
+
+| /personenverwaltung/sperrzeiten/anlegen| / | Sämtliche Eingaben von Sperrzeiten scheinen nicht zu funktionieren oder sind nicht eindeutig | Bsp. There was an unexpected error (type=Bad Request, status=400).
+Failed to convert value of type 'java.lang.String' to required type 'java.time.LocalTime'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.time.LocalTime] for value '13:00'; nested exception is java.lang.IllegalArgumentException: Parse attempt failed for value [13:00]
+
+| /inventarverwaltung/mindestMenge | <MindestBestand> | Die Eingabe des Mindestbestandes akzeptiert negative und leere Werte |  (type=Bad Request, status=400).
+Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: ""
+
+| /nachbestellungEinzeln | <Anzahl> | Die Eingabe erlaubt einen leeren Wert | There was an unexpected error (type=Internal Server Error, status=500).
+No message available
+
+| /nachbestellungAlle | <Anzahl []> | Die Eingaben erlauben leere Werte | There was an unexpected error (type=Internal Server Error, status=500).
+No message available
+
+| /alleBuchungen | <Zusatzkosten> | Die Eingabe der Zusatzkosten erlauben sämtliche Werte (Leer, Buchstaben, negative Zahlen etc) | Bsp. There was an unexpected error (type=Internal Server Error, status=500).
+For input string: "fdghs"
+
+| /kaufen | / | Das Programm erlaubt das Kaufen von mehr Artikeln, als im Lager verfügbar sind | (type=Internal Server Error, status=500).
+Order completion failed! OrderCompletionReport(order=Order(orderIdentifier=5dafc2f5-948d-4fa4-bf44-2eca65186502, paymentMethod=Cash(), userAccount=org.salespointframework.useraccount.UserAccount@30c0b9, dateCreated=2017-12-16T17:58:31.174, orderStatus=COMPLETED, orderLines=OrderLine(orderLineIdentifier=8b2420f5-5bca-4108-ac87-404e5e3958d7, productIdentifier=cc6a48ba-b297-4b52-9fcc-c7b39677baea, price=EUR 165, quantity=5, productName=3333), chargeLines=, events=[OrderCompleted]), status=FAILED, completions=OrderCompletionReport.OrderLineCompletion(orderLine=OrderLine(orderLineIdentifier=8b2420f5-5bca-4108-ac87-404e5e3958d7, productIdentifier=cc6a48ba-b297-4b52-9fcc-c7b39677baea, price=EUR 165, quantity=5, productName=3333), status=FAILED, message=Optional[Number of items requested by the OrderLine is greater than the number available in the Inventory. Please re-stock.]))
+
+|===
+
+== Sonstiges
+* Optik der Anwendung
+  - Umlaute werden nicht Verwendet (z.B. "gewuenschte Zeit" bei Buchung einer Veranstaltung)
+  - Die Termindetails in der Kalendaransicht eines Artisten sind nicht sehr verständlich gestaltet.
+  - Der Kundenname sollte auf der Bestellübersicht (/alleBuchungen) angezeigt werden
+
+* Fehlende Features
+  - Der Kunde kann keine Termine absagen
+  - Die Kalenderseite unter dem Menü "Verwaltung" scheint nicht zu Existieren 
+  - Die Profilseite unter dem Menü "Verwaltung" scheint nicht zu Existieren
+  - Man kann Artistengruppen in der Personalverwaltung nicht verwalten
+  - Man kann Artisten weder Erstellen noch Bearbeiten
+
+* Interaktion mit der Anwendung (Usability)
+  - Unverständlich beim erstellen einer Show oder eines workshops, dass die unten angegebenen Start- und Endwerte als Angebotszeitraum angesehen werden.
+  - Es ist möglich Shows zu erstellen, die an einem Datum in der Vergangenheit starten.
+  - Die "Finanzen" Seite ist die gleiche wie die "Buchungen" Seite
+
+== Verbesserungsvorschläge
+* Was kann noch weiter verbessert werden?
+  - Eine Bestätigung bei Artikel Kauf oder Buchung sollte Angezeigt werden
+  - Preise nach Rabatte auf 2 Nachkommastellen runden
+  - Preise nach Rabatte auf 2 Nachkommastellen runden
+  - Nachdem ein Kunde gelöscht wird, wird man auf die /artistenverwaltung Seite weitergeleitet anstatt auf der /kundenverwaltung Seite zu bleiben
+  - Der Wert des Rabatts sollte auf 0% Einstellbar sein
+
+== Sonstiges / Untestbares
+  - Ein Bild kann beim Erstellen eines Artikels ausgewählt werden, aber kann in diesem Test nicht angezeigt werden

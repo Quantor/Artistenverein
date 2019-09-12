@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="Personalverwaltung">Personalverwaltung</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+
+
+	<div id="sitecontent">
+
+		<div class="ui huge header" th:text="${user.userAccount.username}"></div>
+		<div
+			th:include="fragment/artistenverwaltung_nav:: nav_artistverwaltung"></div>
+    
+    <header>
+      <h1 th:text="Kalender">Kalender</h1>
+    </header>
+    <h3 th:text="${monat + jahr}">Aktueller Monat</h3>  
+  
+  <form class="ui reply form" role="=form" method="post" th:action="@{/kalender}"> 
+    <button type="submit" class="ui button" value = "true" name="monatZurueck">Letzter Monat</button>
+  </form>
+    
+   <form class="ui reply form" role="=form" method="post" th:action="@{/kalender}"> 
+    <button type="submit" class="ui button" value = "true" name="monatVor">Naechster Monat</button>
+  </form>      
+
+    <table class="ui celled table">  
+
+        <thead>
+        <tr>
+            <th th:text="Montag">Montag</th>
+            <th th:text="Dienstag">Dienstag</th>   
+            <th th:text="Mittwoch">Mittwoch</th>
+            <th th:text="Donnerstag">Donnerstag</th>
+            <th th:text="Freitag">Freitag</th>
+            <th th:text="Samstag">Samstag</th>
+            <th th:text="Sonntag">Sonntag</th>
+        </tr>
+        </thead>
+      <tbody>
+        <tr th:each="eintrag : ${eintraege} ">
+            <td th:text="${eintrag[0]}"></td>
+            <td th:text="${eintrag[1]}"></td>
+            <td th:text="${eintrag[2]}"></td>
+            <td th:text="${eintrag[3]}"></td>
+            <td th:text="${eintrag[4]}"></td>
+            <td th:text="${eintrag[5]}"></td>
+            <td th:text="${eintrag[6]}"></td>
+        </tr>
+        </tbody>
+    </table> 
+    
+		<div class="ui large header" th:text="'Termine'"></div>
+		<table class="ui celled table">
+			<thead>
+				<tr>
+					<th>Veranstaltungen</th>
+					<th>Typ</th>
+					<th>Kunde</th>
+					<th>Ort</th>
+					<th>Datum</th>
+					<th>Absagen</th>
+				</tr>
+			</thead>
+
+
+			<tbody th:remove="all-but-first">
+				<tr th:each="buchung:${buchungen}">
+					<td>
+						<a th:href="@{/detail/{id}(id=${buchung.veranstaltung.id})}" th:text="${buchung.veranstaltung.name}"></a>
+					</td>
+					<td>
+						<p th:text="${buchung.veranstaltung.type}"></p>
+					</td>
+					<td>
+						<p th:text="${buchung.kunde.id}"></p>
+					</td>
+					<td>
+						<p th:text="${buchung.ort}"></p>
+					</td>
+
+					<td>
+						<p th:text="${buchung.datum}"></p>
+					</td>
+          					
+					<td><form class="ui form" th:action="@{/artistenverwaltung/termine/absagen}" method="post">
+            			<input type="hidden" name="buchung" th:value="${buchung.id}"/>
+            			<button type="submit" class="ui button" th:text="Absagen">Absagen</button>
+            		</form></td>
+				</tr>
+
+
+
+			</tbody>
+
+
+
+		</table>
+		
+			<table class="ui celled table">
+			<thead>
+				<tr>
+					<th>Kunden</th>
+				</tr>
+			</thead>
+
+
+			<tbody th:remove="all-but-first">
+				<tr th:each="kunde:${kunden}">
+					<td>
+						<p th:text="${kunde.username}"></p>
+					</td>
+					
+					
+				</tr>
+
+
+
+			</tbody>
+
+
+		</table>
+
+
+
+
+
+	</div>
+</body>
+</html>

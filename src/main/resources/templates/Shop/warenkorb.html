@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title>Warenkorb</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<header>
+			<h1 th:text="#{warenkorb.title}">Warenkorb</h1>
+		</header>
+
+		<div class="ui negative message" th:if="${fehler}">Einer der
+			ausgewählten Artikel ist leider nicht in der ausgewählten Menge
+			vorrätig. Bitte warten sie entweder bis der Artikel wieder vorrätig
+			ist, reduzieren sie die gewünschte Menge oder kontaktieren sie einen
+			Administrator.</div>
+
+		<div class="ui positve message" th:if="${success}">Vielen Dank
+			für ihren Einkauf. Der Artistenverein Funkenschlag wünscht
+			ihnen viel Spaß mit diesen Artikeln!</div>
+
+		<div th:unless="${rabattCart.empty}">
+
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th th:text="#{warenkorb.produkt}">Titel</th>
+						<th th:text="#{warenkorb.anzahl}">Anzahl</th>
+						<th th:text="#{warenkorb.preis}">Preis</th>
+						<th th:text="#{warenkorb.loeschen}">Loeschen</th>
+					</tr>
+				</thead>
+				<tbody th:remove="all-but-first">
+
+					<tr th:each="artikel : ${rabattCart} ">
+						<td th:text="${artikel.productName}">Fackel</td>
+						<td><form class="ui form" method="post"
+								th:action="@{/warenkorb/bearbeiten}">
+								<div class="fields">
+									<input name="pid" type="hidden" value="0"
+										th:value="${artikel.product.id}" /> <input name="cid"
+										type="hidden" value="0" th:value="${artikel.id}" /> <input
+										name="number" type="number" min="1" step="1" max="5"
+										th:max="${quantity}" th:value="${artikel.quantity}" required="required" />
+									<button class="ui button" type="submit"
+										th:text="#{warenkorb.speichern}">Speichern</button>
+								</div>
+							</form></td>
+						<td th:text="${{artikel.price}}">1,99 Euro</td>
+						<td><form class="ui form" method="post"
+								th:action="@{/warenkorb/bearbeiten}">
+								<div class="fields">
+									<input name="pid" type="hidden" value="0"
+										th:value="${artikel.product.id}" /> <input name="cid"
+										type="hidden" value="0" th:value="${artikel.id}" /> <input
+										name="number" type="hidden" value="0" />
+									<button class="ui button" type="submit"
+										th:text="#{warenkorb.loeschen}">Loeschen</button>
+								</div>
+							</form></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<form class="ui form" method="post" th:action="@{/warenkorb/leeren}">
+				<button type="submit" class="ui button"
+					th:text="#{warenkorb.leeren}">Leeren</button>
+			</form>
+
+			<div class="ui two column centered grid">
+				<div class="four column centered row">
+					<div class="column">
+						<div class="ui horizontal statistic">
+							<div class="label" th:text="#{warenkorb.gesamt}">Summe</div>
+							<div class="value">
+								<span th:text="${{rabattCart.price}}">1337</span>
+							</div>
+						</div>
+					</div>
+					<div class="column" th:if="${{rabattCart.rabattStatus}}">
+						<div class="ui horizontal statistic">
+							<div class="label" th:text="#{inventar.rabatt}">Summe</div>
+							<div class="value">
+								<span th:text="${{rabatt}}">20</span>
+							</div>
+							<div class="value">
+								<span>%</span>
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<form sec:authorize="hasRole('ROLE_CUSTOMER')" class="ui form"
+							method="post" th:action="@{/warenkorb}">
+							<input type="hidden" name="kaufen" value="true" />
+							<button type="submit" class="ui button"
+								th:text="#{warenkorb.kaufen}">Kaufen</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h2 th:if="${rabattCart.empty}" th:text="#{warenkorb.leer}">Leer</h2>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{bestellungen.title}">Bestellungen</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+	    <header>
+	        <h1 th:text="#{bestellungen.details}">Details</h1>
+	    </header>
+
+		<div class="ui items">
+			<div class="item">
+				<div class="content">
+					<div class="meta">
+						<b>Datum:</b><span th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></span>
+						<br /> <b>Preis:</b><span th:text="${order.totalPriceString}"></span>
+						<div th:if="${{order.rabattStatus}}">
+							<b>Rabatt:</b><span th:text="${order.rabatt}"></span><span>%</span>
+						</div>
+						<span sec:authorize="hasRole('ROLE_BOSS')"><br /> <b>Kunde:</b><span th:text="${order.userAccount.id}"></span></span>
+						
+					</div>
+					<table class="ui celled table">
+				        <thead>
+				        <tr>
+				            <th th:text="#{bestellungen.artikel}">Artikel</th>
+				            <th th:text="#{bestellungen.anzahl}">Preis</th>
+				            <th th:text="#{bestellungen.preis}">Preis</th>
+				        </tr>
+				        </thead>
+				        <tbody>
+				        <tr th:each="orderLine : ${order.orderLines} ">
+				        	<td th:text="${orderLine.productName}"></td>
+				        	<td th:text="${orderLine.quantity}"></td>
+				            <td th:text="${orderLine.price}"></td>
+				        </tr>
+				        </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+</body>
+</html>

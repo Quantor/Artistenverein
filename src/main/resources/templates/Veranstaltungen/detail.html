@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="${veranstaltung.name}">Titel</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+	    <header>
+	        <h1 th:text="${veranstaltung.name}">Titel</h1>
+	    </header>
+
+		    <div class="ui items">
+		        <div class="item">
+		            <div class="content">
+		                <a class="header" th:text="${veranstaltung.name}">Titel</a>
+		                <div class="meta">
+		                	<b>Start:</b><span th:text="${{veranstaltung.startDatum}}">StartDatum</span>
+		                	<b>Ende:</b><span th:text="${{veranstaltung.endDatum}}">EndDatum</span><br />
+		                	<div th:if="${veranstaltung.tage}>1">
+		                		<b>Tage:</b><span th:text="${{veranstaltung.tage}}">Dauer</span>
+		                	</div>
+		                    <b>Dauer:</b><span th:text="${{veranstaltung.dauer}}">Dauer</span> Minuten <br />
+		                    <b>Preis:</b><span th:text="${veranstaltung.price}">Preis</span>
+		                    <div> <font color="red">Achtung. Beim buchen einer Veranstaltung nicht in der vereinseigenen Halle
+		                    wird ein Zuschlag für die Anreise-Gebühren berechnet. </font></div>
+		                    <div>
+								<div th:each="zk : ${zusatzkosten}">
+									<div th:text="Zuschlag">Zusatzkosten</div>
+									<div th:text="${zk.zusatzKostenWert}">Kosten</div>
+								</div> 
+		                	</div>
+		                </div>
+		                <div class="meta">
+		                    <b th:text="#{veranstaltung.artisten}">Artisten</b>
+		                    <div th:each="artist : ${veranstaltung.artisten}">
+		                    	<span th:text="${artist.firstname}">Artistenname</span>
+		                    	<span th:text="${artist.lastname}">Artistenname</span>
+		                    </div>
+		               </div>
+		                <div class="description">
+		                    <p th:text="${veranstaltung.beschreibung}">Beschreibung</p>
+		               </div>
+		        	</div>
+		    	</div>
+			</div>
+			<div>
+				<form class="ui form" role="form" th:if="${artist}" th:action="@{/detail/{id}/bearbeiten(id=${veranstaltung.id})}" method="get">
+					   <button type="submit" th:action="@{/bearbeiten}" sec:authorize="hasRole('ROLE_ARTIST')" 
+					   class="ui button" th:text="#{veranstaltung.bearbeiten}">Veranstaltung bearbeiten!</button>
+				</form>
+				<form class="ui form" role="form" th:if="${artist}" th:action="@{/detail/{id}/loeschen(id=${veranstaltung.id})}" method="get">
+					   <button type="submit" th:action="@{/loeschen}" sec:authorize="hasRole('ROLE_ARTIST')" 
+					   class="ui button" th:text="#{veranstaltung.loeschen}">Veranstaltung löschen!</button>
+				</form>
+				<form class="ui form" role="form" th:if="${artist}" th:action="@{/detail/{id}/artikel(id=${veranstaltung.id})}" method="get">
+					   <button type="submit" th:action="@{/artikel}" sec:authorize="hasRole('ROLE_ARTIST')" 
+					   class="ui button" th:text="#{veranstaltung.artikel}">Artikel zu Veranstaltung linken!</button>
+				</form> 
+				<div th:if="${buchbar}">
+	          		<form class="ui reply form" role="form" method="get" id="formular"  th:action="@{/buchen/{id}(id=${veranstaltung.id})}" >    
+	          			<button sec:authorize="hasRole('ROLE_CUSTOMER')" th:action="@{/buchen/{id}(id=${veranstaltung.id})}" type="submit" class="ui button" name="veranstaltungBuchen">Veranstaltung buchen</button>
+	     			</form>  
+	     		</div>
+			</div>
+			
+			<div class="ui card" th:each="artikel : ${artikellist}">
+				<div class="content">
+					<a class="header" th:href="@{/artikel/{id}(id=${artikel.id})}"
+						th:text="${artikel.name}">Artikelname</a>
+				</div>
+        	</div>
+        	
+        	
+			 <div class="ui comments">
+			 	Mittelwert Bewertung:
+				<div th:text="${veranstaltung.mittelwertBewertung}"> </div>
+					<div class="kommentar" th:each="bewertung : ${veranstaltung.bewertungen}">
+		            <div class="content">
+		            	<div class="rating">
+		                        <i class="star icon"></i>
+		                        <span th:text="${bewertung.bewertung}">5</span>
+		                    </div>
+		                </div>
+		                <div class="text" th:text="${bewertung.text}">Guter Film vom Inhalt her</div>
+		            </div>
+				<h3 class="ui dividing header">Kommentare</h3>
+				
+				<div class="kommentar" th:each="kommentar : ${veranstaltung.kommentare}">
+		            <div class="content">
+		                <div class="text" th:text="${kommentar.text}">Guter Film vong Inhalt her</div>
+		            </div>
+			     </div>
+			</div>
+			
+	         <form class="ui reply form" role="form" sec:authorize="hasRole('ROLE_CUSTOMER')" th:action="@{/kommentar}" method="post">
+	            <input type="hidden" name="vid" value="0" th:value="${veranstaltung.id}"/>
+	            <div class="field">
+	                <textarea id="kommentar" name="kommentar" cols="40" rows="5"></textarea><br/>
+	            </div>
+	            <button type="submit" sec:authorize="hasRole('ROLE_CUSTOMER')" class="ui labeled icon button">
+	                <i class="icon edit"></i> Kommentieren
+	            </button>
+	        </form>
+	            
+			<form th:if="!${darfNochBewerten}" class="ui form" role="form" th:action="@{/bewerten}" method="post">
+			 <input type="hidden" name="vid" value="0" th:value="${veranstaltung.id}"/>
+					   <button type="submit" th:action="@{/bewerten}" sec:authorize="hasRole('ROLE_CUSTOMER')" 
+					   class="ui button" th:text="#{veranstaltung.bewerten}">bewerten</button>
+			</form> 
+	      
+    </div>
+</body>
+</html>

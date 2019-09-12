@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<div th:fragment="gruppe">
+		<div class="ui card">
+			<div class="content">
+				<div class="header" th:text="${gruppenname}"></div>
+				<div class="ui list">
+					<div class="ui header small" th:text="Mitglieder"></div>
+					<div th:each="mitglied : ${mitglieder}">
+
+						<div class="item">
+							<div class="content">
+								<a class="header" th:text="${mitglied.userAccount.username}"></a>
+								<div class="description">
+									<div
+										th:text="${mitglied.userAccount.firstname}+' '+${mitglied.userAccount.lastname}"></div>
+								</div>
+							</div>
+							<div class="ui divider"></div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

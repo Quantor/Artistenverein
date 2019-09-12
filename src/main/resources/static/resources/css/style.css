@@ -1,0 +1,175 @@
+/* CSS RESET */
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: transparent url(bg.jpg) no-repeat fixed;
+}
+
+table {
+	margin: 10px 0 30px 0;
+}
+
+
+}
+
+table tr td {
+	background: #E5E5DB;
+	color: #47433F;
+	border-top: 1px solid #FFF;
+}
+
+#main {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.simple {
+	width: 500px;
+	margin: 20px auto;
+}
+
+.fancy {
+	width: 500px;
+	margin: 20px auto;
+	padding: 50px;
+	border-width: 10px;
+}
+
+#banner {
+	position: relative;
+	width: 1200px;
+	height: 256px;
+	
+}
+
+#bannerpicture {
+	position: absolute;
+	left: 0px;
+	width: 256px;
+	height: 256px;
+	background: transparent url(fs_logo256.png) no-repeat;
+}
+
+#banner_text {
+	position: absolute;
+	left: 300px;
+	top: 20px;
+}
+
+#banner_text h1  {
+	font: normal 100% 'century gothic', arial, sans-serif;
+	font-size: 450%;
+	color: #ffffff;
+}
+
+#banner_text h2 {
+	font: normal 100% 'century gothic', arial, sans-serif;
+	font-size: 200%;
+	color: #ffffff;
+}
+
+#navigation {
+	position: absolute;
+	width: 185px;
+}
+
+
+#banner_s {
+	position: relative;
+	width: 1200px;
+	height: 64px;
+	background: #ffce38;
+	border: 2px solid #000000;
+}
+
+#bannerpicture_s {
+	position: absolute;
+	left: 0px;
+	width: 64px;
+	height: 64px;
+	background: transparent url(fs_logo64.png) no-repeat;
+}
+
+#banner_text_s {
+	position: absolute;
+	left: 300px;
+	
+}
+
+#banner_text_S h1 {
+	font: normal 100% 'century gothic', arial, sans-serif;
+	font-size: 120%;
+	color: #000000;
+}
+
+
+#sitecontent {
+	margin-left: 300px;
+	margin-right: 30px;
+}
+
+#sitecontent h1 {
+	font: normal 100% 'century gothic', arial, sans-serif;
+	font-size: 180%;
+	color: #000000;
+}
+
+#sitecontent h2 {
+	font: normal 100% 'century gothic', arial, sans-serif;
+	font-size: 110%;
+	color: #000000;
+}
+
+ul#menu {
+	margin: -10px;
+}
+
+ul#menu li {
+	float: left;
+	padding: 5px 0 0 5px;
+	width: 150px;
+	list-style: none;
+	margin: 0px 0px 10px 0;
+	background: #d33502;
+}
+
+ul#menu li a {
+	font: normal 100% 'trebuchet ms', sans-serif;
+	display: block;
+	float: left;
+	height: 20px;
+	width: 145px;
+	text-align: center;
+	color: #FFF;
+	text-decoration: none;
+	background: #faa818;
+}
+
+ul#menu li a:hover {
+	color: #ffff00;
+}
+=======
+header {
+	width:100%;
+	height: 200px;
+	background-image: url(../img/cds.jpg);
+	background-repeat: no-repeat;
+	font-size: 20px;
+	margin-top: 1em;
+}
+
+input.fieldError {
+    border-color:red !important;
+    box-shadow:0 0 10px red !important;
+}
+
+img.thumbnail {
+    margin: 0 auto 0 auto;
+	width: 160px;
+	display: block;
+}
+>>>>>>> refs/heads/master

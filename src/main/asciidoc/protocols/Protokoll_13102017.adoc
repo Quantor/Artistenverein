@@ -1,0 +1,71 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 13.10.2017
+
+Ort: APB +
+Beginn: 7:30Uhr +
+Ende:9:00 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+19.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- eine Grobfassung des Pflichtenhefts soll erstellt werden 
+- Alle Diagramme (Klassendiagramm, Kontextdiagramm, Top-Level-Architektur, Anwendungsfalldiagramm, Sequenzdiagramme(von JEDEM eins!)) sollen bis Mittwoch 18.10.2017, 19:00Uhr hochgeladen sein
+- Erstellung einer Liste von Muss-Kriterien
+- Erstellung einer Liste von Kann-Kriterien
+- Fragen zur Aufgabenstellung wurden geklärt („Kundengespräch“)
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|0
+|Fragen an den Kunden zur Aufgabenstellung
+|erledigt
+|--
+
+|===
+
+== Aktueller Stand
+Grundlegendes und Organisatorisches wurde geklärt. Neuer Termin für Wochentliche Treffen 
+wurde vereinbart. Freitag 1DS  => Donnerstag 5DS
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|1
+|Diagramme
+|Klassendiagramm, Kontextdiagramm,Sequenzdiagramme,Top-Level-Architektur und Anwendungsfalldiagramm
+|alle
+|noch zu erledigen
+
+|2
+|Pflichtenheft
+|--
+|alle
+|noch zu erledigen

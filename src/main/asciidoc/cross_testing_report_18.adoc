@@ -1,0 +1,254 @@
+= Cross-Testing Feedback
+
+__Durchführende Gruppe:__ 17 
+__Anwendung von Gruppe:__ 18
+
+== Getestetes System
+Der Artistenverein „Funkenschlag“ besteht aus mehreren Feuerkünstlern und Jongleuren verschiedenster Art. Diese bieten sowohl Workshops als auch Shows an und benötigen hierzu eine Verwaltung ihrer Termine.
+Es soll dabei eine Datenbank aufgebaut werden, in der die einzelnen Artisten und Artistengruppen mit ihren Angeboten gespeichert werden können. Aus dieser Datenbank sollen dann über das Internet Shows und Workshops buchbar sein. Wichtig ist, dass wenn ein Artist verbucht ist, dann auch Gruppenshows in denen er sonst teilnimmt nicht mehr buchbar sind. Da viele die Shows nur als zusätzliche Einnahmequelle neben ihrer normalen Beschäftigung nutzen, muss die Möglichkeit bestehen, Sperrzeiten zu vermerken.
+Für die Verwaltung der Showbuchungen, Kunden und Artistendatenbank muss ein einfaches System implementiert werden, welches nur den Artisten zugänglich ist. Hierbei sieht jeder Artist nach dem Einloggen nur seine eigenen Kunden, Shows, etc. Dem Vorstand des Vereins soll sich hingegen eine Zusammenfassung über alle Aktivitäten präsentieren.
+Workshops können in der vereinseigenen Halle abgehalten werden oder außerhalb. Bei Workshops außerhalb (auch mehrtägig) müssen die Kosten für Anfahrt, Verpflegung und Unterbringung vom Kunden übernommen werden.
+
+Zusätzlich zur Verwaltung der Shows und Workshops soll noch ein kleiner(!) Shop unterhalten
+werden. Hier werden einige Utensilien zum Jonglieren verkauft. Unter anderem Feuerstäbe, Pois,
+Jonglierbälle und Diabolos. Workshopteilnehmern soll ein Rabatt auf alle Shopartikel eingeräumt
+werden.
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+
+| http://localhost:8080/shop/checkout | Anzahl Aritkel im Warenkorb | Versucht ein Kunde mehr Artikel zu kaufen als momentan vorrätig sind, tritt ein Fehler auf | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 13:51:06 GMT 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Order completion failed! OrderCompletionReport(order=Order(orderIdentifier=f4052938-2545-4964-9f49-728ac9dff852, paymentMethod=Cash(), userAccount=org.salespointframework.useraccount.UserAccount@24218019, dateCreated=2017-12-16T13:51:05.879, orderStatus=COMPLETED, orderLines=OrderLine(orderLineIdentifier=2c651886-8a36-4a8d-9547-b2553e4217cc, productIdentifier=99da8503-c777-4a67-b788-ce20555256ea, price=EUR 196, quantity=98, productName=Jonglierbälle), chargeLines=, events=[OrderCompleted]), status=FAILED, completions=OrderCompletionReport.OrderLineCompletion(orderLine=OrderLine(orderLineIdentifier=2c651886-8a36-4a8d-9547-b2553e4217cc, productIdentifier=99da8503-c777-4a67-b788-ce20555256ea, price=EUR 196, quantity=98, productName=Jonglierbälle), status=FAILED, message=Optional[Number of items requested by the OrderLine is greater than the number available in the Inventory. Please re-stock.]))
+
+| http://localhost:8080/profile/calendar?pid=null&monthSummand=1 | userId | Der eingeloggte Nutzer versucht im Kalender (unter Meine Termine) den Monat zu wechseln (das gleiche beim Artisten) | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 13:57:55 GMT 2017
+There was an unexpected error (type=Bad Request, status=400).
+Required Long parameter 'userId' is not present
+
+| http://localhost:8080/events/event/book?pid=80d85dd5-4944-498b-9749-e525a87b4287&dateInMs=1514729041615 | Veranstaltungsort | Beim Buchen einer Verantaltung wählt der Nutzer keinen Ort aus | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 14:04:35 GMT 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Name is null
+
+| http://localhost:8080/profile/calendar | - | Die Spalte Sonntag ist um eine Zeile nach unten verschoben, sowohl in der Ansicht Meine Termine, als auch beim Buchen eines Events | -
+| http://localhost:8080/events/search | Suchanfrage | Beim Suchen im Veranstaltungskatalog tritt ein Fehler auf | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 15:02:38 GMT 2017
+There was an unexpected error (type=Not Found, status=404).
+No message available
+
+| http://localhost:8080/adm/shop/article/add | Nachbestell-Anzahl | Beim Nachbestellen kommt ein Fehler, wenn man eine Zahl größer 2^31-1 eingibt | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 17:03:03 CET 2017
+There was an unexpected error (type=Bad Request, status=400).
+Failed
+ to convert value of type 'java.lang.String[]' to required type 'int[]';
+ nested exception is java.lang.NumberFormatException: For input string: 
+"1298469837418"
+
+| http://localhost:8080/adm/events/create | - | Beim klicken auf "Event Erstellen" kommt ein Fehler | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 17:17:46 CET 2017
+There was an unexpected error (type=Not Found, status=404).
+No message available
+
+| http://localhost:8080/adm/events/bookings | - | Wenn man als Administrator versucht die Buchungen anzuschauen, kommt ein Fehler | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 17:22:00 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Exception evaluating SpringEL expression: "booking.appointment.interval" (adm_events_bookings:40)
+
+| http://localhost:8080/adm/groups/edit?id=1 | - | Wenn man versucht, die Gruppendetails zu bearbeiten kommt ein Fehler | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 17:42:27 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Optional
+ long parameter 'uid' is present but cannot be translated into a null 
+value due to being declared as a primitive type. Consider declaring it 
+as object wrapper for the corresponding primitive type.
+
+| http://localhost:8080/adm/groups/delete?id=1 | - | Beim Versuch eine Gruppe zu löschen tritt ein Fehler auf; Gruppe wird nicht gelöscht | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sat Dec 16 17:47:20 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Error
+ resolving template "adm_groups_delete", template might not exist or 
+might not be accessible by any of the configured Template Resolvers
+
+|http://localhost:8080/adm/events/overview | - | Beim Klicken auf "Termine anzeigen" passiert nichts (man bleibt auf der Seite, Termine werden nicht angezeigt) | -
+|http://localhost:8080/adm/events/edit | Preis des Events | Beim Versuch dieses Feld leer zu lassen tritt ein Fehler auf | Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+Sun Dec 17 10:53:04 CET 2017
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/edit | Dauer [Stunden]| Beim Versuch dieses Feld leer zu lassen tritt ein Fehler auf | Whitelabel Error Page
+
+Sun Dec 17 10:53:31 CET 2017
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/edit | Dauer [Minuten]| Beim Versuch dieses Feld leer zu lassen tritt ein Fehler auf | Whitelabel Error Page
+
+Sun Dec 17 10:54:17 CET 2017
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/edit/b858029c-b58b-494c-8a93-fbf1e80f5700 | Name des Events | Beim Versuch dieses Feld des Formulares frei zu lassen, wird dies nicht gespeichert,
+aber es wird eine Bestätigungsnachricht geschickt. |- 
+
+|http://localhost:8080/adm/events/edit/b858029c-b58b-494c-8a93-fbf1e80f5700 | Beschreibung des Events | Beim Versuch dieses Feld des Formulares frei zu lassen, wird dies nicht gespeichert,
+aber es wird eine Bestätigungsnachricht geschickt. |- 
+
+|http://localhost:8080/profile/calendar?userId= | - | Als Artist eingeloggt, beim Klicken auf den Navigationspunkt : "Meine Termine" kommt ein Fehler (nur wenn man davor im 
+Navigationspunkt "Profil" (http://localhost:8080/profile/user) war, zeigt es die Tabelle an)) | Whitelabel Error Page
+
+Sun Dec 17 11:23:02 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+No message available
+
+|http://localhost:8080/adm/events/add | Name | Beim Versuch den Namen der Veranstaltung frei zu lassen tritt ein Fehler auf. | Whitelabel Error Page
+
+Sun Dec 17 11:39:44 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+Name must not be null or empty!
+
+|http://localhost:8080/adm/events/add | Preis |Beim Versuch den Preis der Veranstaltung frei zu lassen tritt ein Fehler auf. | Whitelabel Error Page
+
+Sun Dec 17 11:40:17 CET 2017
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/add | Dauer [Stunden] |Beim Versuch die Dauer der Veranstaltung frei zu lassen tritt ein Fehler auf. | Whitelabel Error Page
+
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/add | Dauer [Minuten] |Beim Versuch die Dauer der Veranstaltung frei zu lassen tritt ein Fehler auf. | Whitelabel Error Page
+
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='eventForm'. Error count: 1
+
+|http://localhost:8080/adm/events/addShow | - |Beim Versuch eine Show zu erstellen (ohne Gruppe, da diese nicht eingestellt werden kann) tritt ein Fehler auf | Whitelabel Error Page
+
+Sun Dec 17 11:46:23 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+No message available
+
+| http://localhost:8080/login| Benutzername | Bei inkorrekten Nutzername erscheint keine Fehlermeldung, lediglich URL ändert sich auf ./login?error |-
+
+
+| http://localhost:8080/login| Passwort | Bei inkorrekten Passwort erscheint keine Fehlermeldung, lediglich URL ändert sich auf ./login?error |-
+
+
+|http://localhost:8080/register | Benutzername | Bei angabe Bereits existiereneder Usernamen tritt ein fehler auf  |Whitelabel Error Page
+Sun Dec 17 15:13:29 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+User with name Seb already exists!
+
+|http://localhost:8080/register | Benutzername | Username mit zu vielen Zeichen führt zu Fehler  |Whitelabel Error Page
+Sun Dec 17 15:18:44 CET 2017
+There was an unexpected error (type=Internal Server Error, status=500).
+could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement
+
+|http://localhost:8080/register | - | leere Felder führen zu Whitelabel Error anstatt einer einfachen Fehlermeldung auf der Seite selbst  |Whitelabel Error Page
+
+|http://localhost:8080/register | Email | Email Optional. Nimmt inkorrekte Email formate an.  |Whitelabel Error Page
+
+|http://localhost:8080/| - | Empfohlene Veranstaltungen ist leer, auch nach Bewertung einer bestehenden Veransta | -
+
+
+
+
+
+
+
+| | | |
+|===
+
+== Sonstiges
+//* Optik der Anwendung
+//* Fehlende Features
+//* Interaktion mit der Anwendung (Usability)
+
+* Persistenz ist (scheinbar) nicht aktiviert. Änderungen am Benutzerprofil werden nicht über die Laufzeit der Anwendung hinaus gespeichert
+* Die Artikelkacheln im Katalog überlappen sich unschön wenn die Breite des Browserfensters verringert wird
+* Rabatt wird nicht im Warenkorb angezeigt
+* CSS-Fehler (CSS wird nicht gerendert, nur plain html):
+** Detailsansicht von Artikeln (http://localhost:8080/shop/article/{id})
+** Checkoutansicht (http://localhost:8080/shop/checkout)
+** Veranstaltungskatalog (http://localhost:8080/events)
+** Veranstaltung buchen (http://localhost:8080/events/event/book)
+** Erstellen eines Artikels
+** Bearbeiten eines Artikels
+** Bearbeiten einer Veranstaltung 
+** Nachbestellen eines Artikels, hier fehlt die Navigation komplett
+** Veranstaltungsübersicht beim Vorstand
+** Veranstaltungsübersicht beim Artisten (http://localhost:8080/adm/events/overview)
+** Katalogansicht der Veranstaltungen und dazugehörige Detailansicht (http://localhost:8080/events); (http://localhost:8080/events/event/078eb7d3-3143-4a8f-8dbf-94ba0245e705)
+** Finanzübersicht, Navigation fehlt
+** Rabatthöhe einstellen, Navigation fehlt
+** Aufwandspauschale einstallen, Navigation fehlt
+
+
+=== Vorstand:
+
+* Artikel erstellen:
+** Keine einheitliche Seitenansicht beim Erstellen eines Artikels
+** Bild hochladen für den Artikel funktioniert nicht
+** Nachbestellung funktioniert nicht, wenn beim Erstellen der Mindestbestand unterschritten ist
+* Sperrzeiten fehlen komplett
+
+=== Artist:
+
+* Veranstaltung bearbeiten:
+** keine einheitlichen Seitenansichten beim Bearbeiten einer Veranstaltung
+** Rücknavigation zur Startseite - vllt übersichtlicher wieder zur Veranstaltungsübersicht
+** (Bildname des Events und Beschreibung des Events können leer angegeben werden)
+** Bild der Veranstaltung kann nicht geändert werden?
+* Veranstaltungskatalog: 
+** Dauer vllt in der Detail- Ansicht mit anzeigen
+* Terminansicht: 
+** nicht immer "belegt: " hinschreiben, wenn es nicht belget ist
+**Eventnamen angeben, nicht einfach nur "event" hinschreiben
+* Sperrzeiten fehlen komplett
+*Veranstaltung erstellen :
+** Dauer oder Angebotszeitsraum fehlt
+** Wie kann ich ein Bild hochladen?
+** bei Shows kann (auch wenn vorhanden) keine Gruppe ausgwählt werden
+**Shows können gar nicht erstellt werden
+** Wofür steht Dauer (Tage bzw stunden?): Wie lange die Veranstaltung geht, oder wie lange sie angeboten wird?
+** Angabe der Anzahl der aufeinander folgenden Termine für mehrtägige Workshops-  fehlt?
+*Zuordnung von zum Workshop passenden Artikeln: fehlt?
+*Löschen von Veranstaltungen ohne zukünftige Termine: genaue Datumsangabe von Veranstaltungen schon nicht möglich
+
+
+== Verbesserungsvorschläge
+//* Was kann noch weiter verbessert werden?
+* Profilbild als Url zu verknüpfen ist ungünstig gelöst, Upload wäre sinnvoller (Wer hat schon sein Profilbild frei zugänglich im Netz gespeichert)
+* Verhindern das beim Buchen einer Veranstaltung im Kalander ein Datum in der Vergangenheit ausgewählt wird (nicht erste Fehler beim Abschließen des Vorgangs)
+* Abfangen von URL-aufrufen ohne Parameter (z.B. Weiterleitung auf Startseite)
+* Woran sieht der Kunde was ein Workshop und was eine Show ist?
+* Soll der Vorstand wirklich die Rolle und das Passwort jedes Nutzers ändern können?
+* Bei Registration Notwendige Felder markieren und Fehlermeldungen einfügen anstatt Whitelabel Errors
+* 
+
+

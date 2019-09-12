@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<nav th:fragment="navigation">
+
+
+
+
+		<!-- Allgemeine Navigation -->
+		<div class="ui large vertical menu">
+			<div th:include="fragment/boss_nav :: boss_nav"></div>
+	
+			<div th:include="fragment/artist_nav :: artist_nav"></div>
+			<div th:include="fragment/common_nav :: common_nav"></div>
+			<div th:include="fragment/kunden_nav :: kunden_nav"></div>
+			<div th:include="fragment/login :: login"></div>
+
+<!--  
+<<<<<<< HEAD
+
+			<div class="item" sec:authorize="hasAnyRole('ROLE_BOSS')">
+
+				<div class="ui big header">
+					<i class="options icon"></i>
+					Administratives
+				</div>
+				<div class="menu">
+					<a class="item" th:href="@{/personenverwaltung/artistenverwaltung}"
+						th:text="Personalverwaltung">Personalverwaltung</a>
+					<a class="item" href="inventarverwaltung.html"
+						th:href="@{/inventarverwaltung}" th:text="Inventarverwaltung">Inventarverwaltung</a>
+					<a class="item" href="hallenverwaltung.html"
+						th:href="@{/hallenverwaltung}" th:text="Hallenverwaltung">Hallenverwaltung</a>
+					<a class="item">Finanzen</a>
+					<a class="item">ZeugsUndSo</a>
+					<a class="item" href="bestellungen.html" th:href="@{/bestellungen}"
+						th:text="Bestellungen">Bestellungen</a>
+
+
+					<a class="item" href="alleBuchungen.html"
+						th:href="@{/alleBuchungen}" th:text="alleBuchungen">alleBuchungen</a>
+					<a class="item">Finanzen</a>
+					<a class="item">ZeugsUndSo</a>
+					<a class="item" href="bestellungen.html" th:href="@{/bestellungen}"
+						th:text="Bestellungen">Bestellungen</a>
+
+				</div>
+			</div>
+
+			<div class="item" sec:authorize="hasAnyRole('ROLE_ARTIST')">
+
+				<div class="ui big header">
+					<i class="options icon"></i>
+					Verwaltung
+				</div>
+
+				<form th:action="@{/verwaltung/}">
+					<button class="ui labeled basic large red icon button">
+						<i class="bookmark icon"></i>
+						<div style="margin-right: 30px" th:text="Verwaltung"></div>
+					</button>
+				</form>
+
+				<form th:action="@{/sperrzeiten/}">
+                    <button class="ui labeled basic large red icon button">
+                        <i class="bookmark icon"></i>
+                        <div style="margin-right: 30px" th:text="Sperrzeiten"></div>
+                    </button>
+                </form>
+			</div>
+
+			<div class="item" sec:authorize="!isAuthenticated()">
+				<div class="header">
+					Login
+					<i class="user icon"></i>
+				</div>
+				<form class="ui form" role="form" th:action="@{/login}"
+					method="post">
+					<div class="ui input">
+						<input type="text" name="username" placeholder="Username"></input>
+					</div>
+					<div class="ui input">
+						<input type="password" name="password" placeholder="Passwort"></input>
+					</div>
+					<button type="submit" class="ui animated button" tabindex="0">
+						<div class="visible content">Login</div>
+						<div class="hidden content">
+							<i class="right arrow icon"></i>
+						</div>
+					</button>
+					<p>(Acc: Boss pw: 123)</p>
+
+					<a href="orders.html" th:href="@{/registration}"
+						th:text="registrieren">register</a>
+
+				</form>
+			</div>
+			<div class="item" sec:authorize="isAuthenticated()">
+				<div class="header">
+					Account
+					<i class="user icon"></i>
+				</div>
+
+				<div class="item" sec:authorize="hasAnyRole('ROLE_ARTIST')">
+					<div class="header">meine Daten</div>
+					<div class="menu">
+						<a class="item" th:href="@{/meineVeranstaltungen}"
+							th:text="meineVeranstaltungen">meineVeranstaltungen</a>
+						<a class="item" th:href="@{/}" th:text="Gruppies">meineVeranstaltungen</a>
+					</div>
+				</div>
+
+
+
+				<div class="item" sec:authorize="hasAnyRole('ROLE_CUSTOMER')">
+					<div class="header">Meine Daten</div>
+					<div class="menu">
+
+						<a class="item" href="kalender.html" th:href="@{/kalender}"
+							th:text="Kalender">Kalender</a>
+						<a class="item" href="bestellungen.html"
+							th:href="@{/bestellungen}" th:text="Bestellungen">Bestellungen</a>
+					</div>
+				</div>
+
+				<div class="menu">
+					<a class="item" th:href="@{/user/bearbeiten}" th:text="Account">Account</a>
+
+				</div>
+
+
+				<form th:action="@{/logout}" method="post">
+
+					<button type="submit" class="ui animated button" tabindex="0">
+						<div class="visible content">Logout</div>
+						<div class="hidden content">
+							<i class="hand peace icon"></i>
+						</div>
+					</button>
+				</form>
+			</div>
+			
+			-->
+
+		</div>
+
+
+
+
+
+	</nav>
+
+
+
+
+
+
+
+</body>
+</html>

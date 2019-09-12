@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="#{catalog.title}">Katalog</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+
+		<header>
+			<h1 th:text="#{catalog.title}">Katalog</h1>
+		</header>
+			
+		<form class="ui form" method="post" th:action="@{/artikel}">
+			<div class="fields">
+				<div class="five wide field">
+					<div class="ui icon input">
+						<input name="suche" type="text" th:value="${suche}" />
+						<i class="search icon"></i>
+					</div>
+				</div>
+				<button class="ui button" type="submit" th:text="#{catalog.suche}">Suchen</button>	
+				<div class="three wide field">
+					<select class="ui dropdown" name="sortierung">
+						<option value="">keine Sortierung</option>
+						<option th:if="${sortierung != 'alpha'}" value="alpha" >A-Z</option>
+						<option th:if="${sortierung == 'alpha'}" value="alpha" selected="selected">A-Z</option>
+						<option th:if="${sortierung != 'rev_alpha'}" value="rev_alpha">Z-A</option>
+						<option th:if="${sortierung == 'rev_alpha'}" value="rev_alpha" selected="selected">Z-A</option>
+						<option th:if="${sortierung != 'price'}" value="price">Preis aufsteigend</option>
+						<option th:if="${sortierung == 'price'}" value="price" selected="selected">Preis aufsteigend</option>
+						<option th:if="${sortierung != 'rev_price'}" value="rev_price">Preis absteigend</option>
+						<option th:if="${sortierung == 'rev_price'}" value="rev_price" selected="selected">Preis absteigend</option>
+					</select>
+				</div>
+				<button class="ui button" type="submit" th:text="#{catalog.sortieren}">Sortieren</button>	
+			</div>
+		</form>
+
+		<div class="ui link cards" th:remove="all-but-first">
+			<div class="ui card" th:each="artikel : ${katalog}">
+				<div class="content">
+					<a class="header" th:href="@{/artikel/{id}(id=${artikel.id})}"
+						th:text="${artikel.name}">Fackel</a>
+				</div>
+				<div class="image">
+					<a th:href="@{/artikel/{id}(id=${artikel.id})}"> <img
+						class="thumbnail"
+						th:src="@{/img/{bild}.jpg(bild=${artikel.bild})}"
+						src="../static/resources/img/fac.jpg" />
+					</a>
+				</div>
+				<div class="content">
+					<div class="description" th:text="${{artikel.price}}">9.99 €</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

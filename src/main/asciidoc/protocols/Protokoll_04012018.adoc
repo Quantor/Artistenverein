@@ -1,0 +1,155 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 04.01.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+11.01.2018, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- "ein Workshop soll auch über mehrere Tage gehen" muss noch Implementiert werden
+- Präsentation der Software ist am Do, 18.01.2018 (4.DS)
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|5
+|Testplan
+|in Arbeit
+|Unittests müssen hinzugefügt werden
+
+|8
+|Entwurfs-Klassendiagramm
+|in Arbeit
+|Aktualisierung
+
+|10
+|Unittests
+|in Arbeit
+|Code soll mit Unitstests getestet werden (80% Codeabdeckung)
+
+|11
+|Javadoc
+|in Arbeit
+|Es soll eine Java- Dokumentation für die Anwendung erstellt werden
+
+|12
+|Kundenwunsch
+|in Arbeit
+|Wunsch: die letzten ausgelaufenen Veranstaltungen sollen mit den besten Kommentaren (zu den besten Bewertungen)
+	auf der Startseite zu sehen sein
+
+|13
+|CrossTesting
+|fertig
+|Software der Gruppe 18 soll getestet werden und ein Template ausgefüllt werden
+
+|14
+|Anwenderdokumentation
+|in Arbeit
+|Es soll ein Handbuch für die Benutzer der Software geschreiben werden
+
+|15
+|CodeQualität
+|in Arbeit
+|Über SonarQube solle die CodeQualität getestet und dann verbessert werden
+
+
+
+|===
+
+== Aktueller Stand
+Wir befinden uns in der Implementationsphase. 
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|Unittests müssen hinzugefügt werden
+|alle
+|in Arbeit
+
+|8
+|Entwurfs-Klassendiagramm
+|Aktualisierung
+|alle
+|in Arbeit
+
+|10
+|Unittests
+|Code soll mit Unitstests getestet werden (80% Codeabdeckung)
+|alle
+|in Arbeit
+
+|11
+|Javadoc
+|Es soll eine Java- Dokumentation für die Anwendung erstellt werden
+|alle
+|in Arbeit
+
+|12
+|Kundenwunsch
+|Wunsch: die letzten ausgelaufenen Veranstaltungen sollen mit den besten Kommentaren (zu den besten Bewertungen)
+	auf der Startseite zu sehen sein
+|Tizian
+|in Arbeit
+
+|13
+|CrossTesting
+|Software der Gruppe 18 soll getestet werden und ein Template ausgefüllt werden
+|alle
+|in Arbeit
+
+|14
+|Anwenderdokumentation
+|Es soll ein Handbuch für die Benutzer der Software geschreiben werden
+|alle
+|in Arbeit
+
+|15
+|CodeQualität
+|Über SonarQube solle die CodeQualität getestet und dann verbessert werden
+|alle
+|in Arbeit
+
+|6
+|Entwicklerdokumentatoin
+|- Klassen, die neu zum EKD gekommen sind müssen noch beschreiben werden
+|alle
+|in Arbeit
+
+|16
+|CrossTesting- Fehler ausbessern
+|Fehler, die beim Cross- Testen gefunden wurden sollen noch gefixt werden
+|alle
+|in Arbeit
+|==

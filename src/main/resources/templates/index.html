@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="#{home.title}">#title</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+
+
+	<div id="sitecontent">
+
+		<div class="ui large header" th:text="'Vergangene Veranstaltungen'"></div>
+
+		<div class="ui cards">
+			<div th:each="highlight : ${highlights}">
+
+
+				<div class="ui card">
+					<div class="content">
+						<a class="large header" th:text="${highlight.veranstaltung.name}"
+							th:href="@{'/detail/' + ${highlight.veranstaltung.id}}">Titel</a>
+						<div class="meta">
+							<span class="date" th:text="${highlight.veranstaltung.endDatum}">Joined
+								in 2013</span>
+						</div>
+						<div class="description"
+							th:text="'&#34;'+${highlight.bewertung.text}+'&#34;-'">
+							Kommentar</div>
+
+						<div class="extra content">
+							<i class="user icon"
+								th:text="${highlight.kunde.firstname}+${highlight.kunde.Lastname}"></i>
+
+						</div>
+						
+						<div class="extra content">
+							<i class="star icon"
+								th:text="${highlight.bewertung.bewertung}"></i>
+
+						</div>
+
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

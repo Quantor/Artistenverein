@@ -1,0 +1,84 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 09.11..2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+16.11.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Vorführung der Prototypen zur Artistenverein- Anwendung
+- Es soll möglichst zeitnah eine Zwischenpräsentation stattfinden, in welcher die Prototypen
+und die Ausarbeitungen in der Entwurfsphase vorgestellt werden sollen. 
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|4
+|Anwendungsprototyp
+|erledigt
+|- soll noch vorgestellt werden +
+ - evtl. alle zusammenfassen +
+
+|5
+|Testplan
+|in Arbeit
+|deckt noch nicht alle Muss-Kriterien ab
+
+|6
+|Entwicklerdokumentation
+|erledigt
+|Entwurf-Klassendiagramm fehlt noch (neues Issue)
+
+|7
+|Prototyp-Tests
+|erledigt
+|--
+
+|===
+
+== Aktueller Stand
+Wir befinden uns in der Entwurfs-Phase. 
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|soll noch erweitert werden
+|alle
+|in Arbeit
+
+|8
+|Entwurfs-Klassendiagramm
+|Diagramm mit Salespointklassen, Erklärungen zu einigen Entwurfsentsceidungen
+|alle
+|noch zu erledigen

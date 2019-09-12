@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+<title th:text="#{create.title}">Create Item</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<header>
+			<h1 th:text="#{create.title}">Create Item</h1>
+		</header>
+
+
+		<form method="post" role="formular" class="ui form" id="formular"
+			th:action="@{/artikelErstellen}" th:object="${formular}"
+			enctype="multipart/form-data">
+
+			<h3 class="ui dividing header">Neuer Artikel:</h3>
+
+			<div class="ui negative message" th:if="${#fields.hasErrors('*')}">
+				<p>Einige Angaben können so nicht übernommen werden.</p>
+			</div>
+
+			<div class="field">
+				<label for="name">Name</label> <input id="name" name="name"
+					th:field="*{name}" th:errorclass="fieldError" type="text"
+					required="required" /><br />
+				<div class="ui negative message"
+					th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+					<p>Der Name darf nicht leer sein.</p>
+				</div>
+			</div>
+
+			<div class="field">
+				<label for="preis">Preis</label> <input id="preis" name="preis"
+					th:field="*{preis}" th:errorclass="fieldError" type="number"
+					step="0.01" min="0" required="required" /><br />
+				<div class="ui negative message"
+					th:if="${#fields.hasErrors('preis')}" th:errors="*{preis}">
+					<p>Der Preis darf nicht leer sein.</p>
+				</div>
+			</div>
+
+			<div class="field">
+				<label for="bild">Bild</label> <input id="bild" name="bild"
+					th:field="*{bild}" th:errorclass="fieldError" type="file"
+					accept="image/jpeg" required="required" /><br />
+				<div class="ui negative message"
+					th:if="${#fields.hasErrors('bild')}" th:errors="*{bild}">
+					<p>Das Bild darf nicht fehlen.</p>
+				</div>
+			</div>
+			
+			<div class="field">
+				<label for="beschreibung">Beschreibung</label>
+				<textarea id="beschreibung" name="beschreibung" form="formular"
+					th:field="*{beschreibung}" th:errorclass="fieldError"
+					required="required"></textarea>
+				<br />
+				<div class="ui negative message"
+					th:if="${#fields.hasErrors('beschreibung')}" th:errors="*{beschreibung}">
+					<p>Die Beschreibung darf nicht fehlen.</p>
+				</div>
+			</div>
+
+			<button type="submit" class="ui button" th:text="#{create.submit}">Artikel
+				einstellen</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{buchung.bestaetigung}">Titel</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+	    <header>
+	        <h1 th:text="#{buchung.bestaetigung}">Titel</h1>
+	    </header>
+	    <div>
+		    Sie haben folgende Veranstaltung mit folgenden Kriterien gebucht:
+		    <b>Veranstaltung: </b><span th:text="${{buchung.veranstaltung.name}}">Titel</span><br /> 
+		    <p> Die Veranstaltung würde an folgenden Tagen stattfinden: </p>
+		    <div th:each="buchungsdatum : ${buchungsDaten}">
+		    	<b>Datum: </b><span th:text="${{buchungsdatum}}">StartDatum</span><br />
+		    </div>
+		    <b>Dauer: </b><span th:text="${{buchung.veranstaltung.dauer}}">Dauer</span><br />
+		    <b>Preis:</b><span th:text="${{buchung.price}}">Preis</span><br />
+		    
+	    </div>
+	     <form class="ui form" th:action="@{/buchungsbestaetigung}" method="post">
+            	<input type="hidden" name="buchung" th:value="${buchung.id}"/>
+            	<button type="submit" class="ui button" th:text="bestaetigen">Absagen</button>
+       </form>
+        <form class="ui form" th:action="@{/buchungablehnen}" method="post">
+            	<input type="hidden" name="buchung" th:value="${buchung.id}"/>
+            	<button type="submit" class="ui button" th:text="ablehnen">Absagen</button>
+       </form>
+	</div>
+</body>
+</html>

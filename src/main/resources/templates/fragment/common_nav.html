@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+</head>
+<body>
+	<nav th:fragment="common_nav">
+		<!-- Verwalungsbereich für Boss -->
+		<div class="item">
+
+			<div class="item">
+				<form th:action="@{/}">
+					<button class="ui labeled  fluid basic blue icon large button">
+						<i class="home icon"></i>
+						<div th:text="#{naviagtion.home}"></div>
+
+					</button>
+				</form>
+			</div>
+
+
+			<div class="item">
+				<form th:action="@{/workshops}">
+					<button class="ui fluid labeled basic blue icon large button">
+						<i class="grid layout icon"></i>
+						<div  th:text="#{naviagtion.workshops}"></div>
+					</button>
+				</form>
+
+				<form th:action="@{/shows}">
+					<button class="ui fluid labeled basic blue large icon button">
+						<i class="grid layout icon"></i>
+						<div  th:text="#{naviagtion.shows}"></div>
+					</button>
+				</form>
+			</div>
+			<div class="item">
+				<form th:action="@{/artikel}">
+					<button class="ui fluid labeled basic blue large icon button">
+						<i class="shop icon"></i>
+						<div  th:text="#{naviagtion.shop}"></div>
+					</button>
+				</form>
+
+				<form th:action="@{/warenkorb}">
+					<button class="ui fluid labeled basic large blue icon button">
+						<i class="shopping basket icon"></i>
+						<div th:text="#{naviagtion.cart}"></div>
+
+					</button>
+				</form>
+			</div>
+			<div class="item">
+				<form th:action="@{/artisten}">
+					<button class="ui fluid labeled basic large blue icon button">
+						<i class="users icon"></i>
+						<div  th:text="#{naviagtion.artists}"></div>
+					</button>
+				</form>
+				<form th:action="@{/artistengruppen}">
+					<button class="ui fluid labeled basic large blue icon button">
+						<i class="bookmark icon"></i>
+						<div th:text="#{naviagtion.groups}"></div>
+					</button>
+				</form>
+
+			</div>
+		</div>
+
+	</nav>
+</body>
+
+</html>

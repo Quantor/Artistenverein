@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title >Artikel hinzufügen</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div class="ui container">
+
+    <header>
+        <h1>Artikel hinzufügen</h1>
+        <h1>Text</h1>
+    </header>
+
+		<div id="sitecontent">
+		
+			<form class="ui form" role="form" method="get" th:action="@{/addArtikel/{id}(id=${veranstaltung.id})}"
+		    				th:object="${artikel}">
+		        <table class="ui celled table">
+		            <thead>
+			            <tr>
+			                <th>Proukt</th>
+			                <th>Hinzufügen</th>
+			            </tr>
+		            </thead>
+		            <tbody th:remove="all-but-first">
+			            <tr th:each=" artikel : ${katalog}">
+			                <td th:text="${artikel.name}">Last Action Hero</td>
+							<td>
+			                    <div class="ui checkbox">
+			                     <input name="artikel" value="0" th:value="${artikel.id}" type="checkbox"/>
+								  <label>hinzuf&uuml;gen</label>
+								</div>
+								
+			                </td>
+			            </tr>
+		            </tbody>
+	        	</table>
+	         <button type="submit" class="ui button"  name="action">hinzuf&uuml;gen!</button>
+	        </form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 04.01.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+11.01.2018, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- "ein Workshop soll auch über mehrere Tage gehen" muss noch Implementiert werden
+- Präsentation der Software ist am Do, 18.01.2018 (4.DS)
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|5
+|Testplan
+|in Arbeit
+|Es fehlen nur noch wenige Unitests.
+
+|8
+|Entwurfs-Klassendiagramm
+|fertig
+|wurde komplett aktualisiert und stimmt nun mit der Implementation überein.
+
+|10
+|Unittests
+|in Arbeit
+|Es sind bereits 75,6 % erreicht wurden (fehlen nur noch 4,4%)
+
+|11
+|Javadoc
+|fertig
+|100% wurden erreicht
+
+|12
+|Kundenwunsch
+|fertig
+|
+
+|13
+|CrossTesting
+|fertig
+|Gefundene Fehler wurden beseitigt.
+
+|14
+|Anwenderdokumentation
+|in Arbeit
+|Es soll ein Handbuch für die Benutzer der Software geschreiben werden
+
+|15
+|CodeQualität
+|fertig
+|Es tauchen keine "blocker" oder "major" Issus mehr auf
+
+|6
+|Entwicklerdokumentatoin
+|in Arbeit
+|- Klassen, die neu zum EKD gekommen sind müssen noch beschreiben werden
+
+
+|===
+
+== Aktueller Stand
+Software und Dokumentationen sind soweit fertig. Es muss nur noch an kleinen Details gearbeitet werden.
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|Unittests müssen hinzugefügt werden 
+|alle
+|in Arbeit
+
+|10
+|Unittests
+|Code soll mit Unitstests getestet werden (noch 4,4%))
+|alle
+|in Arbeit
+
+|14
+|Anwenderdokumentation
+|Es soll nur noch ein verlinktes Inhaltsverzeichnis hinzugefügtwerden.
+|alle
+|in Arbeit
+
+|6
+|Entwicklerdokumentatoin
+|- Klassen, die neu zum EKD gekommen sind müssen noch beschreiben werden
+|alle
+|in Arbeit
+|==

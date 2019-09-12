@@ -1,0 +1,99 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 02.11..2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+09.11.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Vorführung der Prototypen zur Artistenverein- Anwendung
+- Besprechung der noch anliegenden Aufgaben (Entwickler-Doumentation, Test-Plan)
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|2
+|Pflichtenheft
+|erledigt
+|--
+
+|3
+|VideoShop-Prototyp
+|erledigt
+|fehlende Prototypen wurden nachgereicht
+
+|4
+|Anwendungs-Prototyp
+|in Arbeit
+|erste Vorschläge sind fertig, einige müssen noch erweitert/ ausgebessert werden
+
+|5
+|Testplan
+|noch nicht vorhanden
+|aus zeitlichen Gründen wurde dieses Dokument noch nciht angefertigt
+
+|6
+|Entwicklerdokumentation
+|noch nicht vorhanden
+|aus zeitlichen Gründen wurde dieses Dokument noch nciht angefertigt
+
+|===
+
+== Aktueller Stand
+Wir befinden uns in der Entwurfs-Phase.
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|4
+|Anwendungsprototyp
+|Prototypen zur Artistenverein- Verwaltung sollen noch erweitert oder verbessert werden
+|alle
+|in Arbeit
+
+|5
+|Testplan
+|Eine Rohfassung soll bis zum nächsten Treffen vorhanden sein
+|alle
+|noch zu erledigen
+
+|6
+|Entwicklerdokumentation
+|Eine Rohfassung soll bis zum nächsten Treffen vorhanden sein
+|alle
+|noch zu erledigen
+
+|7
+|Prototyp-Tests
+|Jeder sollzu seinem Prototypen zwei bis drei Tests anfertigen
+|alle
+|noch zu erledigen

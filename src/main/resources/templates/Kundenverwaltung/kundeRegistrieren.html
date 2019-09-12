@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="Kundenverwaltung">Kundenverwaltung</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+	<div id="sitecontent">
+		<h3 th:text="KundeRegistrieren">Registrieren:</h3>
+
+
+		<form class="ui form" method="post" th:action="@{/kundeRegistrieren}" th:object="${formular}">
+			<div class="ui form">
+				<div class="fields">
+					<div class="field">
+						<label for= "benutzername" >Benutzername</label>
+             <input id="benutzername" type="text" placeholder="Benutzername" name="name" required="required" th:field="*{benutzername}" /> 
+              <h4 th:text="${error}"></h4>
+             <p th:value="${error}" th:errorclass="fieldError" th:if="${#fields.hasErrors('benutzername')}" th:errors="*{benutzername}">Dieser Benutzername existiert schon!</p>
+					</div>
+					<div class="field">
+						<label for="passwort">Passwort</label>
+             <input id="passwort" type="password" placeholder="Passwort" name="passwort" required="required" th:field="*{passwort}"/>
+					</div>
+					<div class="field">
+						<label for="vorname">Vorname</label>
+             <input id= "vorname" type="text" placeholder="Vorname" name="vorname" required="required" th:field="*{vorname}"/>
+					</div>
+					<div class="field">
+						<label for="nachname">Nachname</label>
+             <input id="nachname" type="text" placeholder="Nachname" name="nachname" required="required" th:field="*{nachname}"/>
+					</div>
+					<div class="field">
+						<label for="email">Email</label>
+             <input id="email" type="text" placeholder="Email" name="email" required="required" th:field="*{email}"/>
+					</div> 
+          <div class="field">
+						<label for="telefonnummer">Telefonnummer</label>
+             <input id="telefonnummer" type="text" placeholder="Telefonnummer" name="name" required="required" th:field="*{telefonnummer}"/>
+					</div>
+				</div>
+				<button type="submit" class="ui button" th:text="Registrieren">Registrieren</button>
+			</div>
+		</form>
+
+
+
+	</div>
+
+
+</body>
+</html>

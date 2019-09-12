@@ -1,0 +1,89 @@
+:gruppenNummer: 17
+= Protokoll Gruppe__ {gruppenNummer}__
+
+Treffen am 16.11.2017
+
+Ort: APB +
+Beginn: 14:50Uhr +
+Ende:16:20 Uhr +
+
+_Schriftführer: Luisa Leopold_
+
+*Nächstes Treffen:* +
+23.11.10.2017, 14:50 Uhr, APB +
+_Teilnehmer:_ +
+
+- Luisa Leopold +
+- Emanuel Kern +
+- Oliver Jensch	+
+- Tizian Fischer +
+- Anton Reinhard +
+
+== Bemerkungen:
+*Organisatorisches:*
+
+- Teamtreffen zur Zwischenpräsentation: 21.11.2017 um 16.20 Uhr im Raum 0.47 in der SLUB
+- Es dürfen keine weiteren Frameworks (neben Salespoint und Spring) verwendet werden
+- Muss- Kriterien müssen ohne Java-Script funktionieren
+
+== Retrospektive des letzten Sprints
+
+[options="header", cols="1, 3, 2, 3"]
+|===
+|Issue
+|Aufgabe
+|Status
+|Bemerkung
+
+|5
+|Testplan
+|in Arbeit
+|- Akteure sollen noch hinzugefügt werden +
+	- IDs müssen noch ergänzt werden
+
+|8
+|Entwurfsklassendiagramm
+|in Arbeit
+|noch fehlerhaft
+
+|===
+
+== Aktueller Stand
+Die Entwurfsphase ist fast abgeschlossen und die Implementierungsphase beginnt.
+
+== Planung des nächsten Sprints
+
+[options="header", cols="1, 2, 3, 3, 3"]
+|===
+|Issue
+|Titel
+|Beschreibung
+|Verantwortlicher
+|Status
+
+|5
+|Testplan
+|Ergänzungen (IDs und Akteure) müssen noch hinzugefügt werden
+|alle
+|in Arbeit
+
+|8
+|Entwurfs-Klassendiagramm
+|Überarbeitung
+|alle
+|in Arbeit
+
+|6
+|Entwicklerdokumentatoin
+|- Hinzufügen des Entwurf- Klassendiagramms +
+	- Erweiterung der bestehenden Kriterien
+|alle
+|in Arbeit
+
+|4
+|Anwendungsprototyp
+|Prototypen zu einem Prototyp zusammenfassen
+|alle
+|in Arbeit
+
+|===

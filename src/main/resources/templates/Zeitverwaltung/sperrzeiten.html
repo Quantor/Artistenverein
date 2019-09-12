@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+	type="text/css" />
+<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+	href="../static/resources/css/style.css" type="text/css" />
+
+
+<title th:text="#{home.title}">#title</title>
+</head>
+<body>
+	<div th:include="fragment/template :: template"></div>
+
+	<div id="sitecontent">
+	<div class="ui huge header" th:text="${user.userAccount.username}"></div>
+		<div th:include="fragment/artistenverwaltung_nav:: nav_artistverwaltung"></div>
+		<h3 th:text="Sperrzeiten"></h3>
+		<form class="ui form" method="post" th:action="@{/sperrzeiterstellen}">
+			<table class="ui celled table">
+				<tr>
+					<td><input type="date" name="datum">Datum</input></td>
+					<td><input type="time" name="zeitvon">Zeit</input></td>
+					<td><input type="time" name="dauer">Dauer</input></td>
+					<td><select name="haeufigkeit" required="required">
+							<option th:text="#{sperrzeiten.einmalig}" value="einmalig">Einmalig</option>
+							<option th:text="#{sperrzeiten.jaehrlich}" value="jaehrlich">Jährlich</option>
+							<option th:text="#{sperrzeiten.monatlich}" value="monatlich">Monaltich</option>
+							<option th:text="#{sperrzeiten.woechentlich}"
+								value="woechentlich">Wöchentlich</option>
+							<option th:text="#{sperrzeiten.taeglich}" value="taeglich">Täglich</option>
+					</select></td>
+					<td><input type="text" name="name" required="required">Name</input></td>
+					<td><input type="text" name="kommentar" required="required">Kommentar</input></td>
+					<td>
+						<button type="submit" class="ui button"
+							th:text="#{sperrzeiten.neuesperrzeit}" name="pid">Neue
+							Sperrzeit hinzufügen</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<div class="ui link cards" th:remove="all-but-first">
+			<div class="ui card" th:each="zeit : ${zeiten}">
+				<div class="content">
+					<a class="header" th:text="${zeit.getName()}">Weihnachten</a>
+					<a class="text" th:text="${zeit.getFormatierteDauer()}">Von 13:00 bis 00:00</a>
+					<a class="text" th:text="${zeit.getFormatierteHaeufigkeit()}">Monatlich am 24. Dezember</a>
+					&#13;&#10;Kommentar:
+					<a class="text" th:text="${zeit.getKommentar()}">Frei haben</a>
+				</div>
+				<form class="ut form" method="post" th:action="@{/sperrzeitloeschen}">
+					<input type="hidden" name="item" value="0" th:value="${zeit.getId()}"/>
+					<button type="submit" class="ui button" th:text="#{sperrzeiten.loeschen}" name="pid">
+						Diese Sperrzeit löschen
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

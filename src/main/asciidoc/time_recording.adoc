@@ -1,0 +1,32 @@
+﻿= Zeiterfassung für Gruppe 17
+
+[option="headers"]
+|===
+|Woche |Tizian Fischer |Luisa Leopold |Oliver Jensch |Anton Reinhard |Emanuel Kern |Meeting 
+|1  	|531  			|596   			|510   		|500    |540    |90      
+|2  	|790  			|853 			|780   		|640    |730    |90       
+|3  	|964  			|576    		|840   		|750    |670    |90       
+|4  	|788  			|1201   		|810    	|630    |810    |90       
+|5  	|1150  			|895   			|560   		|810    |690    |90        
+|6  	|765  			|836  			|720     	|540    |660    |90 
+|7  	|1053   		|1157   		|960    	|730   	|1110   |90       
+|8  	|978  			|1092    		|990    	|700   	|810    |90      
+|9  	|1020   		|1157   		|930    	|650   	|900    |90      
+|10  	|550  			|787  			|660    	|700   	|780    |90       
+|11  	|…   			|1384    		|840    	|…    	|…    	|90      
+|12  	|…   			|…    			|…    		|…    	|…    	|90    
+|Durchschnitt pro Student |  
+|===
+
+Bitte tragen Sie am Ende des Praktikums noch folgende weitere Werte ein:
+Summe der Arbeitsstunden pro Student:
+
+SUMME(SPALTE(DevX))
+
+Arbeitsstunden pro Woche pro Student:
+
+SUMME(SPALTE(DevX)) / 12
+
+Durchschnittliche Arbeitzeit aller Studenten pro Woche:
+
+(SUMME(SPALTE(Dev1)) + SUMME(SPALTE(Dev2)) + SUMME(SPALTE(Dev3)) + SUMME(SPALTE(Dev4)) + SUMME(SPALTE(Dev5)) +SUMME(SPALTE(Dev6))) / 6
